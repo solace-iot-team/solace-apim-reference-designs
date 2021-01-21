@@ -8,7 +8,7 @@
 
 ### Fixed Parameters
 
-    - **apim/elevator-co**: domain
+  - **apim/elevator-co**: domain
   - **data-product**: fixed
   - **V1**: version
   - **json**: payload content type
