@@ -18,8 +18,8 @@ REST_USERNAME="solace-cloud-client"
 REST_PASSWORD="enfe56t36gbp4evn4hner9grmh"
 REST_HOST="http://mr1i5g7tif6z9h.messaging.solace.cloud:9000"
 
-eventSchemaFile="$scriptDir/alarm.schema.json"
-payloadFile="$tmpDir/payload.json"
+eventSchemaFile="$scriptDir/critical-alarm.schema.json"
+payloadFile="$tmpDir/critical-alarm.payload.json"
 
 # TOPICs
 # apim/elevator-co/data-product/V1/json/elevator/critical-alarm/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}
@@ -36,8 +36,7 @@ topics=(
 
 # fixed values
 type="car2floor_alignment"
-severity="critical"
-code=42
+alarmCode=42
 description="critical issue, misalignment car to floor. stop elevator immediatly"
 
 ##############################################################################################################################
@@ -59,8 +58,7 @@ for i in {1..1000}; do
       "body": {
         "type": "'"$type"'",
         "description": "'"$description"'",
-        "code": '"$code"',
-        "severity": "'"$severity"'",
+        "code": '$alarmCode',
         "details": {
           "floor": 7,
           "discrepancy_mm": 16

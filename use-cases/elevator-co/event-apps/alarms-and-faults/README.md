@@ -1,0 +1,69 @@
+# Elevator-Co: Event-Apps: Alarms & Faults
+
+## Topic Template
+
+`apim/elevator-co/data-product/V1/json/elevator/{event_type}/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
+
+### Fixed Parameters
+
+  - **apim/elevator-co**: domain
+  - **data-product**: fixed
+  - **V1**: version
+  - **json**: payload content type
+  - **elevator**: asset type
+
+### Event-App Parameters
+
+  - **event_type**: event type
+
+### Run-Time Parameters
+
+  - **resource_org_id**: organization that owns the asset, e.g. hilton, mariott
+  - **resource_region_id**: region the resource is installed. examples: country: FR, DE.
+  - **resource_sub_region_id**: sub-region within the region the resource is installed. examples: city: munich, paris, milan
+  - **resource_site_id**: site where the resource is installed.
+  - **resource_type**: the type of the resource, e.g. type of elevator
+  - **resource_id**: the unique id of the resource, e.g. ABXD32
+
+## Critical-Alarms
+
+**event_type**="critcal-alarm"
+
+### Topic Template
+
+`apim/elevator-co/data-product/V1/json/elevator/critical-alarm/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
+
+### Examples
+
+- `apim/elevator-co/data-product/V1/json/elevator/critical-alarm/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+
+### Simulator
+
+````bash
+# requires python
+pip install jsonschema
+````
+
+````bash
+./send.critical-alarms.sh
+````
+
+## Faults
+
+**event_type**="fault"
+
+### Topic Template
+
+`apim/elevator-co/data-product/V1/json/elevator/fault/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
+
+### Examples
+
+- `apim/elevator-co/data-product/V1/json/elevator/fault/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+
+### Simulator
+
+````bash
+./send.faults.sh
+````
+
+---

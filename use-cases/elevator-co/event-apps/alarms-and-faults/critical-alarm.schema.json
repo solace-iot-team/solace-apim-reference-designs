@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://eventportal.solace.cloud/apim/elevator-co/alarm.json",
   "type": "object",
-  "title": "Elevator Co alarm event payload",
+  "title": "Elevator Co critical alarm event payload",
   "required": [
     "header",
     "body"
@@ -32,7 +32,6 @@
         "type",
         "description",
         "code",
-        "severity",
         "details"
       ],
       "properties": {
@@ -52,19 +51,12 @@
           "title": "alarm code",
           "type": "integer"
         },
-        "severity": {
-          "title": "alarm severity",
-          "type": "string",
-          "enum": [
-            "critical",
-            "non-critical"
-          ]
-        },
         "details": {
           "title": "alarm or fault details",
           "type": "object",
           "anyOf": [
             {
+                "title": "details for type=car2floor_alignment",
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
@@ -81,6 +73,7 @@
                 }
             },
             {
+                "title": "details for type=max_weight_exceeded",
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
