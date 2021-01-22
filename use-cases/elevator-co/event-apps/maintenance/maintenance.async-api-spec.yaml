@@ -1,0 +1,81 @@
+components:
+  schemas:
+    maintenance:
+      $schema: 'http://json-schema.org/draft-07/schema#'
+      type: object
+      title: Elevator Co maintenance event payload
+      required:
+        - header
+        - body
+      properties:
+        header:
+          additionalProperties: false
+          type: object
+          required:
+            - topic
+            - timestamp
+          properties:
+            topic:
+              type: string
+            timestamp:
+              type: string
+        body:
+          additionalProperties: false
+          type: object
+          required:
+            - component_id
+            - description
+            - timewindow_days
+            - details
+          properties:
+            component_id:
+              title: component_id that needs maintenance
+              type: string
+            timewindow_days:
+              title: maintenance time window in days
+              type: integer
+            description:
+              title: maintenance description
+              type: string
+            details:
+              title: maintenance details
+              type: object
+            probability_of_failure_pct:
+              title: probability of fault / urgency of maintenace in %
+              type: integer
+      $id: >-
+        http://eventportal.solace.cloud/apim/elevator-co/maintenance/maintenance.json
+  messages:
+    maintenance:
+      payload:
+        $ref: '#/components/schemas/maintenance'
+      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
+      contentType: application/json
+  parameters:
+    topic_elem:
+      schema:
+        type: string      
+channels:
+  'apim/elevator-co/data-product/V1/json/elevator/maintenance/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':
+    subscribe:
+      message:
+        $ref: '#/components/messages/maintenance'
+    parameters:
+      resource_org_id:
+        $ref: '#/components/parameters/topic_elem'
+      resource_region_id:
+        $ref: '#/components/parameters/topic_elem'
+      resource_sub_region_id:
+        $ref: '#/components/parameters/topic_elem'
+      resource_site_id:
+        $ref: '#/components/parameters/topic_elem'
+      resource_type:
+        $ref: '#/components/parameters/topic_elem'
+      resource_id:
+        $ref: '#/components/parameters/topic_elem'
+asyncapi: 2.0.0
+info:
+  x-application-class: unspecified
+  title: maintenance
+  x-view: provider
+  version: 0.0.1

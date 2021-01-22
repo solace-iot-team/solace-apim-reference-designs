@@ -5,7 +5,7 @@ tmpDir="$scriptDir/tmp"
 mkdir -p $tmpDir; rm -rf "$tmpDir/*"
 
 echo
-echo "Sending journeys ..."
+echo "Sending maintenance events ..."
 echo
 
 # ######################################################################
@@ -18,20 +18,20 @@ REST_USERNAME="solace-cloud-client"
 REST_PASSWORD="enfe56t36gbp4evn4hner9grmh"
 REST_HOST="http://mr1i5g7tif6z9h.messaging.solace.cloud:9000"
 
-eventSchemaFile="$scriptDir/journey.schema.json"
-payloadFile="$tmpDir/journey.payload.json"
+eventSchemaFile="$scriptDir/maintenance.schema.json"
+payloadFile="$tmpDir/maintenance.payload.json"
 
 # TOPICs
-# apim/elevator-co/data-product/V1/json/elevator/journey/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}
+# apim/elevator-co/data-product/V1/json/elevator/maintenance/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}
 topics=(
 # hilton, france, paris, opera
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1"
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-2"
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-3"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-2"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-3"
 # hilton, de, munich, city
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/DE/munich/city/elevator-make-ABC/elevator-id-4"
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/DE/munich/city/elevator-make-ABC/elevator-id-5"
-  "apim/elevator-co/data-product/V1/json/elevator/journey/hilton/DE/munich/city/elevator-make-ABC/elevator-id-6"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/DE/munich/city/elevator-make-ABC/elevator-id-4"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/DE/munich/city/elevator-make-ABC/elevator-id-5"
+  "apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/DE/munich/city/elevator-make-ABC/elevator-id-6"
 )
 
 ##############################################################################################################################
@@ -44,10 +44,8 @@ for i in {1..1000}; do
       sleep 2
       ((eventNum++))
       timestamp=$(date -u +%Y-%m-%d-%H:%M:%S-%Z)
-      from_floor=$((1 + $RANDOM % 42))
-      to_floor=$((1 + $RANDOM % 42))
-      if [ $from_floor -eq $to_floor ]; then ((from_floor--)); fi
-      if [ $from_floor -lt $to_floor ]; then type="up"; else type="down"; fi
+      component_id="ABC-"$((1 + $RANDOM % 10000))
+      timewindow_days=$((5 + $RANDOM % 20))
       payload='
       {
         "header": {
@@ -55,9 +53,16 @@ for i in {1..1000}; do
           "timestamp": "'"$timestamp"'"
         },
         "body": {
-          "type": "'"$type"'",
-          "from_floor": '$from_floor',
-          "to_floor": '$to_floor'
+          "component_id": "'"$component_id"'",
+          "description": "misalignment car to floor",
+          "timewindow_days": '$timewindow_days',
+          "probability_of_failure_pct": 90,
+          "details": {
+            "reasons": [
+              "misalignment car to floor > 8mm",
+              "avg journeys / day > 25"
+            ]
+          }
         }
       }
       '

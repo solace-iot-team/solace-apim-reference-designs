@@ -29,7 +29,8 @@
       "additionalProperties": false,
       "required": [
         "type",
-        "number_floors"
+        "from_floor",
+        "to_floor"
       ],
       "properties": {
         "type": {
@@ -40,7 +41,10 @@
             "down"
           ]
         },
-        "number_floors": {
+        "from_floor": {
+          "type": "integer"
+        },
+        "to_floor": {
           "type": "integer"
         }
       }
