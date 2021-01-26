@@ -13,10 +13,13 @@ echo
 # NO_VALIDATION="True"
 # ######################################################################
 
-# solace broker connection details
-REST_USERNAME="solace-cloud-client"
-REST_PASSWORD="enfe56t36gbp4evn4hner9grmh"
-REST_HOST="http://mr1i5g7tif6z9h.messaging.solace.cloud:9000"
+# solace broker connection details as env variables
+if [ -z "$SOLACE_APIM_REST_USERNAME" ]; then echo ">>> ERROR: missing env var: SOLACE_APIM_REST_USERNAME"; exit 1; fi
+if [ -z "$SOLACE_APIM_REST_PASSWORD" ]; then echo ">>> ERROR: missing env var: SOLACE_APIM_REST_PASSWORD"; exit 1; fi
+if [ -z "$SOLACE_APIM_REST_URL" ]; then echo ">>> ERROR: missing env var: SOLACE_APIM_REST_URL"; exit 1; fi
+REST_USERNAME=$SOLACE_APIM_REST_USERNAME
+REST_PASSWORD=$SOLACE_APIM_REST_PASSWORD
+REST_HOST=$SOLACE_APIM_REST_URL
 
 eventSchemaFile="$scriptDir/info-screen.schema.json"
 payloadFile="$tmpDir/info-screen.payload.json"

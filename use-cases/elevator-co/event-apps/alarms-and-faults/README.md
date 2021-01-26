@@ -42,6 +42,10 @@
 ````bash
 # requires python
 pip install jsonschema
+# REST connection details
+export SOLACE_APIM_REST_USERNAME="e.g. solace-cloud-client"
+export SOLACE_APIM_REST_PASSWORD="xxxx"
+export SOLACE_APIM_REST_URL="http://xxxx.messaging.solace.cloud:9000"
 ````
 
 ````bash
