@@ -39,7 +39,7 @@ Variables:
 
 ## Import Postman Collection
 
-Collection: **Solace-APIM-UC-Elevator-Co.postman_collection.json**
+Collection: [**Solace-APIM-UC-Elevator-Co.postman_collection.json**](./Solace-APIM-UC-Elevator-Co.postman_collection.json)
 
 Select Environment: e.g. `My-Account-APIM-Test`
 
