@@ -54,10 +54,19 @@ components:
   parameters:
     topic_elem:
       schema:
-        type: string      
+        type: string
 channels:
   'apim/elevator-co/data-product/V1/json/elevator/maintenance/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':
     subscribe:
+      bindings:
+        http:
+          bindingVersion: ‘0.1.0’
+          type: request
+          method: POST
+        mqtt:
+          qos: 1
+          retain: true
+          bindingVersion: 0.1.0      
       message:
         $ref: '#/components/messages/maintenance'
     parameters:

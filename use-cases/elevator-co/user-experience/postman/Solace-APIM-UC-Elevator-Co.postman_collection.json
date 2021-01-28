@@ -50,62 +50,50 @@
 					"response": []
 				},
 				{
-					"name": "delete Org",
+					"name": "create dev env",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 204\", function () {",
-									"    pm.response.to.have.status(204);",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
 									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/organizations/{{org}}",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"organizations",
-								"{{org}}"
-							]
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
 						}
 					},
-					"response": []
-				},
-				{
-					"name": "get Org",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{devEnv_name}}\",\n  \"description\": \"development environment\",\n  \"serviceId\": \"{{devEnv_serviceId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{baseUrl}}/organizations/{{org}}",
+							"raw": "{{baseUrl}}/{{org}}/environments",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"organizations",
-								"{{org}}"
+								"{{org}}",
+								"environments"
 							]
 						}
 					},
@@ -116,55 +104,6 @@
 		{
 			"name": "publisher",
 			"item": [
-				{
-					"name": "GET api-spec: alarms-and-faults",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"",
-									"postman.setEnvironmentVariable(\"alarmsAndFaultsApiSpec\", responseBody)",
-									"// console.log('responseBody =' + responseBody)",
-									"",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "text/yaml",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/alarms-and-faults/spec",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{org}}",
-								"event-portal",
-								"apis",
-								"alarms-and-faults",
-								"spec"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Create api: alarms-and-faults",
 					"event": [
@@ -220,41 +159,6 @@
 								"{{org}}",
 								"apis",
 								"alarms-and-faults"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET api-spec: usage",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"postman.setEnvironmentVariable(\"usageApiSpec\", responseBody)",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/usage/spec",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{org}}",
-								"event-portal",
-								"apis",
-								"usage",
-								"spec"
 							]
 						}
 					},
@@ -321,43 +225,6 @@
 					"response": []
 				},
 				{
-					"name": "GET api-spec: maintenance",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"",
-									"postman.setEnvironmentVariable(\"maintenanceApiSpec\", responseBody)",
-									"",
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/maintenance/spec",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{org}}",
-								"event-portal",
-								"apis",
-								"maintenance",
-								"spec"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Create api: maintenance",
 					"event": [
 						{
@@ -412,56 +279,6 @@
 								"{{org}}",
 								"apis",
 								"maintenance"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create dev env",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"content-type": true
-						}
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{devEnv_name}}\",\n  \"description\": \"development environment\",\n  \"serviceId\": \"{{devEnv_serviceId}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/{{org}}/environments",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{org}}",
-								"environments"
 							]
 						}
 					},
@@ -697,7 +514,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-alarms-and-faults\",\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-elevator-alarms-and-faults-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-alarms-and-faults\",\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-elevator-alarms-and-faults-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {},\n    \"callbackUrl\": \"my-elevator.service-co.com/v1/critical-events\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps",
@@ -739,7 +556,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {},\n    \"callbackUrl\": \"my-elevator.service-co.com/v1/usage-events\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps",
@@ -762,15 +579,6 @@
 			"name": "approver",
 			"item": [
 				{
-					"name": "todo: get a list of apps that need approval",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
-					},
-					"response": []
-				},
-				{
 					"name": "approve dev-1 app",
 					"request": {
 						"method": "PATCH",
@@ -782,7 +590,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"status\": \"approved\"\n}"
+							"raw": "{\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"munich, cologne\"\n        }\n    ],\n    \"status\": \"approved\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-usage",
@@ -903,6 +711,68 @@
 			"name": "helpers",
 			"item": [
 				{
+					"name": "delete Org",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{org}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{org}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Org",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{org}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{org}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "apiProducts",
 					"request": {
 						"method": "GET",
@@ -937,6 +807,146 @@
 								"apps"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EventPortal",
+			"item": [
+				{
+					"name": "GET api-spec: usage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"ep_usageApiSpec\", responseBody)",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/usage/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"usage",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET api-spec: alarms-and-faults",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"postman.setEnvironmentVariable(\"ep_alarmsAndFaultsApiSpec\", responseBody)",
+									"// console.log('responseBody =' + responseBody)",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/yaml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/alarms-and-faults/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"alarms-and-faults",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET api-spec: maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"postman.setEnvironmentVariable(\"ep_maintenanceApiSpec\", responseBody)",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/maintenance/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"maintenance",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Waiting2bImplemented",
+			"item": [
+				{
+					"name": "todo: get a list of apps that need approval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
@@ -976,6 +986,20 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "alarmsAndFaultsApiSpec",
+			"value": "components:\n  schemas:\n    fault:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co fault event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              description: >-\n                the time the fault was generated by the asset - includes the\n                timezone\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - type\n            - description\n            - code\n            - details\n          properties:\n            component_id:\n              title: component_id the fault refers to\n              type: string\n            code:\n              title: alarm code\n              type: integer\n            description:\n              title: human readable fault description\n              type: string\n            details:\n              anyOf:\n                - additionalProperties: false\n                  title: details for type=light\n                  type: object\n                  required:\n                    - actual_lux\n                    - expected_lux\n                    - discrepancy_pct\n                  properties:\n                    expected_lux:\n                      type: integer\n                    discrepancy_pct:\n                      type: integer\n                    actual_lux:\n                      type: integer\n                - additionalProperties: false\n                  title: details for type=phone\n                  type: object\n                  required:\n                    - num_tests_failed\n                  properties:\n                    num_tests_failed:\n                      type: integer\n              title: alarm or fault details\n              type: object\n            type:\n              title: the type of alarm\n              type: string\n              enum:\n                - light\n                - phone\n      $id: 'http://eventportal.solace.cloud/apim/elevator-co/alarm.json'\n    critical-alarm:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co critical alarm event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              description: >-\n                the time the alarm was generated by the asset - includes the\n                timezone\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - type\n            - description\n            - code\n            - details\n          properties:\n            code:\n              title: alarm code\n              type: integer\n            description:\n              title: human readable alarm description\n              type: string\n            details:\n              anyOf:\n                - additionalProperties: false\n                  title: details for type=car2floor_alignment\n                  type: object\n                  required:\n                    - floor\n                    - discrepancy_mm\n                  properties:\n                    discrepancy_mm:\n                      type: integer\n                    floor:\n                      type: integer\n                - additionalProperties: false\n                  title: details for type=max_weight_exceeded\n                  type: object\n                  required:\n                    - max_weight_kg\n                    - actual_weight_kg\n                  properties:\n                    actual_weight_kg:\n                      type: integer\n                    max_weight_kg:\n                      type: integer\n              title: alarm or fault details\n              type: object\n            type:\n              title: the type of alarm\n              type: string\n              enum:\n                - car2floor_alignment\n                - max_weight_exceeded\n      $id: 'http://eventportal.solace.cloud/apim/elevator-co/alarm.json'\n  messages:\n    fault:\n      payload:\n        $ref: '#/components/schemas/fault'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n    critical-alarm:\n      payload:\n        $ref: '#/components/schemas/critical-alarm'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    topic_elem:\n      schema:\n        type: string\nchannels:\n  'apim/elevator-co/data-product/V1/json/elevator/critical-alarm/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0\n      message:\n        $ref: '#/components/messages/critical-alarm'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\n  'apim/elevator-co/data-product/V1/json/elevator/fault/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0\n      message:\n        $ref: '#/components/messages/fault'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: alarms-and-faults\n  x-view: provider\n  version: 0.0.1\n"
+		},
+		{
+			"key": "maintenanceApiSpec",
+			"value": "components:\n  schemas:\n    maintenance:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co maintenance event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - component_id\n            - description\n            - timewindow_days\n            - details\n          properties:\n            component_id:\n              title: component_id that needs maintenance\n              type: string\n            timewindow_days:\n              title: maintenance time window in days\n              type: integer\n            description:\n              title: maintenance description\n              type: string\n            details:\n              title: maintenance details\n              type: object\n            probability_of_failure_pct:\n              title: probability of fault / urgency of maintenace in %\n              type: integer\n      $id: >-\n        http://eventportal.solace.cloud/apim/elevator-co/maintenance/maintenance.json\n  messages:\n    maintenance:\n      payload:\n        $ref: '#/components/schemas/maintenance'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    topic_elem:\n      schema:\n        type: string\nchannels:\n  'apim/elevator-co/data-product/V1/json/elevator/maintenance/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0      \n      message:\n        $ref: '#/components/messages/maintenance'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: maintenance\n  x-view: provider\n  version: 0.0.1\n"
+		},
+		{
+			"key": "usageApiSpec",
+			"value": "components:\n  schemas:\n    call-wait:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co call elevator wait time event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - floor\n            - wait_min\n          properties:\n            floor:\n              type: integer\n            wait_min:\n              type: integer\n      $id: 'http://eventportal.solace.cloud/apim/elevator-co/usage/call-wait.json'\n    journey:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co journey event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - type\n            - from_floor\n            - to_floor\n          properties:\n            to_floor:\n              type: integer\n            from_floor:\n              type: integer\n            type:\n              title: the type of journey\n              type: string\n              enum:\n                - up\n                - down\n      $id: 'http://eventportal.solace.cloud/apim/elevator-co/usage/journey.json'\n    info-screen:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co info screen usage event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - num_sessions_last_hour\n            - avg_clicks_per_session\n          properties:\n            num_sessions_last_hour:\n              type: integer\n            avg_clicks_per_session:\n              type: integer\n      $id: 'http://eventportal.solace.cloud/apim/elevator-co/usage/info-screen.json'\n  messages:\n    call-wait:\n      payload:\n        $ref: '#/components/schemas/call-wait'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n    journey:\n      payload:\n        $ref: '#/components/schemas/journey'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n    info-screen:\n      payload:\n        $ref: '#/components/schemas/info-screen'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    topic_elem:\n      schema:\n        type: string\nchannels:\n  'apim/elevator-co/data-product/V1/json/elevator/info-screen/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0\n      message:\n        $ref: '#/components/messages/info-screen'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\n  'apim/elevator-co/data-product/V1/json/elevator/journey/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0\n      message:\n        $ref: '#/components/messages/journey'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\n  'apim/elevator-co/data-product/V1/json/elevator/call-wait/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}':\n    subscribe:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0      \n      message:\n        $ref: '#/components/messages/call-wait'\n    parameters:\n      resource_org_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_sub_region_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_site_id:\n        $ref: '#/components/parameters/topic_elem'\n      resource_type:\n        $ref: '#/components/parameters/topic_elem'\n      resource_id:\n        $ref: '#/components/parameters/topic_elem'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: usage\n  x-view: provider\n  version: 0.0.1\n"
 		}
 	]
 }

@@ -37,6 +37,7 @@ Variables:
   - **solace-apim-api-password**: {the api password}
   - **org**: `{your-unique-ord-id}`
 
+
 ## Import Postman Collection
 
 Collection: [**Solace-APIM-UC-Elevator-Co.postman_collection.json**](./Solace-APIM-UC-Elevator-Co.postman_collection.json)
@@ -46,10 +47,18 @@ Select Environment: e.g. `My-Account-APIM-Test`
 
 ## Run Postman
 
-### Create Organization
+For ease of use, these pre-configured AsyncAPI specs are contained in the collection as variables:
+  - **alarmsAndFaultsApiSpec**: [alarms-and-faults.async-api-spec.yaml](../../event-apps/alarms-and-faults/alarms-and-faults.async-api-spec.yaml)
+  - **maintenanceApiSpec**: [maintenance.async-api-spec.yaml](../../event-apps/maintenance/maintenance.async-api-spec.yaml)
+  - **usageApiSpec**: [usage.async-api-spec.yaml](../../event-apps/usage/usage.async-api-spec.yaml)
+
+
+### Create Organization & Environments
 
 - **management:**
-  - run: **create Org**
+  - run: **all**
+    - creates the organization
+    - creates the development environment - the association with the Development Broker
 
 ### Create API Products
 
@@ -57,7 +66,6 @@ Select Environment: e.g. `My-Account-APIM-Test`
   - run: **all**
     - fetches the AsyncAPI specs for alarms-and-faults, maintenance, usage from Event Portal
     - creates the apis from the AsyncAPI specs
-    - creates the development environment - the association with the Development Broker
     - creates API products for alarms-and-faults, maintenance, usage
 
 ### Create Apps
@@ -70,9 +78,9 @@ Select Environment: e.g. `My-Account-APIM-Test`
 ### Approve Apps
 
 - **approver:**
-  - TODO:
-  - get a list of apps pending approval
-  - send approved
+  - run:**approve dev-1 app:**
+    - restricts the event stream to: `hilton` in `de` in `munich and cologne`
+    - sets status=`approved`
 
 ### Use Apps
 - **consumer-use-apps:**
@@ -81,5 +89,8 @@ Select Environment: e.g. `My-Account-APIM-Test`
   - run: **GET app details: app details: dev-2-elevator-usage**
     - returns app details
 
-
+### Start Clean
+- **helpers:**
+  - run: **delete Org:**
+    - deletes the entire org and everything in it
 ---
