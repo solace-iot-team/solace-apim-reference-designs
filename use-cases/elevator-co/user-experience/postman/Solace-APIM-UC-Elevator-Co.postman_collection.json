@@ -580,6 +580,19 @@
 			"item": [
 				{
 					"name": "approve dev-1 app",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -593,7 +606,7 @@
 							"raw": "{\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"munich, cologne\"\n        }\n    ],\n    \"status\": \"approved\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-usage",
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-maintenance",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -602,7 +615,7 @@
 								"developers",
 								"dev-1",
 								"apps",
-								"dev-1-elevator-alarms-and-faults-usage"
+								"dev-1-elevator-alarms-and-faults-maintenance"
 							]
 						}
 					},
