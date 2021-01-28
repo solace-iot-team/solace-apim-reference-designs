@@ -1,14 +1,6 @@
-# Use Case: Elevator-Co - Postman Walkthrough Solace Platform API Usage
+# User Experience for Use Case: Elevator-Co
 
 [Solace Platform API - Open API Doc](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/)
-
-## Setup Solace Event Portal
-
-Create the schemas, events, event apps:
-
-* [alarms-and-faults](../../event-apps/alarms-and-faults)
-* [maintenance](../../event-apps/maintenance)
-* [usage](../../event-apps/usage)
 
 ## Setup Solace Development Broker
 
@@ -93,4 +85,19 @@ For ease of use, these pre-configured AsyncAPI specs are contained in the collec
 - **helpers:**
   - run: **delete Org:**
     - deletes the entire org and everything in it
+
+## Using Solace Event Portal
+### Setup Solace Event Portal
+
+Create the schemas, events, event apps:
+
+* [alarms-and-faults](../../event-apps/alarms-and-faults)
+* [maintenance](../../event-apps/maintenance)
+* [usage](../../event-apps/usage)
+
+### Run Postman
+
+- **EventPortal:**
+  - run: **all**
+    - retrieves the AsyncAPI specs for usage, alarms & faults, maintenace from event portal
 ---
