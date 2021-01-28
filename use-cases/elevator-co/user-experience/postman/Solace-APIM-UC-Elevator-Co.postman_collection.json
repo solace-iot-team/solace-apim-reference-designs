@@ -1,0 +1,981 @@
+{
+	"info": {
+		"_postman_id": "756ad4ac-bb6f-47b6-b120-fe09738a3e59",
+		"name": "Solace-APIM-UC-Elevator-Co",
+		"description": "Solace Platform API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "management",
+			"item": [
+				{
+					"name": "create Org",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{org}}\",\n    \"cloud-token\": \"{{solaceCloudApiToken}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/organizations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Org",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{org}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{org}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Org",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/organizations/{{org}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"organizations",
+								"{{org}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "publisher",
+			"item": [
+				{
+					"name": "GET api-spec: alarms-and-faults",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"postman.setEnvironmentVariable(\"alarmsAndFaultsApiSpec\", responseBody)",
+									"// console.log('responseBody =' + responseBody)",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/yaml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/alarms-and-faults/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"alarms-and-faults",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create api: alarms-and-faults",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{alarmsAndFaultsApiSpec}}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/alarms-and-faults",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"alarms-and-faults"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET api-spec: usage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"usageApiSpec\", responseBody)",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/usage/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"usage",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create api: usage",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{usageApiSpec}}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/usage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET api-spec: maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"postman.setEnvironmentVariable(\"maintenanceApiSpec\", responseBody)",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/event-portal/apis/maintenance/spec",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"event-portal",
+								"apis",
+								"maintenance",
+								"spec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create api: maintenance",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{alarmsAndFaultsApiSpec}}",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create dev env",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{devEnv_name}}\",\n  \"description\": \"development environment\",\n  \"serviceId\": \"{{devEnv_serviceId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/environments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"environments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product: alarms&faults",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apis\": [\n        \"alarms-and-faults\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator alarms and faults\",\n    \"displayName\": \"Elevator Alarm & Faults\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-alarms-and-faults\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product: usage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apis\": [\n        \"usage\"\n    ],\n    \"approvalType\": \"auto\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator usage data\",\n    \"displayName\": \"Elevator Usage Data\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-usage\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product: maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apis\": [\n        \"maintenance\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consumer-create-apps",
+			"item": [
+				{
+					"name": "create developer-1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dev-1@service-co.com\",\n    \"firstName\": \"Dev-1\",\n    \"lastName\": \"Developer-1\",\n    \"userName\": \"dev-1\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create developer-2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dev-2@service-co.com\",\n    \"firstName\": \"Dev-2\",\n    \"lastName\": \"Developer-2\",\n    \"userName\": \"dev-2\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create app for dev-1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-alarms-and-faults\",\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-elevator-alarms-and-faults-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create app for dev-2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-2",
+								"apps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "approver",
+			"item": [
+				{
+					"name": "todo: get a list of apps that need approval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "approve dev-1 app",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"approved\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-usage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps",
+								"dev-1-elevator-alarms-and-faults-usage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consumer-use-apps",
+			"item": [
+				{
+					"name": "app details: dev-1-elevator-alarms-and-faults-maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps",
+								"dev-1-elevator-alarms-and-faults-maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "app details: dev-2-elevator-usage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps/dev-2-elevator-usage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-2",
+								"apps",
+								"dev-2-elevator-usage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "helpers",
+			"item": [
+				{
+					"name": "apiProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apps for dev-1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{solace-apim-api-password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{solace-apim-api-user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
