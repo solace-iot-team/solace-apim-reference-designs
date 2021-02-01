@@ -263,7 +263,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{{alarmsAndFaultsApiSpec}}",
+							"raw": "{{maintenanceApiSpec}}",
 							"options": {
 								"raw": {
 									"language": "text"
@@ -309,7 +309,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"alarms-and-faults\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator alarms and faults\",\n    \"displayName\": \"Elevator Alarm & Faults\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-alarms-and-faults\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"alarms-and-faults\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator alarms and faults\",\n    \"displayName\": \"Elevator Alarm & Faults\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-alarms-and-faults\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -349,7 +349,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"usage\"\n    ],\n    \"approvalType\": \"auto\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator usage data\",\n    \"displayName\": \"Elevator Usage Data\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-usage\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"usage\"\n    ],\n    \"approvalType\": \"auto\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator usage data\",\n    \"displayName\": \"Elevator Usage Data\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-usage\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -389,7 +389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"maintenance\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"maintenance\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -514,7 +514,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-alarms-and-faults\",\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-elevator-alarms-and-faults-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {},\n    \"callbackUrl\": \"my-elevator.service-co.com/v1/critical-events\"\n}"
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-alarms-and-faults\",\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-elevator-alarms-and-faults-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps",
@@ -556,7 +556,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {},\n    \"callbackUrl\": \"my-elevator.service-co.com/v1/usage-events\"\n}"
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps",
