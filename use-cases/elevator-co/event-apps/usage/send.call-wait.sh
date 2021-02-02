@@ -28,13 +28,13 @@ payloadFile="$tmpDir/call-wait.payload.json"
 # apim/elevator-co/data-product/V1/json/elevator/call-wait/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}
 topics=(
 # hilton, france, paris, opera
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1"
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-2"
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-3"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/fr/paris/opera/elevator-make-ABC/elevator-id-1"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/fr/paris/opera/elevator-make-ABC/elevator-id-2"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/fr/paris/opera/elevator-make-ABC/elevator-id-3"
 # hilton, de, munich, city
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/DE/munich/city/elevator-make-ABC/elevator-id-4"
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/DE/munich/city/elevator-make-ABC/elevator-id-5"
-  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/DE/munich/city/elevator-make-ABC/elevator-id-6"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/de/munich/city/elevator-make-ABC/elevator-id-4"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/de/munich/city/elevator-make-ABC/elevator-id-5"
+  "apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/de/munich/city/elevator-make-ABC/elevator-id-6"
 )
 
 ##############################################################################################################################
