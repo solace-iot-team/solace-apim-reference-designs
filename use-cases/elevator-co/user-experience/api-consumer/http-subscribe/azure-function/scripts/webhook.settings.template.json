@@ -1,0 +1,10 @@
+{
+  "az_webhook_function": {
+    "az_func_name": "solace-rdp-2-blob",
+    "az_func_code": "xxx-yyy-zzz",
+    "az_func_host": "solace-int-rdp-az-funcs-fa.domain.com",
+    "az_func_port": 111,
+    "az_func_tls_enabled": false,
+    "az_func_trusted_common_name": "*.domain.com"
+  }
+}
