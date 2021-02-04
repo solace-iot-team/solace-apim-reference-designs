@@ -31,14 +31,24 @@ export rdp2Blob_azFuncCode=$( echo $funcAppInfoJSON | jq -r '.functions."solace-
 export rdp2Blob_azFuncHost=$( echo $funcAppInfoJSON | jq -r '.defaultHostName' )
 export hostDomain="*."${rdp2Blob_azFuncHost#*.}
 export certFile="$deploymentDir/$certName"
+# fixed values
+export rdp2Blob_azFuncPort=443
+export rdp2Blob_azFuncMode="parallel"
+export rdp2Blog_azFuncName="solace-rdp-2-blob"
 
+# compose uri
+functionBaseUrl="https://$rdp2Blob_azFuncHost:$rdp2Blob_azFuncPort/api/$rdp2Blog_azFuncName?code=$rdp2Blob_azFuncCode"
+functionParams="path=test&pathCompose=withTime"
+export rdp2Blob_azFuncUri="$functionBaseUrl&$functionParams"
 # merge into template
 settingsJSON=$(cat $settingsTemplateFile | jq . )
 settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_code=env.rdp2Blob_azFuncCode")
 settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_host=env.rdp2Blob_azFuncHost")
 settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_trusted_common_name=env.hostDomain")
 settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_tls_enabled=true")
-settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_port=443")
+settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.az_func_port=env.rdp2Blob_azFuncPort")
+settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.webHook.uri=env.rdp2Blob_azFuncUri")
+settingsJSON=$(echo $settingsJSON | jq ".az_webhook_function.webHook.mode=env.rdp2Blob_azFuncMode")
 
 echo $settingsJSON | jq . > $settingsFile
 

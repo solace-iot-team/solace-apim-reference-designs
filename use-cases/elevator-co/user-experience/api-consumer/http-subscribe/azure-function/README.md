@@ -73,19 +73,23 @@ Example `settings.json`:
 
 ### Display App Webhook Settings
 
-Use these settings when registering your app:
+Use these settings when registering your app: `az_webhook_function.webHook`.
 
 ````bash
-./3.get.apim-app-settings.sh
+./3.get.apim-app-webhook-settings.sh
 ````
 Example `webhook.settings.json`:
 ````json
 {
   "az_webhook_function": {
-    "az_func_name": "solace-rdp-2-blob",
-    "az_func_code": "{code}==",
-    "az_func_host": "{function-app-name}.azurewebsites.net",
-    "az_func_port": 443,
+    "webHook": {
+      "uri": "https://{name}.azurewebsites.net:443/api/solace-rdp-2-blob?code={code}&path=test&pathCompose=withTime",
+      "method": "POST",
+      "mode": "parallel"
+    },
+    "az_func_code": "{code}",
+    "az_func_host": "{name}.azurewebsites.net",
+    "az_func_port": "443",
     "az_func_tls_enabled": true,
     "az_func_trusted_common_name": "*.azurewebsites.net"
   }
@@ -99,25 +103,23 @@ Example `webhook.settings.json`:
 ./4.test.azure-function.sh
 ````
 
+### Update App with Webhook Details
+
+Use the Postman Collection:
+
+* Update: `Solace-APIM-UC-Evevator-Co/consumer-update-apps-webhook`
+* Get Details: `Solace-APIM-UC-Evevator-Co/consumer-use-apps`
+
+### Send Events
+
+* Use `send.*.sh` simulators in the `event-apps` directories to send events to the broker.
+* Check Azure Blog Storage to see the events
+
+
 ### Delete Azure Deployment
 Convenience script to delete the deployment.
 ````bash
-./5.delete.deployment.azure.sh
+./x.delete.deployment.azure.sh
 ````
-
----------
-
-
-## Create App
-
-- http subscribe
-- token, url
-
-## Start Simulator
-
-## Watch Azure Datalake Being Populated
-
-
-
 
 ---

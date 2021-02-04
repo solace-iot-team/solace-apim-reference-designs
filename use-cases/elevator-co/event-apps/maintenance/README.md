@@ -30,7 +30,7 @@
 ### Topic Template
 `apim/elevator-co/data-product/V1/json/elevator/maintenance/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
 ### Examples
-- `apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/maintenance/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 ````bash

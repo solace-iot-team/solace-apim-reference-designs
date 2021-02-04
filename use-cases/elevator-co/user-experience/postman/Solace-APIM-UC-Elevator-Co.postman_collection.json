@@ -309,7 +309,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"alarms-and-faults\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator alarms and faults\",\n    \"displayName\": \"Elevator Alarm & Faults\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-alarms-and-faults\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"alarms-and-faults\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator alarms and faults\",\n    \"displayName\": \"Elevator Alarm & Faults\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-alarms-and-faults\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -349,7 +349,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"usage\"\n    ],\n    \"approvalType\": \"auto\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator usage data\",\n    \"displayName\": \"Elevator Usage Data\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-usage\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"usage\"\n    ],\n    \"approvalType\": \"auto\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator usage data\",\n    \"displayName\": \"Elevator Usage Data\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-usage\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n                {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -389,7 +389,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"maintenance\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"maintenance\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_org_id\",\n            \"value\": \"hilton, marriott\"\n        },\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        },\n        {\n            \"name\": \"resource_sub_region_id\",\n            \"value\": \"paris, munich\"\n        },\n        {\n            \"name\": \"resource_site_id\",\n            \"value\": \"opera, city, bahnhof\"\n        },\n        {\n            \"name\": \"resource_type\",\n            \"value\": \"elev-make1, elev-make2\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n                {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -701,6 +701,140 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps/dev-2-elevator-usage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-2",
+								"apps",
+								"dev-2-elevator-usage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "consumer-update-apps-webhook",
+			"item": [
+				{
+					"name": "app for dev-1 with webhook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webHook\": {\n      \"uri\": \"https://apim-rdp-func-rjgu-fa.azurewebsites.net:443/api/solace-rdp-2-blob?code=lW3fk0vNawEBaGa90/0uJ1AADwzr4KVAMTgqXDaBaB8EOt0zYOOD6w==&path=dev-1&pathCompose=withTime\",\n      \"method\": \"POST\",\n      \"mode\": \"serial\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps",
+								"dev-1-elevator-alarms-and-faults-maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "app for dev-2 with webhook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webHook\": {\n      \"uri\": \"https://apim-rdp-func-rjgu-fa.azurewebsites.net:443/api/solace-rdp-2-blob?code=lW3fk0vNawEBaGa90/0uJ1AADwzr4KVAMTgqXDaBaB8EOt0zYOOD6w==&path=dev-2&pathCompose=withTime\",\n      \"method\": \"POST\",\n      \"mode\": \"parallel\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps/dev-2-elevator-usage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-2",
+								"apps",
+								"dev-2-elevator-usage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "app for dev-2 with webhook too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"webHook\": {\n      \"uri\": \"https://apim-rdp-func-rjgu-fa.azurewebsites.net:443/api/solace-rdp-2-blob?code=this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long-this-is-too-long==&path=dev-2&pathCompose=withTime\",\n      \"method\": \"POST\",\n      \"mode\": \"parallel\"\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-2/apps/dev-2-elevator-usage",

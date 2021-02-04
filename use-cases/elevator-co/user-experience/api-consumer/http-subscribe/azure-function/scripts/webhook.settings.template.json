@@ -1,6 +1,10 @@
 {
   "az_webhook_function": {
-    "az_func_name": "solace-rdp-2-blob",
+    "webHook": {
+      "uri": "https://{host}:{port}/api/{func_name}?code={code}&path=test&pathCompose=withTime",
+      "method": "POST",
+      "mode": "serial"
+    },
     "az_func_code": "xxx-yyy-zzz",
     "az_func_host": "solace-int-rdp-az-funcs-fa.domain.com",
     "az_func_port": 111,
