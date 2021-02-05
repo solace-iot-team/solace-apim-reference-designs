@@ -24,6 +24,8 @@ Variables:
   - **solaceCloudApiToken**: `{solace cloud api token}`
   - **devEnv_serviceId**: the service id of the Solace Cloud broker, e.g. `1i5g7tif6z8p`
   - **devEnv_name**: the name of the development environment in the api, e.g. `our-dev-env`
+  - **prodEnv_serviceId**: the service id of the Solace Cloud broker, e.g. `1i5g7tif6z8x`
+  - **prodEnv_name**: the name of the development environment in the api, e.g. `our-prod-env`
   - **baseUrl**: `http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/v1`
   - **solace-apim-api-user**: {the api user}
   - **solace-apim-api-password**: {the api password}
