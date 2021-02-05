@@ -30,7 +30,7 @@
 ### Topic Template
 `apim/elevator-co/data-product/V1/json/elevator/journey/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
 ### Examples
-- `apim/elevator-co/data-product/V1/json/elevator/journey/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/journey/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 ````bash
@@ -49,7 +49,7 @@ export SOLACE_APIM_REST_URL="http://xxxx.messaging.solace.cloud:9000"
 ### Topic Template
 `apim/elevator-co/data-product/V1/json/elevator/call-wait/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
 ### Examples
-- `apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/call-wait/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 ````bash
@@ -61,7 +61,7 @@ export SOLACE_APIM_REST_URL="http://xxxx.messaging.solace.cloud:9000"
 ### Topic Template
 `apim/elevator-co/data-product/V1/json/elevator/info-screen/{resource_org_id}/{resource_region_id}/{resource_sub_region_id}/{resource_site_id}/{resource_type}/{resource_id}`
 ### Examples
-- `apim/elevator-co/data-product/V1/json/elevator/info-screen/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/info-screen/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 ````bash

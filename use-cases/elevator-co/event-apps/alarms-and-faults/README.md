@@ -35,7 +35,7 @@
 
 ### Examples
 
-- `apim/elevator-co/data-product/V1/json/elevator/critical-alarm/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/critical-alarm/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 
@@ -62,7 +62,7 @@ export SOLACE_APIM_REST_URL="http://xxxx.messaging.solace.cloud:9000"
 
 ### Examples
 
-- `apim/elevator-co/data-product/V1/json/elevator/fault/hilton/FR/paris/opera/elevator-make-ABC/elevator-id-1`
+- `apim/elevator-co/data-product/V1/json/elevator/fault/hilton/FR/paris/opera/elev-make1/elevator-id-1`
 
 ### Simulator
 
