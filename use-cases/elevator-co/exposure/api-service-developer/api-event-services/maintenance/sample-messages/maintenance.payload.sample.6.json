@@ -1,0 +1,19 @@
+{
+  "header": {
+    "topic": "apim/elevator-co/api/V1/json/de/elevator/maintenace/elev-make-1/elevator-id-6",
+    "timestamp": "2021-02-15-13:25:39-UTC",
+    "tracking_id": "74dafc27-a962-494d-b19b-d46f3dc365a6"
+  },
+  "body": {
+    "component_id": "ABC-6912",
+    "description": "misalignment car to floor",
+    "timewindow_days": 23,
+    "probability_of_failure_pct": 90,
+    "details": {
+      "reasons": [
+        "misalignment car to floor > 8mm",
+        "avg journeys / day > 25"
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "tracking_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "timestamp"
+      ],
+      "properties": {
+        "topic": {
+          "$ref": "common.json#/definitions/topic"
+        },
+        "timestamp": {
+          "$ref": "common.json#/definitions/timestamp"
+        }
+      }
+    },
+    "header_with_tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "timestamp",
+        "tracking_id"
+      ],
+      "properties": {
+        "tracking_id": {
+          "$ref": "common.json#/definitions/tracking_id"
+        },
+        "topic": {
+          "$ref": "common.json#/definitions/topic"
+        },
+        "timestamp": {
+          "$ref": "common.json#/definitions/timestamp"
+        }
+      }
+    }
+  }
+}

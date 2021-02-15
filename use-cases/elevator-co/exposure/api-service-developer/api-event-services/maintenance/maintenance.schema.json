@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://localhost:8811/maintenance.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "Elevator Co maintenance event payload",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "$ref": "common-schemas/common.json#/definitions/header_with_tracking"
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component_id",
+        "description",
+        "timewindow_days",
+        "details"
+      ],
+      "properties": {
+        "component_id": {
+          "title": "component_id that needs maintenance",
+          "type": "string"
+        },
+        "description": {
+          "title": "maintenance description",
+          "type": "string"
+        },
+        "timewindow_days": {
+          "title": "maintenance time window in days",
+          "type": "integer"
+        },
+        "probability_of_failure_pct": {
+          "title": "probability of fault / urgency of maintenace in %",
+          "type": "integer"
+        },
+        "details": {
+          "title": "maintenance details",
+          "type": "object"
+        }
+      }
+    }
+  }
+}
