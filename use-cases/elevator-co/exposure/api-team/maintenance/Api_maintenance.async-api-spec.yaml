@@ -84,7 +84,7 @@ components:
         pattern: "^[a-zA-Z0-9-]+$"
 channels:
   'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':
-    subscribe:
+    publish:
       bindings:
         http:
           bindingVersion: ‘0.1.0’
