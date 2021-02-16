@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "868497c0-7d42-4fa0-bc0c-98248faeb7ee",
-		"name": "Solace-APIM-UC-Elevator-Co developer",
+		"name": "Solace-APIM-UC-Elevator-Co-developer",
 		"description": "Solace Platform API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,6 +45,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "general api spec status-update",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/status-update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"status-update"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -77,46 +96,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"email\": \"dev-1@service-co.com\",\n    \"firstName\": \"Dev-1\",\n    \"lastName\": \"Developer-1\",\n    \"userName\": \"dev-1\"\n}"
-						},
-						"url": {
-							"raw": "{{baseUrl}}/{{org}}/developers",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"{{org}}",
-								"developers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "register developer-2",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 201\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"dev-2@service-co.com\",\n    \"firstName\": \"Dev-2\",\n    \"lastName\": \"Developer-2\",\n    \"userName\": \"dev-2\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers",
@@ -276,6 +255,52 @@
 				},
 				{
 					"name": "specific api-spec: dev1:maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apps/dev-1-elevator-alarms-and-faults-maintenance/apis/maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apps",
+								"dev-1-elevator-alarms-and-faults-maintenance",
+								"apis",
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific api-spec: dev1:status-update",
 					"event": [
 						{
 							"listen": "test",
