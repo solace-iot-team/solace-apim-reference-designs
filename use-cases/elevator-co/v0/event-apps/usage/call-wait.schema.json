@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://eventportal.solace.cloud/apim/elevator-co/usage/call-wait.json",
+  "type": "object",
+  "title": "Elevator Co call elevator wait time event payload",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "timestamp"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "floor",
+        "wait_min"
+      ],
+      "properties": {
+        "floor": {
+          "type": "integer"
+        },
+        "wait_min": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
