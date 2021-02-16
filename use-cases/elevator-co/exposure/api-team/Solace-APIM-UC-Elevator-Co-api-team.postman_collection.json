@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "c33c89d8-679e-47c1-ae45-20a35831ae9d",
+		"name": "Solace-APIM-UC-Elevator-Co-api-team",
+		"description": "Solace Platform API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get environments",
+			"item": [
+				{
+					"name": "env details: dev",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/environments/{{devEnv_name}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"environments",
+								"{{devEnv_name}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "env details: prod",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/environments/{{prodEnv_name}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"environments",
+								"{{prodEnv_name}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "register apis",
+			"item": [
+				{
+					"name": "register api: maintenance",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "components:\n  schemas:\n    maintenance:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co maintenance event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n            - tracking_id\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n            tracking_id:\n              type: string\n              pattern: \"^[a-zA-Z0-9-]+$\"\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - component_id\n            - description\n            - timewindow_days\n            - details\n          properties:\n            component_id:\n              title: component_id that needs maintenance\n              type: string\n            timewindow_days:\n              title: maintenance time window in days\n              type: integer\n            description:\n              title: maintenance description\n              type: string\n            details:\n              title: maintenance details\n              type: object\n            probability_of_failure_pct:\n              title: probability of fault / urgency of maintenace in %\n              type: integer\n      $id: >-\n        http://eventportal.solace.cloud/apim/elevator-co/maintenance/maintenance.json\n  messages:\n    maintenance:\n      payload:\n        $ref: '#/components/schemas/maintenance'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    resource_region_id:\n      schema:\n        type: string\n        enum:\n          - fr\n          - de\n    equipment_type:\n      schema:\n        type: string\n        enum:\n          - elevator\n    event_type:\n      schema:\n        type: string\n        enum:\n          - maintenace\n    resource_type:\n      schema:\n        type: string\n        enum:\n          - elev-make-1\n          - elev-make-2\n    resource_id:\n      schema:\n        type: string\n        pattern: \"^[a-zA-Z0-9-]+$\"\nchannels:\n  'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':\n    publish:\n      bindings:\n        mqtt:\n          bindingVersion: ‘0.1.0’\n          qos: 1\n          retain: true\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n      message:\n        $ref: '#/components/messages/maintenance'\n    parameters:\n      resource_region_id:\n        $ref: '#/components/parameters/resource_region_id'\n      equipment_type:\n        $ref: '#/components/parameters/equipment_type'\n      event_type:\n        $ref: '#/components/parameters/event_type'\n      resource_type:\n        $ref: '#/components/parameters/resource_type'\n      resource_id:\n        $ref: '#/components/parameters/resource_id'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: 'ApiEventService:maintenance'\n  x-view: provider\n  version: 0.0.1\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register api: status-update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "components:\n  schemas:\n    status_update:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      additionalProperties: false\n      type: object\n      title: Elevator Co status update for tracking id\n      required:\n        - status_update\n      properties:\n        status_update:\n          additionalProperties: false\n          type: object\n          required:\n            - timestamp\n            - tracking_id\n            - status\n          properties:\n            tracking_id:\n              type: string\n              pattern: \"^[a-zA-Z0-9-]+$\"\n            timestamp:\n              type: string\n            status:\n              type: string\n              enum:\n              - received\n              - resolved\n      $id: >-\n        http://eventportal.solace.cloud/apim/elevator-co/status_update.json\n  messages:\n    status_update:\n      payload:\n        $ref: '#/components/schemas/status_update'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    tracking_id:\n      schema:\n        type: string\n        pattern: \"^[a-zA-Z0-9-]+$\"\nchannels:\n  'apim/elevator-co/api/V1/json/status/{tracking_id}':\n    subscribe:\n      message:\n        $ref: '#/components/messages/status_update'\n      bindings:\n        mqtt:\n          bindingVersion: ‘0.1.0’\n          qos: 1\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n    parameters:\n      tracking_id:\n        $ref: '#/components/parameters/tracking_id'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: 'ApiEventService:status_update'\n  x-view: provider\n  version: 0.0.1\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/status-update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"status-update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update api: maintenance",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "components:\n  schemas:\n    maintenance:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      type: object\n      title: Elevator Co maintenance event payload\n      required:\n        - header\n        - body\n      properties:\n        header:\n          additionalProperties: false\n          type: object\n          required:\n            - topic\n            - timestamp\n            - tracking_id\n          properties:\n            topic:\n              type: string\n            timestamp:\n              type: string\n            tracking_id:\n              type: string\n              pattern: \"^[a-zA-Z0-9-]+$\"\n        body:\n          additionalProperties: false\n          type: object\n          required:\n            - component_id\n            - description\n            - timewindow_days\n            - details\n          properties:\n            component_id:\n              title: component_id that needs maintenance\n              type: string\n            timewindow_days:\n              title: maintenance time window in days\n              type: integer\n            description:\n              title: maintenance description\n              type: string\n            details:\n              title: maintenance details\n              type: object\n            probability_of_failure_pct:\n              title: probability of fault / urgency of maintenace in %\n              type: integer\n      $id: >-\n        http://eventportal.solace.cloud/apim/elevator-co/maintenance/maintenance.json\n  messages:\n    maintenance:\n      payload:\n        $ref: '#/components/schemas/maintenance'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    resource_region_id:\n      schema:\n        type: string\n        enum:\n          - fr\n          - de\n    equipment_type:\n      schema:\n        type: string\n        enum:\n          - elevator\n    event_type:\n      schema:\n        type: string\n        enum:\n          - maintenace\n    resource_type:\n      schema:\n        type: string\n        enum:\n          - elev-make-1\n          - elev-make-2\n    resource_id:\n      schema:\n        type: string\n        pattern: \"^[a-zA-Z0-9-]+$\"\nchannels:\n  'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':\n    publish:\n      bindings:\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n        mqtt:\n          qos: 1\n          retain: true\n          bindingVersion: 0.1.0\n      message:\n        $ref: '#/components/messages/maintenance'\n    parameters:\n      resource_region_id:\n        $ref: '#/components/parameters/resource_region_id'\n      equipment_type:\n        $ref: '#/components/parameters/equipment_type'\n      event_type:\n        $ref: '#/components/parameters/event_type'\n      resource_type:\n        $ref: '#/components/parameters/resource_type'\n      resource_id:\n        $ref: '#/components/parameters/resource_id'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: maintenance\n  x-view: provider\n  version: 0.0.1\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"maintenance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update api: status-update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "components:\n  schemas:\n    status_update:\n      $schema: 'http://json-schema.org/draft-07/schema#'\n      additionalProperties: false\n      type: object\n      title: Elevator Co status update for tracking id\n      required:\n        - status_update\n      properties:\n        status_update:\n          additionalProperties: false\n          type: object\n          required:\n            - timestamp\n            - tracking_id\n            - status\n          properties:\n            tracking_id:\n              type: string\n              pattern: \"^[a-zA-Z0-9-]+$\"\n            timestamp:\n              type: string\n            status:\n              type: string\n              enum:\n              - received\n              - resolved\n      $id: >-\n        http://eventportal.solace.cloud/apim/elevator-co/status_update.json\n  messages:\n    status_update:\n      payload:\n        $ref: '#/components/schemas/status_update'\n      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0\n      contentType: application/json\n  parameters:\n    tracking_id:\n      schema:\n        type: string\n        pattern: \"^[a-zA-Z0-9-]+$\"\nchannels:\n  'apim/elevator-co/api/V1/json/status/{tracking_id}':\n    subscribe:\n      message:\n        $ref: '#/components/messages/status_update'\n      bindings:\n        mqtt:\n          bindingVersion: ‘0.1.0’\n          qos: 1\n        http:\n          bindingVersion: ‘0.1.0’\n          type: request\n          method: POST\n    parameters:\n      tracking_id:\n        $ref: '#/components/parameters/tracking_id'\nasyncapi: 2.0.0\ninfo:\n  x-application-class: unspecified\n  title: 'ApiEventService:status_update'\n  x-view: provider\n  version: 0.0.1\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apis/status-update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apis",
+								"status-update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create api products",
+			"item": [
+				{
+					"name": "create product: maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apis\": [\n        \"maintenance\", \"status-update\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\",\n        \"{{prodEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "approve apps",
+			"item": [
+				{
+					"name": "list of apps that require approval",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apps?status=pending",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apps"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve dev-1 app",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attributes\": [\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr\"\n        }\n    ],\n    \"status\": \"approved\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps/dev-1-elevator-alarms-and-faults-maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"developers",
+								"dev-1",
+								"apps",
+								"dev-1-elevator-alarms-and-faults-maintenance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{solace-apim-api-password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{solace-apim-api-user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

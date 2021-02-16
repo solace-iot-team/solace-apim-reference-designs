@@ -1,48 +1,31 @@
 # Elevator-Co:Exposure:API Team
 
-- Receives API Event Services AsyncAPI Spec from API Service Developer.
-- Creates AsyncAPI Spec for consumption (note: the reverse operations)
-  - assigns channel bindings for consumption
-- Bundles APIs (1 API = 1 AsyncAPI Spec) into API Products
-- Assigns Environments to API Products (the physical instances of the runtime gateway=Solace broker)
-- Assigns protocols to API Products (based on capabilities of Environments)
-- Publishes API Products for consumption
 
 
-## Create AsyncAPI Spec for Consumption
+[Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json](./Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json)
 
-_**Note: these are the reverse / opposites of the API Event Services.**_
+### get details of environments
 
-### Subscribe
-- alarms-and-faults
-- maintenance
-- usage
+  - see which protocols are enabled for each environment
 
-### Publish
-- status
+### register / update apis
 
-### API AsyncAPI Spec
-- payload: same as incoming API Event Service AsyncAPI spec
-- topic schemas: same as incoming API Event Service AsyncAPI spec
-- channel bindings:
-  - (takes quality of service hints from API Event Service AsyncAPI spec)
-  - http
-  - mqtt
-  - quality of service parameters
+  - get the AsyncApi Spec from [api-service-developer/api-event-services](./api-service-developer/api-event-services)
+  - adjust channel bindings for consumption to the protocols to be supported (e.g. mqtt & http only)
+  - copy into body of register api calls
 
-## Create API Products
-- bundle 1 or many APIs (=AsyncAPI spec) into products
-- adds approval type:
-  - manual, auto
-- adds valid values for topic parameters
-  - e.g. region_id = fr, de, us, ch
-- protocols for consumption
-  - http
-  - mqtt
+### create api products
 
-## Approves Developer Apps
-- checks specific access permissions for developer
-- optional: changes topic parameter values (attributes) for developer based on contract
-- approves developer app
+- select Apis
+- select environments
+- select protocols
+- select attributes (topic parameter values)
+- select approval type
+
+### approve developer apps
+- get list of developer apps for approval
+- check developer specific attributes (permissions) and adjust accordingly
+- approve app for a developer
+
 
 ---
