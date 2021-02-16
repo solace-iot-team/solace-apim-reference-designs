@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://localhost:8811/status_update.schema.json",
+  "type": "object",
+  "title": "Status update for tracking id",
+  "required": [
+    "status_update"
+  ],
+  "properties": {
+    "status_update": {
+      "$ref": "common-schemas/common.json#/definitions/status_update"
+    }
+  }
+}

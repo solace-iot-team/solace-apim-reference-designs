@@ -1,16 +1,21 @@
 # Elevator-Co: Exposure:API Service Developer:API Event Service:Maintenance
 
-### Topic Template
+## Topic Schema
 
 **event_type**="maintenance"
 
 `apim/elevator-co/api/V1/json/{resource_region_id}/elevator/maintenace/{resource_type}/{resource_id}`
 
-### Examples
+**Topic Examples:**
 - `apim/elevator-co/api/V1/json/fr/elevator/maintenace/elev-make-1/elevator-id-1`
 - `apim/elevator-co/api/V1/json/de/elevator/maintenace/elev-make-1/elevator-id-2`
 
-### Simulator
+## Async API Spec
+
+[./ApiEventService_maintenance.async-api-spec.yml](./ApiEventService_maintenance.async-api-spec.yml)
+
+
+## API Event Service Simulator
 
 Requires:
 - python 3
@@ -28,7 +33,7 @@ export SOLACE_APIM_REST_URL="http://xxxx.messaging.solace.cloud:9000"
 ./send.maintenance.sh
 ````
 
-Output:
+**Output:**
 ````bash
 ls ./sample-messages/*.json
 ````

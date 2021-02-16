@@ -10,6 +10,11 @@ definitions:
     type: string
   timestamp:
     type: string
+  status:
+    type: string
+    enum:
+    - received
+    - resolved
   header:
     type: object
     additionalProperties: false
@@ -35,3 +40,17 @@ definitions:
         "$ref": common.json#/definitions/topic
       timestamp:
         "$ref": common.json#/definitions/timestamp
+  status_update:
+    type: object
+    additionalProperties: false
+    required:
+    - timestamp
+    - tracking_id
+    - status
+    properties:
+      tracking_id:
+        "$ref": common.json#/definitions/tracking_id
+      timestamp:
+        "$ref": common.json#/definitions/timestamp
+      status:
+        "$ref": common.json#/definitions/status

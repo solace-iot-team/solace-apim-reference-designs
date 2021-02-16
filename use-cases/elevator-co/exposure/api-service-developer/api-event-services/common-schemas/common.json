@@ -13,6 +13,10 @@
     "timestamp": {
       "type": "string"
     },
+    "status": {
+      "type": "string",
+      "enum": ["received", "resolved"]
+    },
     "header": {
       "type": "object",
       "additionalProperties": false,
@@ -46,6 +50,26 @@
         },
         "timestamp": {
           "$ref": "common.json#/definitions/timestamp"
+        }
+      }
+    },
+    "status_update": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tracking_id",
+        "timestamp",
+        "status"
+      ],
+      "properties": {
+        "tracking_id": {
+          "$ref": "common.json#/definitions/tracking_id"
+        },
+        "timestamp": {
+          "$ref": "common.json#/definitions/timestamp"
+        },
+        "status": {
+          "$ref": "common.json#/definitions/status"
         }
       }
     }
