@@ -134,15 +134,21 @@
         "apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}": {
             "publish": {
                 "bindings": {
+                    "smf": {
+                        "bindingVersion": "‘0.1.0’",
+                        "qos": "guaranteed",
+                        "priority": 1
+                    },
+                    "mqtt": {
+                        "bindingVersion": "‘0.1.0’",
+                        "qos": 1,
+                        "retain": false,
+                        "cleanSession": false
+                    },
                     "http": {
                         "bindingVersion": "‘0.1.0’",
                         "type": "request",
                         "method": "POST"
-                    },
-                    "mqtt": {
-                        "qos": 1,
-                        "retain": true,
-                        "bindingVersion": "0.1.0"
                     }
                 },
                 "message": {
@@ -171,11 +177,21 @@
     "asyncapi": "2.0.0",
     "info": {
         "x-application-class": "unspecified",
-        "title": "maintenance",
+        "title": "ApiEventService:maintenance",
         "x-view": "provider",
         "version": "0.0.1"
     },
     "servers": {
+        "dev-ws-mqtt": {
+            "protocol": "ws-mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "ws://mr1i5g7tif6z9h.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
         "dev-mqtt": {
             "protocol": "mqtt",
             "protocolVersion": "3.1.1",
@@ -193,6 +209,16 @@
             "security": [
                 {
                     "httpBasic": []
+                }
+            ]
+        },
+        "prod-ws-mqtt": {
+            "protocol": "ws-mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "ws://mr1n34cqfgy8kj.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
                 }
             ]
         },

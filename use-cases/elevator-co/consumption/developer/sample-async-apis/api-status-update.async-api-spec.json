@@ -75,9 +75,14 @@
                     "$ref": "#/components/messages/status_update"
                 },
                 "bindings": {
+                    "smf": {
+                        "bindingVersion": "‘0.1.0’",
+                        "qos": "guaranteed"
+                    },
                     "mqtt": {
                         "bindingVersion": "‘0.1.0’",
-                        "qos": 1
+                        "qos": 1,
+                        "retain": false
                     },
                     "http": {
                         "bindingVersion": "‘0.1.0’",
@@ -101,6 +106,16 @@
         "version": "0.0.1"
     },
     "servers": {
+        "dev-ws-mqtt": {
+            "protocol": "ws-mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "ws://mr1i5g7tif6z9h.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
         "dev-mqtt": {
             "protocol": "mqtt",
             "protocolVersion": "3.1.1",
@@ -118,6 +133,16 @@
             "security": [
                 {
                     "httpBasic": []
+                }
+            ]
+        },
+        "prod-ws-mqtt": {
+            "protocol": "ws-mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "ws://mr1n34cqfgy8kj.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
                 }
             ]
         },

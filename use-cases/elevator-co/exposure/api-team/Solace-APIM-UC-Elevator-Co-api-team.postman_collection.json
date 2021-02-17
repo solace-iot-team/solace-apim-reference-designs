@@ -322,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apis\": [\n        \"maintenance\", \"status-update\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\",\n        \"{{prodEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+							"raw": "{\n    \"apis\": [\n        \"maintenance\",\n        \"status-update\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\",\n        \"{{prodEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"ws-mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apiProducts",
@@ -417,6 +417,52 @@
 								"dev-1",
 								"apps",
 								"dev-1-maintenance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "helpers",
+			"item": [
+				{
+					"name": "update product: maintenance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"apis\": [\n        \"maintenance\",\n        \"status-update\"\n    ],\n    \"approvalType\": \"manual\",\n    \"attributes\": [\n        {\n            \"name\": \"resource_region_id\",\n            \"value\": \"fr, de\"\n        }\n    ],\n    \"description\": \"elevator maintenance alerts\",\n    \"displayName\": \"Elevator Maintenance Alerts\",\n    \"environments\": [\n        \"{{devEnv_name}}\",\n        \"{{prodEnv_name}}\"\n    ],\n    \"name\": \"elevator-maintenance\",\n    \"pubResources\": [],\n    \"subResources\": [],\n    \"protocols\": [\n        {\n            \"name\": \"ws-mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"mqtt\",\n            \"version\": \"3.1.1\"\n        },\n        {\n            \"name\": \"http\",\n            \"version\": \"1.1\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{org}}/apiProducts/elevator-maintenance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{org}}",
+								"apiProducts",
+								"elevator-maintenance"
 							]
 						}
 					},
