@@ -1,2 +1,5 @@
 tmp
 .DS_Store
+deleteme.*
+experimental*
+*.postman_environment.json

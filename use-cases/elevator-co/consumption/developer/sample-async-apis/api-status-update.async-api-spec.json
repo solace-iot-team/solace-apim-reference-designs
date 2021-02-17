@@ -1,0 +1,145 @@
+{
+    "components": {
+        "schemas": {
+            "status_update": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "additionalProperties": false,
+                "type": "object",
+                "title": "Elevator Co status update for tracking id",
+                "required": [
+                    "status_update"
+                ],
+                "properties": {
+                    "status_update": {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "required": [
+                            "timestamp",
+                            "tracking_id",
+                            "status"
+                        ],
+                        "properties": {
+                            "tracking_id": {
+                                "type": "string",
+                                "pattern": "^[a-zA-Z0-9-]+$"
+                            },
+                            "timestamp": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string",
+                                "enum": [
+                                    "received",
+                                    "resolved"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "$id": "http://eventportal.solace.cloud/apim/elevator-co/status_update.json"
+            }
+        },
+        "messages": {
+            "status_update": {
+                "payload": {
+                    "$ref": "#/components/schemas/status_update"
+                },
+                "schemaFormat": "application/vnd.aai.asyncapi+json;version=2.0.0",
+                "contentType": "application/json"
+            }
+        },
+        "parameters": {
+            "tracking_id": {
+                "schema": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9-]+$"
+                }
+            }
+        },
+        "securitySchemes": {
+            "userPassword": {
+                "type": "userPassword",
+                "description": "Username Password"
+            },
+            "httpBasic": {
+                "type": "http",
+                "description": "HTTP Basic",
+                "scheme": "basic"
+            }
+        }
+    },
+    "channels": {
+        "apim/elevator-co/api/V1/json/status/{tracking_id}": {
+            "subscribe": {
+                "message": {
+                    "$ref": "#/components/messages/status_update"
+                },
+                "bindings": {
+                    "mqtt": {
+                        "bindingVersion": "‘0.1.0’",
+                        "qos": 1
+                    },
+                    "http": {
+                        "bindingVersion": "‘0.1.0’",
+                        "type": "request",
+                        "method": "POST"
+                    }
+                }
+            },
+            "parameters": {
+                "tracking_id": {
+                    "$ref": "#/components/parameters/tracking_id"
+                }
+            }
+        }
+    },
+    "asyncapi": "2.0.0",
+    "info": {
+        "x-application-class": "unspecified",
+        "title": "ApiEventService:status_update",
+        "x-view": "provider",
+        "version": "0.0.1"
+    },
+    "servers": {
+        "dev-mqtt": {
+            "protocol": "mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "tcp://mr1i5g7tif6z9h.messaging.solace.cloud:1883",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "dev-http": {
+            "protocol": "http",
+            "protocolVersion": "1.1",
+            "url": "http://mr1i5g7tif6z9h.messaging.solace.cloud:9000",
+            "security": [
+                {
+                    "httpBasic": []
+                }
+            ]
+        },
+        "prod-mqtt": {
+            "protocol": "mqtt",
+            "protocolVersion": "3.1.1",
+            "url": "tcp://mr1n34cqfgy8kj.messaging.solace.cloud:1883",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "prod-http": {
+            "protocol": "http",
+            "protocolVersion": "1.1",
+            "url": "http://mr1n34cqfgy8kj.messaging.solace.cloud:9000",
+            "security": [
+                {
+                    "httpBasic": []
+                }
+            ]
+        }
+    }
+}
