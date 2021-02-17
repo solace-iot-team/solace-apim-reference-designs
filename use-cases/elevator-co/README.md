@@ -5,4 +5,15 @@
 <p align="center"><img src="../../images/apim.use-case.elevator-co.png" /></p>
 
 
+## Run
+
+1 - [exposure/operations](./exposure/operations)
+
+2 - [exposure/api-team](./exposure/api-team)
+
+3 - [consumption/developer](./consumption/developer)
+
+4 - [exposure/api-team](./exposure/api-team) - optional, if apps require approval
+
+
 ---

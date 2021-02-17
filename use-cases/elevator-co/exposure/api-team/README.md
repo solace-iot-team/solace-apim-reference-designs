@@ -1,8 +1,6 @@
 # Elevator-Co:Exposure:API Team
 
-
-
-[Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json](./Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json)
+Postman Collection: [Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json](./Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json)
 
 ### get details of environments
 

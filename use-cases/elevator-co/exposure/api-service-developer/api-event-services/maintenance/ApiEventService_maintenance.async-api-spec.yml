@@ -89,10 +89,12 @@ channels:
         smf:
           bindingVersion: ‘0.1.0’
           qos: guaranteed
+          priority: 1
         mqtt:
           bindingVersion: ‘0.1.0’
           qos: 1
-          retain: true
+          retain: false
+          cleanSession: false
         http:
           bindingVersion: ‘0.1.0’
           type: request
