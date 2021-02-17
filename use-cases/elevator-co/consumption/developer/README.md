@@ -1,7 +1,7 @@
 # Elevator-Co:Consumption:Developer
 
 
-[Solace-APIM-UC-Elevator-Co-developer.postman_collection.json](./Solace-APIM-UC-Elevator-Co-developer.postman_collection.json)
+Postman Collection: [Solace-APIM-UC-Elevator-Co-developer.postman_collection.json](./Solace-APIM-UC-Elevator-Co-developer.postman_collection.json)
 
 ### browse api products & specs
 
@@ -33,5 +33,9 @@
 
 ### next
 Generate code, start subscribing & publishing ...
+
+## Sampe Async API Specs
+See [sample-async-apis](./sample-async-apis) for pre-generated, final specs that can be used directly.
+These are examples generated using the above steps.
 
 ---
