@@ -55,6 +55,8 @@ components:
         $ref: '#/components/schemas/maintenance'
       schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
       contentType: application/json
+      examples:
+        - payload: {"header":{"topic":"apim/elevator-co/api/V1/json/fr/elevator/maintenace/elev-make-1/elevator-id-1","timestamp":"2021-02-15-13:25:27-UTC","tracking_id":"4fd44ed1-1ba9-4f53-87a2-d4f4385c09d5"},"body":{"component_id":"ABC-1784","description":"misalignment car to floor","timewindow_days":24,"probability_of_failure_pct":90,"details":{"reasons":["misalignment car to floor > 8mm","avg journeys / day > 25"]}}}
   parameters:
     resource_region_id:
       schema:
@@ -85,6 +87,11 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':
     publish:
+      summary: "receive maintenace events from elevators"
+      description: |
+        Maintenance events indicate recommended maintenance actions to be carried out within a certain timeframe.
+        Each maintennace event must be confirmed with a status_update message using the same tracking_id indicating action is either received or resolved.
+      operationId: onMaintenance
       bindings:
         smf:
           bindingVersion: ‘0.1.0’

@@ -34,6 +34,9 @@ components:
         $ref: '#/components/schemas/status_update'
       schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
       contentType: application/json
+      examples:
+        - payload: {"status_update":{"timestamp":"2021-02-16-14:54:15-UTC","status":"received","tracking_id":"44ccd43d-7f3e-45a0-a98b-3d75388e3e44"}}
+        - payload: {"status_update":{"timestamp":"2021-02-16-14:54:36-UTC","status":"resolved","tracking_id":"fa663bb5-fadb-43b2-80cd-461d4302d503"}}
   parameters:
     tracking_id:
       schema:
@@ -42,6 +45,11 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/status/{tracking_id}':
     subscribe:
+      summary: "send status updates for a specific tracking id"
+      operationId: sendStatus
+      tags:
+        - name: status
+        - name: tracking
       message:
         $ref: '#/components/messages/status_update'
       bindings:
