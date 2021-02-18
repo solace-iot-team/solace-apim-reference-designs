@@ -1,7 +1,5 @@
 # Use Cases
 
-[Solace Platform API - Open API Doc.](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/)
-
 ## Use Case Organization
 
 Each use case has two main sub-directories: **consumption** and **exposure**.
