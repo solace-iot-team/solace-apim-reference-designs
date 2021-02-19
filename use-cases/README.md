@@ -80,6 +80,8 @@ All Postman Collections require the following environment variables:
 
 Variables:
 - **baseUrl**: `http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/v1`
+- **solace-apim-admin-user**: {the admin user}
+- **solace-apim-admin-pwd**: {the admin password}
 - **solace-apim-api-user**: {the api user}
 - **solace-apim-api-password**: {the api password}
 - **solaceCloudApiToken**: `{solace cloud api token}`
