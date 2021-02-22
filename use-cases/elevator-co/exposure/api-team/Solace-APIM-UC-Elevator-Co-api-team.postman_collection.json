@@ -59,7 +59,6 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"",
 									""
 								],
 								"type": "text/javascript"
@@ -119,7 +118,6 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"",
 									""
 								],
 								"type": "text/javascript"

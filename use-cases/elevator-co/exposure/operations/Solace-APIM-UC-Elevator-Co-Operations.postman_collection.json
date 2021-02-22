@@ -294,6 +294,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{solace-apim-admin-pwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{solace-apim-admin-user}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -335,6 +350,37 @@
 							"path": [
 								"organizations",
 								"{{org}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Org environments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/solace-api-portal-dev/environments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"solace-api-portal-dev",
+								"environments"
 							]
 						}
 					},

@@ -140,7 +140,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": "{\n    \"apiProducts\": [\n        \"elevator-maintenance\"\n    ],\n    \"name\": \"dev-1-maintenance\",\n    \"expiresIn\": -1,\n    \"credentials\": {\n        \"secret\": {\n            \"consumerKey\": \"dev-1-maintenance-consumer-key\",\n            \"consumerSecret\": \"dev-1-maintenance-consumer-secret\"\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/developers/dev-1/apps",
@@ -236,7 +236,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apps/dev-1-maintenance/apis",
@@ -281,7 +281,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apps/dev-1-maintenance/apis/maintenance",
@@ -327,7 +327,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"apiProducts\": [\n        \"elevator-usage\"\n    ],\n    \"name\": \"dev-2-elevator-usage\",\n    \"expiresIn\": -1,\n    \"credentials\": {}\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{baseUrl}}/{{org}}/apps/dev-1-maintenance/apis/status-update",
