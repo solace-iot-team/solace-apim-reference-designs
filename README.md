@@ -1,6 +1,9 @@
 # solace-apim-reference-designs
 Reference Designs & Examples for Solace API Management Integration.
 
+See also: [Concepts](./Concepts.md)
+
+
 <p align="center"><img src="./images/apim.unifying-overview.png" /></p>
 
 
@@ -25,6 +28,8 @@ _**Under Development!**_
 
 <p align="center"><img src="./images/apim.workflow-overview.consumption.png" /></p>
 
+## Links
 
+[Concepts](./Concepts.md)
 
 ---
