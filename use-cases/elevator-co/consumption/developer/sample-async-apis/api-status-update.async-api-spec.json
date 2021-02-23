@@ -111,8 +111,19 @@
                     },
                     "mqtt": {
                         "bindingVersion": "‘0.1.0’",
-                        "qos": 1,
-                        "retain": false
+                        "qos": 1
+                    },
+                    "secure-mqtt": {
+                        "bindingVersion": "0.1.0",
+                        "qos": 1
+                    },
+                    "ws-mqtt": {
+                        "bindingVersion": "0.1.0",
+                        "qos": 1
+                    },
+                    "wss-mqtt": {
+                        "bindingVersion": "0.1.0",
+                        "qos": 1
                     },
                     "http": {
                         "bindingVersion": "‘0.1.0’",
@@ -133,13 +144,30 @@
         "x-application-class": "unspecified",
         "title": "ApiEventService:status_update",
         "x-view": "provider",
-        "version": "0.0.1"
+        "version": "0.0.2"
     },
     "servers": {
         "dev-ws-mqtt": {
             "protocol": "ws-mqtt",
-            "protocolVersion": "3.1.1",
             "url": "ws://mr1i5g7tif6z9h.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "dev-wss-mqtt": {
+            "protocol": "wss-mqtt",
+            "url": "wss://mr1i5g7tif6z9h.messaging.solace.cloud:8443",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "dev-secure-mqtt": {
+            "protocol": "secure-mqtt",
+            "url": "ssl://mr1i5g7tif6z9h.messaging.solace.cloud:8883",
             "security": [
                 {
                     "userPassword": []
@@ -148,7 +176,6 @@
         },
         "dev-mqtt": {
             "protocol": "mqtt",
-            "protocolVersion": "3.1.1",
             "url": "tcp://mr1i5g7tif6z9h.messaging.solace.cloud:1883",
             "security": [
                 {
@@ -158,7 +185,6 @@
         },
         "dev-http": {
             "protocol": "http",
-            "protocolVersion": "1.1",
             "url": "http://mr1i5g7tif6z9h.messaging.solace.cloud:9000",
             "security": [
                 {
@@ -168,8 +194,25 @@
         },
         "prod-ws-mqtt": {
             "protocol": "ws-mqtt",
-            "protocolVersion": "3.1.1",
             "url": "ws://mr1n34cqfgy8kj.messaging.solace.cloud:8000",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "prod-wss-mqtt": {
+            "protocol": "wss-mqtt",
+            "url": "wss://mr1n34cqfgy8kj.messaging.solace.cloud:8443",
+            "security": [
+                {
+                    "userPassword": []
+                }
+            ]
+        },
+        "prod-secure-mqtt": {
+            "protocol": "secure-mqtt",
+            "url": "ssl://mr1n34cqfgy8kj.messaging.solace.cloud:8883",
             "security": [
                 {
                     "userPassword": []
@@ -178,7 +221,6 @@
         },
         "prod-mqtt": {
             "protocol": "mqtt",
-            "protocolVersion": "3.1.1",
             "url": "tcp://mr1n34cqfgy8kj.messaging.solace.cloud:1883",
             "security": [
                 {
@@ -188,7 +230,6 @@
         },
         "prod-http": {
             "protocol": "http",
-            "protocolVersion": "1.1",
             "url": "http://mr1n34cqfgy8kj.messaging.solace.cloud:9000",
             "security": [
                 {
