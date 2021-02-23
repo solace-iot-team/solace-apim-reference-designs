@@ -102,6 +102,21 @@ channels:
           qos: 1
           retain: false
           cleanSession: false
+        secure-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
+          retain: false
+          cleanSession: false
+        ws-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
+          retain: false
+          cleanSession: false
+        wss-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
+          retain: false
+          cleanSession: false
         http:
           bindingVersion: ‘0.1.0’
           type: request
@@ -124,4 +139,4 @@ info:
   x-application-class: unspecified
   title: 'ApiEventService:maintenance'
   x-view: provider
-  version: 0.0.1
+  version: 0.0.2

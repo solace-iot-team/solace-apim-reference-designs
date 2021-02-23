@@ -59,7 +59,15 @@ channels:
         mqtt:
           bindingVersion: ‘0.1.0’
           qos: 1
-          retain: false
+        secure-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
+        ws-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
+        wss-mqtt:
+          bindingVersion: 0.1.0
+          qos: 1
         http:
           bindingVersion: ‘0.1.0’
           type: request
@@ -72,4 +80,4 @@ info:
   x-application-class: unspecified
   title: 'ApiEventService:status_update'
   x-view: provider
-  version: 0.0.1
+  version: 0.0.2
