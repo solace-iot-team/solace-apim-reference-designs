@@ -45,29 +45,19 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/status/{tracking_id}':
     subscribe:
-      summary: "send status updates for a specific tracking id"
-      operationId: sendStatus
+      # operation should be called publish
+      summary: "publish status updates for a specific tracking id"
+      operationId: publishStatus
       tags:
         - name: status
         - name: tracking
       message:
         $ref: '#/components/messages/status_update'
       bindings:
-        smf:
-          bindingVersion: ‘0.1.0’
-          qos: guaranteed
         mqtt:
           bindingVersion: ‘0.1.0’
           qos: 1
-        secure-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
-        ws-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
-        wss-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
+          retain: false
         http:
           bindingVersion: ‘0.1.0’
           type: request
@@ -79,5 +69,5 @@ asyncapi: 2.0.0
 info:
   x-application-class: unspecified
   title: 'ApiEventService:status_update'
-  x-view: provider
-  version: 0.0.2
+  x-view: consumer
+  version: 0.0.3

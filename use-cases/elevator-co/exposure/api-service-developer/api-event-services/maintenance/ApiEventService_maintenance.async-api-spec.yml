@@ -87,36 +87,16 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':
     publish:
-      summary: "receive maintenace events from elevators"
+      # operation should be called subscribe
+      summary: "subscribe to maintenace events from elevators"
       description: |
         Maintenance events indicate recommended maintenance actions to be carried out within a certain timeframe.
         Each maintennace event must be confirmed with a status_update message using the same tracking_id indicating action is either received or resolved.
       operationId: onMaintenance
       bindings:
-        smf:
-          bindingVersion: ‘0.1.0’
-          qos: guaranteed
-          priority: 1
         mqtt:
           bindingVersion: ‘0.1.0’
           qos: 1
-          retain: false
-          cleanSession: false
-        secure-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
-          retain: false
-          cleanSession: false
-        ws-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
-          retain: false
-          cleanSession: false
-        wss-mqtt:
-          bindingVersion: 0.1.0
-          qos: 1
-          retain: false
-          cleanSession: false
         http:
           bindingVersion: ‘0.1.0’
           type: request
@@ -138,5 +118,5 @@ asyncapi: 2.0.0
 info:
   x-application-class: unspecified
   title: 'ApiEventService:maintenance'
-  x-view: provider
-  version: 0.0.2
+  x-view: consumer
+  version: 0.0.3

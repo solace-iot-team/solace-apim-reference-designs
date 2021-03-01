@@ -1,35 +1,45 @@
 # solace-apim-reference-designs
-Reference Designs & Examples for Solace API Management Integration.
+Reference Designs & Examples for Solace Aysnc API Management Integration.
 
-See also: [Concepts](./Concepts.md)
+[Concepts](./Concepts.md) |
+[Solace Platform API - Open API Doc](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/) |
+[Use Cases](./use-cases) |
+
+## Repo Organization
+
+* **use-cases**
+  - designs, sample specs, postman collections based on a particular use case
+
+## Getting Started
+
+### Prerequisites
+In order to use the Solace Platform API (e.g. via the Postman Collections provided for the use cases) you need the following:
+- a Solace Cloud Account and the rights to generate API Tokens
+- a provisioned Solace Platform API Organization
+- a set of provisioned credentials for the Solace Platform API
+
+To obtain these [create an issue](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) or contact us directly via e-mail.
+
+Pls provide:
+- your name
+- your e-mail address
+- your company name
+- your chosen Solace Platform API organization id, e.g. `MY_ORG_NAME`
+
+You receive:
+- username & password for the Solace Platform API
+
+### Use Cases
+
+Contain designs, sample specs, postman collections etc. to showcase a particular use case.
+
+[See here for instructions common for all use cases.](./use-cases)
+
+Choose a use case:
+
+* [Use Case: Elevator-Co](./use-cases/elevator-co)
 
 
-<p align="center"><img src="./images/apim.unifying-overview.png" /></p>
 
-
-## The Solace Platform API
-
-_**Under Development!**_
-
-
-[Solace Platform API - Open API Doc.](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/)
-
-
-<p align="center"><img src="./images/apim.platform-api.png" height="300"/></p>
-
-
-## High-Level Async Management Workflows
-
-### API Exposure
-
-<p align="center"><img src="./images/apim.workflow-overview.exposure.png" /></p>
-
-### API Consumption
-
-<p align="center"><img src="./images/apim.workflow-overview.consumption.png" /></p>
-
-## Links
-
-[Concepts](./Concepts.md)
 
 ---
