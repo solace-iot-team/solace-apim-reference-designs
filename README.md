@@ -14,13 +14,20 @@ Reference Designs & Examples for Solace Aysnc API Management Integration.
 
 ### Prerequisites
 In order to use the Solace Platform API (e.g. via the Postman Collections provided for the use cases) you need the following:
-- a Solace Cloud Account
-- a Solace Platform API Organization
-- credentials for the Solace Platform API
+- a Solace Cloud Account and the rights to generate API Tokens
+- a provisioned Solace Platform API Organization
+- a set of provisioned credentials for the Solace Platform API
 
-we create unique user/pwd
+To obtain these [create an issue](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) or contact us directly via e-mail.
 
-[Create an Issue](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) or contact us directly via e-mail to obtain these.
+Pls provide:
+- your name
+- your e-mail address
+- your company name
+- your chosen Solace Platform API organization id, e.g. `MY_ORG_NAME`
+
+You receive:
+- username & password for the Solace Platform API
 
 ### Use Cases
 
