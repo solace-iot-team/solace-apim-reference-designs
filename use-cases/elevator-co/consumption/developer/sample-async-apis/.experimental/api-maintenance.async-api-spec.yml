@@ -101,6 +101,10 @@ components:
     userPassword:
       type: userPassword
       description: Username Password
+    httpBasic:
+      type: http
+      description: HTTP Basic
+      scheme: basic
 channels:
   apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}:
     publish:
@@ -111,11 +115,15 @@ channels:
       operationId: onMaintenance
       bindings:
         mqtt:
-          bindingVersion: "0.2.0"
+          bindingVersion: "‘0.2.0’"
           qos: 1
           permissions:
             topics:
               - "apim/elevator-co/api/V1/json/fr/+/+/+/#"
+        http:
+          bindingVersion: "‘0.1.0’"
+          type: request
+          method: POST
       message:
         "$ref": "#/components/messages/maintenance"
     parameters:
@@ -132,18 +140,18 @@ channels:
 asyncapi: 2.0.0
 info:
   x-application-class: unspecified
-  title: ApiEventService:maintenance-simple
+  title: ApiEventService:maintenance
   x-view: consumer
   version: 0.0.3
 servers:
-  dev-mqtt:
-    protocol: mqtt
-    url: tcp://mr1i5g7tif6z9h.messaging.solace.cloud:1883
+  dev-ws-mqtt:
+    protocol: ws-mqtt
+    url: ws://mr1i5g7tif6z9h.messaging.solace.cloud:8000
     security:
     - userPassword: []
     bindings:
       mqtt:
-        clientId: "{consumerKey+uuid?}"
+        clientId: "{consumerKey}"
         cleanSession: false
         connectTimeout: 60
         keepAlive: 60
@@ -153,3 +161,120 @@ servers:
           message: gone offline.
           retain: false
         bindingVersion: 0.2.0
+  dev-wss-mqtt:
+    protocol: wss-mqtt
+    url: wss://mr1i5g7tif6z9h.messaging.solace.cloud:8443
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  dev-secure-mqtt:
+    protocol: secure-mqtt
+    url: ssl://mr1i5g7tif6z9h.messaging.solace.cloud:8883
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  dev-mqtt:
+    protocol: mqtt
+    url: tcp://mr1i5g7tif6z9h.messaging.solace.cloud:1883
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  dev-http:
+    protocol: http
+    url: http://mr1i5g7tif6z9h.messaging.solace.cloud:9000
+    security:
+    - httpBasic: []
+  prod-ws-mqtt:
+    protocol: ws-mqtt
+    url: ws://mr1n34cqfgy8kj.messaging.solace.cloud:8000
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  prod-wss-mqtt:
+    protocol: wss-mqtt
+    url: wss://mr1n34cqfgy8kj.messaging.solace.cloud:8443
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  prod-secure-mqtt:
+    protocol: secure-mqtt
+    url: ssl://mr1n34cqfgy8kj.messaging.solace.cloud:8883
+    security:
+    - userPassword: []
+  prod-mqtt:
+    protocol: mqtt
+    url: tcp://mr1n34cqfgy8kj.messaging.solace.cloud:1883
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+  prod-http:
+    protocol: http
+    url: http://mr1n34cqfgy8kj.messaging.solace.cloud:9000
+    security:
+    - httpBasic: []
