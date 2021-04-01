@@ -1,0 +1,48 @@
+---
+servers:
+  dev-ws-mqtt:
+    protocol: ws-mqtt
+    url: ws://mr1i5g7tif6z9h.messaging.solace.cloud:8000
+    security:
+    - userPassword: []
+    bindings:
+      mqtt:
+        clientId: "{consumerKey}"
+        cleanSession: false
+        connectTimeout: 60
+        keepAlive: 60
+        lastWill:
+          topic: /last-wills
+          qos: 1
+          message: gone offline.
+          retain: false
+        bindingVersion: 0.2.0
+
+channels:
+  apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}:
+    publish:
+      summary: receive maintenace events from elevators
+      description: |
+        Maintenance events indicate recommended maintenance actions to be carried out within a certain timeframe.
+        Each maintennace event must be confirmed with a status_update message using the same tracking_id indicating action is either received or resolved.
+      operationId: onMaintenance
+      bindings:
+        mqtt:
+          bindingVersion: "‘0.1.0’"
+          qos: 1
+          permissions:
+            topics:
+              - "apim/elevator-co/api/V1/json/fr/+/+/+/#"
+
+
+  apim/elevator-co/api/V1/json/status/{tracking_id}:
+    subscribe:
+      summary: send status updates for a specific tracking id
+      operationId: sendStatus
+      bindings:
+        mqtt:
+          bindingVersion: "‘0.1.0’"
+          qos: 1
+          permissions:
+            topics:
+              - "apim/elevator-co/api/V1/json/status/#"

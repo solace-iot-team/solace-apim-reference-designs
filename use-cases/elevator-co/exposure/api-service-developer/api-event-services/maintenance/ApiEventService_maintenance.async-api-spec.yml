@@ -87,7 +87,6 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/{resource_region_id}/{equipment_type}/{event_type}/{resource_type}/{resource_id}':
     publish:
-      # operation should be called subscribe
       summary: "subscribe to maintenace events from elevators"
       description: |
         Maintenance events indicate recommended maintenance actions to be carried out within a certain timeframe.

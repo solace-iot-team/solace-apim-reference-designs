@@ -45,7 +45,6 @@ components:
 channels:
   'apim/elevator-co/api/V1/json/status/{tracking_id}':
     subscribe:
-      # operation should be called publish
       summary: "publish status updates for a specific tracking id"
       operationId: publishStatus
       tags:
