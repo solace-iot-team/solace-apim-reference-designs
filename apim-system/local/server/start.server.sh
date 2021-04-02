@@ -32,6 +32,15 @@ fileUserRegistry="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_PLATFORM_API
 
 echo " >>> Starting Platform API Server in docker for $APIM_SYSTEM_USE_CASE_NAME ..."
 
+echo "hello world"
+echo "hello world"
+echo "hello world"
+echo "hello world"
+echo "hello world"
+echo "hello world"
+echo "hello world"
+
+
   uName=$(uname -s)
   case $uName in
     Darwin)
