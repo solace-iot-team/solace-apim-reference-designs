@@ -28,7 +28,9 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        node: [ '12', '14' ]
+        # node: [ '12', '14' ]
+        node: [ '12' ]
+
     steps:
       - name: Check Auth
         if: github.event_name == 'workflow_dispatch' && github.actor != 'ricardojosegomezulmke' && github.actor != '195858'
@@ -71,6 +73,7 @@ jobs:
       - name: npm install
         run: |
           cd "${UC_TEST_HOME_DIR}"
+          npm update npm
           npm install
 
       # - name: check
@@ -96,7 +99,6 @@ jobs:
       - name: docker
         if: always()
         run: |
-          sleep 2m
           docker ps -a
           docker logs uc-elevator-co-platform-api-server
           sleep 2m
