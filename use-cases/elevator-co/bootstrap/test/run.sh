@@ -26,7 +26,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 ############################################################################################################################
 # Run
 
-  source "$scriptDir/test.source.env.sh"
+  source $scriptDir/test.source.env.sh
 
   FAILED=0
 
