@@ -17,7 +17,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 echo ">>> Bootstrap Local Mongo DB ..."
   export APIM_SYSTEM_USE_CASE_NAME=$APIM_BOOTSTRAP_USE_CASE_NAME
   export APIM_SYSTEM_MONGO_PORT=$APIM_BOOTSTRAP_MONGO_PORT
-  runScript="./apim-system/local/mongodb/start.mongo.sh"
+  runScript="$scriptDir/apim-system/local/mongodb/start.mongo.sh"
   $runScript
   code=$?; if [[ $code != 0 ]]; then echo " >>> ERROR - code=$code - runScript='$runScript' - $scriptName"; exit 1; fi
 echo ">>> Success";
@@ -30,7 +30,7 @@ echo ">>> Bootstrap Local Platform API Server ..."
   export APIM_SYSTEM_PLATFORM_API_SERVER_PORT=$APIM_BOOTSTRAP_PLATFORM_API_SERVER_PORT
   export APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL=$APIM_BOOTSTRAP_PLATFORM_API_SERVER_LOG_LEVEL
 
-  runScript="./apim-system/local/server/start.server.sh"
+  runScript="$scriptDir/apim-system/local/server/start.server.sh"
   $runScript
   code=$?; if [[ $code != 0 ]]; then echo " >>> ERROR - code=$code - runScript='$runScript' - $scriptName"; exit 1; fi
 echo ">>> Success";
