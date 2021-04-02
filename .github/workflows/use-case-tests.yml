@@ -87,6 +87,7 @@ jobs:
           test/run.sh
 
       - name: docker
+        if: always()
         run: |
           docker ps -a
           docker logs uc-elevator-co-platform-api-server
