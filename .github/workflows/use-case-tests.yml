@@ -73,12 +73,12 @@ jobs:
           cd "${UC_TEST_HOME_DIR}"
           npm install
 
-      - name: check
-        if: always()
-        run: |
-          cd "${UC_TEST_HOME_DIR}"
-          cat apim-system/local/server/start.server.sh
-          # apim-system/local/server/start.server.sh
+      # - name: check
+      #   if: always()
+      #   run: |
+      #     cd "${UC_TEST_HOME_DIR}"
+      #     cat apim-system/local/server/start.server.sh
+      #     # apim-system/local/server/start.server.sh
 
       - name: Run Tests
         run: |
@@ -96,6 +96,16 @@ jobs:
       - name: docker
         if: always()
         run: |
+          sleep 2m
+          docker ps -a
+          docker logs uc-elevator-co-platform-api-server
+          sleep 2m
+          docker ps -a
+          docker logs uc-elevator-co-platform-api-server
+          sleep 2m
+          docker ps -a
+          docker logs uc-elevator-co-platform-api-server
+          sleep 2m
           docker ps -a
           docker logs uc-elevator-co-platform-api-server
 
