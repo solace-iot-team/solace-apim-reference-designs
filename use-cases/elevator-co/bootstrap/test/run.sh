@@ -5,6 +5,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 ############################################################################################################################
 # Environment Variables
 
+  source $scriptDir/test.source.env.sh
   if [ -z "$APIM_BOOTSTRAP_USE_CASE_NAME" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_BOOTSTRAP_USE_CASE_NAME"; exit 1; fi
 
 ############################################################################################################################
@@ -25,8 +26,6 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 
 ############################################################################################################################
 # Run
-
-  source $scriptDir/test.source.env.sh
 
   FAILED=0
 
