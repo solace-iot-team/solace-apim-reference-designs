@@ -52,8 +52,7 @@ jobs:
           echo "node --version: "; node --version
           echo "npm --version: "; npm --version
           echo "docker --version"; docker --version
-          echo ">>> environment: TEST_* "
-          env | grep TEST
+          echo "docker-compose --version"; docker-compose --version
 
       - name: setup node
         uses: actions/setup-node@v2
@@ -67,6 +66,7 @@ jobs:
           echo "node --version: "; node --version
           echo "npm --version: "; npm --version
           echo "docker --version"; docker --version
+          echo "docker-compose --version"; docker-compose --version
 
       - name: npm install
         run: |
