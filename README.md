@@ -1,14 +1,8 @@
-# solace-apim-reference-designs
-Reference Designs & Examples for Solace Aysnc API Management Integration.
+# Reference Designs & Examples for Solace Aysnc API Management Integration.
 
 [Concepts](./Concepts.md) |
 [Solace Platform API - Open API Doc](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/) |
 [Use Cases](./use-cases) |
-
-## Repo Organization
-
-* **use-cases**
-  - designs, sample specs, postman collections based on a particular use case
 
 ## Getting Started
 
@@ -31,7 +25,7 @@ You receive:
 
 ### Use Cases
 
-Contain designs, sample specs, postman collections etc. to showcase a particular use case.
+Contain designs, sample specs, bootstrap cli example to showcase a particular use case.
 
 [See here for instructions common for all use cases.](./use-cases)
 

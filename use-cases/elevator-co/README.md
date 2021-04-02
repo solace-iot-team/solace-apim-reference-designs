@@ -4,6 +4,9 @@
 
 <p align="center"><img src="../../images/apim.use-case.elevator-co.png" /></p>
 
+## Bootstrap Use Case
+
+[bootstrap](./bootstrap)
 
 ## Run
 
