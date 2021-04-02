@@ -15,6 +15,9 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 ############################################################################################################################
 # Run
 
+env | grep APIM_SYSTEM
+
+
 dockerComposeFileMac="$scriptDir/docker-compose.mac.yml"
 localMongoDBUrlMac="mongodb://host.docker.internal:$APIM_SYSTEM_MONGO_PORT/platform?retryWrites=true&w=majority"
 dockerComposeFileLinux="$scriptDir/docker-compose.linux.yml"
@@ -36,6 +39,7 @@ echo " >>> Starting Platform API Server in docker for $APIM_SYSTEM_USE_CASE_NAME
       localMongoDBUrl=$localMongoDBUrlMac
       ;;
     Linux)
+      echo "starting docker with linux compose"
       dockerComposeFile=$dockerComposeFileLinux
       localMongoDBUrl=$localMongoDBUrlLinux
       ;;
@@ -53,6 +57,8 @@ echo " >>> Starting Platform API Server in docker for $APIM_SYSTEM_USE_CASE_NAME
   export LOG_LEVEL=$APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL
   export APP_ID=$APIM_SYSTEM_USE_CASE_NAME
   export FILE_USER_REGISTRY=$fileUserRegistry
+
+  env | grep PLATFORM
 
   docker-compose -f "$dockerComposeFile" up -d
   if [[ $? != 0 ]]; then echo " >>> ERROR: docker compose with '$dockerComposeFile'"; exit 1; fi
