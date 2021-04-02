@@ -78,7 +78,7 @@ jobs:
         run: |
           cd "${UC_TEST_HOME_DIR}"
           cat apim-system/local/server/start.server.sh
-          apim-system/local/server/start.server.sh
+          # apim-system/local/server/start.server.sh
 
       - name: Run Tests
         run: |
