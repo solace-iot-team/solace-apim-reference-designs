@@ -86,6 +86,11 @@ jobs:
           cd "${UC_TEST_HOME_DIR}"
           test/run.sh
 
+      - name: docker
+        run: |
+          docker ps -a
+          docker logs uc-elevator-co-platform-api-server
+
       - name: Archive logs
         if: ${{ (failure() && !cancelled()) || (always() && (github.event_name=='workflow_dispatch' || env.DEBUG_FLAG=='true') ) }}
         uses: actions/upload-artifact@v2

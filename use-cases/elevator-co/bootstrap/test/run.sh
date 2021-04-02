@@ -41,7 +41,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 # Get Container logs and stop server
   declare -a runScripts=(
     "$scriptDir/get-server-logs.sh"
-    "$scriptDir/../teardown.apim-system.local.sh"
+    # "$scriptDir/../teardown.apim-system.local.sh"
   )
   for runScript in ${runScripts[@]}; do
     echo "starting: $runScript ..."
