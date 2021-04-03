@@ -40,6 +40,14 @@ env | grep APIM_SYSTEM
 ```bash
 docker logs {container-name}
 ```
+**connect your browser:**
+````
+http://localhost:{$APIM_SYSTEM_PLATFORM_API_SERVER_PORT}
+````
+
+* view the Swagger OpenAPI spec
+* ...
+
 
 **stop:**
 ```bash

@@ -5,11 +5,9 @@
 <p align="center"><img src="../../images/apim.use-case.elevator-co.png" /></p>
 
 
-TODO
-
 ## Bootstrap Use Case
 
-[bootstrap](./bootstrap)
+[See `bootstrap`](./bootstrap) for details.
 
 ## Run
 

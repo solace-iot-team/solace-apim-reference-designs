@@ -1,7 +1,7 @@
 # Bootstrap Use Case: Elevator Company
 
 ## Overview
-Pipeline ([see src/index.ts](./src/index.ts)):
+Bootstrap Pipeline ([see src/index.ts](./src/index.ts)):
 
 - initialize the client library with the management & api user usernames & passwords
 - delete the organization
@@ -41,6 +41,16 @@ $ env | grep APIM_BOOTSTRAP
 ````bash
 $ ./bootstrap.apim-system.local.sh
 ````
+
+**connect your browser:**
+````
+http://localhost:{$APIM_BOOTSTRAP_PLATFORM_API_SERVER_PORT}
+````
+
+* view the Swagger OpenAPI spec
+* ...
+
+
 **teardown:**
 ````bash
 $ ./teardown.apim-system.local.sh

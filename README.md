@@ -3,7 +3,7 @@
 # Reference Designs & Examples for Solace AysncAPI Management Integration.
 
 [Concepts](./Concepts.md) |
-[Issues](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) | 
+[Issues](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) |
 [Discussions](https://github.com/solace-iot-team/solace-apim-reference-designs/discussions)
 
 ## Prerequisites
@@ -29,8 +29,6 @@ Copy & save the token. It is needed to configure the use case scripts.
 ### Use Cases
 
 The Use Case folders contains designs, sample AsyncAPI specs, bootstrap cli examples and more to showcase a particular use case.
-
-Choose a use case:
 
 * [Use Case: Elevator-Co](./use-cases/elevator-co)
 

@@ -10,11 +10,6 @@
 - `apim/elevator-co/api/V1/json/fr/elevator/maintenace/elev-make-1/elevator-id-1`
 - `apim/elevator-co/api/V1/json/de/elevator/maintenace/elev-make-1/elevator-id-2`
 
-## Async API Spec
-
-[./ApiEventService_maintenance.async-api-spec.yml](./ApiEventService_maintenance.async-api-spec.yml)
-
-
 ## API Event Service Simulator
 
 Requires:
