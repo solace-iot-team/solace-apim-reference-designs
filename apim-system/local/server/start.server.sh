@@ -55,7 +55,8 @@ echo " >>> Starting Platform API Server in docker for $APIM_SYSTEM_USE_CASE_NAME
   export LOG_LEVEL=$APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL
   export APP_ID=$APIM_SYSTEM_USE_CASE_NAME
   export FILE_USER_REGISTRY=$fileUserRegistry
-
+  export DOCKER_CLIENT_TIMEOUT=120
+  export COMPOSE_HTTP_TIMEOUT=120
   docker-compose -f "$dockerComposeFile" up -d
   if [[ $? != 0 ]]; then echo " >>> ERROR: docker compose with '$dockerComposeFile'"; exit 1; fi
   docker ps -a
