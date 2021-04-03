@@ -1,3 +1,5 @@
+[![use-case-tests](https://github.com/solace-iot-team/solace-apim-reference-designs/actions/workflows/use-case-tests.yml/badge.svg)](https://github.com/solace-iot-team/solace-apim-reference-designs/actions/workflows/use-case-tests.yml)
+
 # Reference Designs & Examples for Solace Aysnc API Management Integration.
 
 [Concepts](./Concepts.md) |
