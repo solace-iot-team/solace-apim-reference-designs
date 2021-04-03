@@ -9,15 +9,11 @@
 
 [See `bootstrap`](./bootstrap) for details.
 
-## Run
+## Details
 
-1 - [exposure/operations](./exposure/operations)
-
-2 - [exposure/api-team](./exposure/api-team)
-
-3 - [consumption/developer](./consumption/developer)
-
-4 - [exposure/api-team](./exposure/api-team) - optional, if apps require approval
+* [exposure/api-service-developer](./exposure/api-service-developer)
+* [exposure/api-team](./exposure/api-team)
+* [consumption/developer](./consumption/developer)
 
 
 ---
