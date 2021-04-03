@@ -15,9 +15,8 @@ Pipeline ([see src/index.ts](./src/index.ts)):
 
 ## Prerequisites
 
-- Running instance of the Platform-Api Server
-- Solace Cloud account with rights to create a token
-- 2 services in Solace Cloud to act as the API Gateways `prod` and `dev`
+- Solace Cloud API Token & optional separate Event Portal API URL & Token - [see README for details](https://github.com/solace-iot-team/solace-apim-reference-designs).
+- 2 services in Solace Cloud to act as the API Gateways, `production` and `development`
 
 ## Configure
 
@@ -35,17 +34,19 @@ $ env | grep APIM_BOOTSTRAP
 ````
 
 ## Run
-### Bootstrap local APIM System
+### Local Platform API System
 [See here for more details.](./apim-system/local)
+
+**standup:**
 ````bash
 $ ./bootstrap.apim-system.local.sh
 ````
-
+**teardown:**
 ````bash
 $ ./teardown.apim-system.local.sh
 ````
 
-### Bootstrap Use Case
+### Bootstrap Use Case on Platform API System
 
 ````bash
 $ npm install

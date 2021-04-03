@@ -7,6 +7,16 @@
 
 ## Configure
 
+### Create an Organization User file
+Example:
+````json
+{
+  "{organization-A-admin-username}": "{password}",
+  "{organization-B-admin-username}": "{password}"
+}
+````
+### Configuration
+
 Set the environment variables defined in `template.source.env.sh`.
 
 ```bash

@@ -22,10 +22,11 @@ env | grep APIM_SYSTEM
 
 ## Run
 
+**start:**
 ```bash
 ./start.mongo.sh
 ```
-
+**stop:**
 ```bash
 ./stop.mongo.sh
 ```
