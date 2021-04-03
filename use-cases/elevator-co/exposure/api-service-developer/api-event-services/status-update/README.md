@@ -9,11 +9,6 @@
 **Topic Examples:**
 - `apim/elevator-co/api/V1/json/status/123ABCxyz`
 
-## Async API Spec
-
-[ApiEventService_status_update.async-api-spec.yml](./ApiEventService_status_update.async-api-spec.yml)
-
-
 ## API Event Service Simulator
 
 Requires:

@@ -1,41 +1,34 @@
-# solace-apim-reference-designs
-Reference Designs & Examples for Solace Aysnc API Management Integration.
+[![use-case-tests](https://github.com/solace-iot-team/solace-apim-reference-designs/actions/workflows/use-case-tests.yml/badge.svg)](https://github.com/solace-iot-team/solace-apim-reference-designs/actions/workflows/use-case-tests.yml)
+
+# Reference Designs & Examples for Solace AysncAPI Management Integration.
 
 [Concepts](./Concepts.md) |
-[Solace Platform API - Open API Doc](http://ec2-18-157-186-227.eu-central-1.compute.amazonaws.com:3000/api-explorer/#/) |
-[Use Cases](./use-cases) |
+[Issues](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) |
+[Discussions](https://github.com/solace-iot-team/solace-apim-reference-designs/discussions)
 
-## Repo Organization
-
-* **use-cases**
-  - designs, sample specs, postman collections based on a particular use case
-
-## Getting Started
-
-### Prerequisites
-In order to use the Solace Platform API (e.g. via the Postman Collections provided for the use cases) you need the following:
+## Prerequisites
+In order to use the Solace Platform API you need the following:
 - a Solace Cloud Account and the rights to generate API Tokens
-- a provisioned Solace Platform API Organization
-- a set of provisioned credentials for the Solace Platform API
+- a provisioned Solace Platform API System
 
-To obtain these [create an issue](https://github.com/solace-iot-team/solace-apim-reference-designs/issues) or contact us directly via e-mail.
+## Generate a Solace Cloud API Token
 
-Pls provide:
-- your name
-- your e-mail address
-- your company name
-- your chosen Solace Platform API organization id, e.g. `MY_ORG_NAME`
+Permissions:
+  - Organization Services:
+    - Get Services
+  - Event Portal
+    - Event Portal Read
 
-You receive:
-- username & password for the Solace Platform API
+Copy & save the token. It is needed to configure the use case scripts.
+
+## Provision a Solace Platform API System
+
+* [Local system in docker containers](./apim-system/local)
+* [System in AWS] - coming soon
 
 ### Use Cases
 
-Contain designs, sample specs, postman collections etc. to showcase a particular use case.
-
-[See here for instructions common for all use cases.](./use-cases)
-
-Choose a use case:
+The Use Case folders contains designs, sample AsyncAPI specs, bootstrap cli examples and more to showcase a particular use case.
 
 * [Use Case: Elevator-Co](./use-cases/elevator-co)
 

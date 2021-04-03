@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  mongodb:
+    container_name: $APIM_SYSTEM_USE_CASE_NAME-mongodb
+    image : mongo:latest
+    volumes:
+      - mongodbdata:/data/db
+    ports:
+      - ${APIM_SYSTEM_MONGO_PORT}:${APIM_SYSTEM_MONGO_PORT}
+    restart: unless-stopped
+volumes:
+  mongodbdata:

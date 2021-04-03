@@ -3,33 +3,32 @@
 # Copyright (c) 2021, Solace Corporation, Ricardo Gomez-Ulmke (ricardo.gomez-ulmke@solace.com)
 # ---------------------------------------------------------------------------------------------
 
-name: use-case-test
+name: use-case-tests
 on:
   # for testing
   workflow_dispatch:
-  # # production
-  # schedule:
-  # #   # - cron: '0 7 * * MON'
-  #   - cron: '0 7 * * *'
-  # pull_request:
-  #   branches:
-  #     - main
+  # production
+  schedule:
+  #   # - cron: '0 7 * * MON'
+    - cron: '0 7 * * *'
+  pull_request:
+    branches:
+      - main
 env:
   DEBUG_FLAG: ${{ true }}
   # DEBUG_FLAG: ${{ false }}
-  # TEST_PLATFORM_DIR: "api-implementation"
-  TEST_TEST_RUNNER_OUTPUT_DIR: "api-implementation/test/integration/tmp"
-  TEST_OUTPUT_NAME: "api-implementation-test-integration"
 jobs:
   use_case_elevator_co:
-    env:
-      UC_HOME_DIR: "use-cases/elevator-co/"
-      UC_TEST_ELEVATOR_CO_OUTPUT_DIR: "api-implementation/test/integration/tmp"
     runs-on: ubuntu-18.04
+    env:
+      UC_HOME_DIR: "use-cases/elevator-co"
+      UC_TEST_HOME_DIR: "use-cases/elevator-co/bootstrap"
+      UC_TEST_OUTPUT_DIR: "use-cases/elevator-co/bootstrap/test/tmp"
+      UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-test-elevator-co"
     strategy:
       max-parallel: 1
       matrix:
-        node: [ '12' ]
+        node: [ '12', '14' ]
     steps:
       - name: Check Auth
         if: github.event_name == 'workflow_dispatch' && github.actor != 'ricardojosegomezulmke' && github.actor != '195858'
@@ -52,8 +51,8 @@ jobs:
           echo "bash --version: "; bash --version
           echo "node --version: "; node --version
           echo "npm --version: "; npm --version
-          echo ">>> environment: TEST_* "
-          env | grep TEST
+          echo "docker --version"; docker --version
+          echo "docker-compose --version"; docker-compose --version
 
       - name: setup node
         uses: actions/setup-node@v2
@@ -67,30 +66,32 @@ jobs:
           echo "node --version: "; node --version
           echo "npm --version: "; npm --version
           echo "docker --version"; docker --version
+          echo "docker-compose --version"; docker-compose --version
 
       - name: npm install
         run: |
-          cd "${TEST_PLATFORM_DIR}"
+          cd "${UC_TEST_HOME_DIR}"
           npm install
 
       - name: Run Tests
         run: |
-          export APIM_INTEGRATION_TEST_SOLACE_CLOUD_URL=${{ secrets.SOLACE_CLOUD_URL }}
-          export APIM_INTEGRATION_TEST_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
-          export APIM_INTEGRATION_TEST_SOLACE_EVENT_PORTAL_URL=${{ secrets.SOLACE_EVENT_PORTAL_URL }}
-          export APIM_INTEGRATION_TEST_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_TOKEN }}
-          export APIM_INTEGRATION_TEST_PLATFORM_ADMIN_USER=${{ secrets.PLATFORM_ADMIN_USER }}
-          export APIM_INTEGRATION_TEST_PLATFORM_ADMIN_PASSWORD=${{ secrets.PLATFORM_ADMIN_PASSWORD }}
-          export APIM_SOLACE_PLATFORM_API_PROJECT_HOME="$GITHUB_WORKSPACE"
-          cd "$APIM_SOLACE_PLATFORM_API_PROJECT_HOME/${TEST_PLATFORM_DIR}"
-          test/integration/run.sh
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER=${{ secrets.PLATFORM_ADMIN_USER }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER_PWD=${{ secrets.PLATFORM_ADMIN_PASSWORD }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_API_URL=${{ secrets.SOLACE_EVENT_PORTAL_BETA_API_URL }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}""
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
+          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
+          cd "${UC_TEST_HOME_DIR}"
+          test/run.sh
 
       - name: Archive logs
         if: ${{ (failure() && !cancelled()) || (always() && (github.event_name=='workflow_dispatch' || env.DEBUG_FLAG=='true') ) }}
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.TEST_OUTPUT_NAME }}
-          path: ${{ github.workspace }}/${{ env.TEST_TEST_RUNNER_OUTPUT_DIR }}
+          name: ${{ env.UC_TEST_OUTPUT_NAME }}
+          path: ${{ github.workspace }}/${{ env.UC_TEST_OUTPUT_DIR }}
           if-no-files-found: error
 
 ###

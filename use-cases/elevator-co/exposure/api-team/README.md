@@ -1,6 +1,6 @@
 # Elevator-Co:Exposure:API Team
 
-Postman Collection: [Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json](./Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json)
+Create & publish `API Products` from `AysncAPIs` provided by `api-service-developer`.
 
 ### get details of environments
 
@@ -8,13 +8,12 @@ Postman Collection: [Solace-APIM-UC-Elevator-Co-api-team.postman_collection.json
 
 ### register / update apis
 
-  - get the AsyncApi Spec from [api-service-developer/api-event-services](./api-service-developer/api-event-services)
-  - adjust channel bindings for consumption to the protocols to be supported (e.g. mqtt & http only)
-  - copy into body of register api calls
+  - get the `AsyncAPI Spec` from [api-service-developer/api-event-services](./api-service-developer/api-event-services)
+  - adjust channel bindings in `AsyncAPI Spec` for consumption to the protocols to be supported (e.g. mqtt & http only)
 
 ### create api products
 
-- select Apis
+- select AsyncAPIs
 - select environments
 - select protocols
 - select attributes (topic parameter values)

@@ -1,0 +1,20 @@
+#
+# Solace Platform API Server
+# MacOS
+#
+version: "3.3"
+services:
+  platform-api-server:
+    container_name: "${CONTAINER_NAME}"
+    image: "${IMAGE}"
+    volumes:
+      - ${PLATFORM_DATA_MOUNT_PATH}:${PLATFORM_DATA_INTERNAL_PATH}
+    ports:
+      - ${PLATFORM_PORT}:${PLATFORM_PORT}
+    restart: unless-stopped
+    environment:
+      - DB_URL=${DB_URL}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - APP_ID=${APP_ID}
+      - FILE_USER_REGISTRY=${FILE_USER_REGISTRY}
+      - PLATFORM_PORT=${PLATFORM_PORT}

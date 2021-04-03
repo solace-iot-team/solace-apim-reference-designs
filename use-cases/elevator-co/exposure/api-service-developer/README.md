@@ -1,6 +1,6 @@
 # Elevator-Co:Exposure:API Service Developer
 
-Develops API Event Services based on the raw telemetry data from elevators.
+Develop API Event Services based on the raw telemetry data from elevators.
 
 ## Develop API Event Services
 
@@ -13,8 +13,6 @@ Develops API Event Services based on the raw telemetry data from elevators.
 - status
 
 ## Create AsyncAPI Spec
-
-**Note: Create AsyncAPI Spec using reverse/opposite for pub<-->sub.**
 
 Contains:
 - **payload schemas**

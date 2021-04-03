@@ -1,22 +1,21 @@
 # Elevator-Co:Consumption:Developer
 
-
-Postman Collection: [Solace-APIM-UC-Elevator-Co-developer.postman_collection.json](./Solace-APIM-UC-Elevator-Co-developer.postman_collection.json)
+Create `Developer Apps` by selecting `API Products` and develop their in-house apps.
 
 ### browse api products & specs
 
-- get a list of api products
-- get the api product Async Api specs
+- view a list of `API Products` available
+- view the `AsyncAPI Specs` of the APIs in the `API Products`
 
 ### register
 
-- register developer username
+- register as a developer
 
 ### create apps
 
-- create developer app from api products
-- provide credentials or leave it empty (they are auto generated)
-- if approval type = manual, status=pending, waiting for approval from api-team
+- create `Developer App` from `API Products`
+- provide own credentials or leave empty for auto-generation
+- waiting for approval from api-team where required
 
 ### get app details
 
@@ -24,15 +23,12 @@ Postman Collection: [Solace-APIM-UC-Elevator-Co-developer.postman_collection.jso
 - credentials
 - environment / messagingProtocols - the connection strings
 - permissions - the pub/sub topic patterns permissioned
-
-
-- get list of AsncApi specs listed in the app
-
-
-- get the specific AsyncApi spec for each api
+- get list of `AsyncAPI Specs` listed in the app
+- view / download specific `AsyncAPI Spec` for each `API`
 
 ### next
-Generate code, start subscribing & publishing ...
+- develop own App or generate code
+- start subscribing & publishing ...
 
 ## Sampe Async API Specs
 See [sample-async-apis](./sample-async-apis) for pre-generated, final specs that can be used directly.

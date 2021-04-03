@@ -5,15 +5,15 @@
 <p align="center"><img src="../../images/apim.use-case.elevator-co.png" /></p>
 
 
-## Run
+## Bootstrap Use Case
 
-1 - [exposure/operations](./exposure/operations)
+[See `bootstrap`](./bootstrap) for details.
 
-2 - [exposure/api-team](./exposure/api-team)
+## Details
 
-3 - [consumption/developer](./consumption/developer)
-
-4 - [exposure/api-team](./exposure/api-team) - optional, if apps require approval
+* [exposure/api-service-developer](./exposure/api-service-developer)
+* [exposure/api-team](./exposure/api-team)
+* [consumption/developer](./consumption/developer)
 
 
 ---
