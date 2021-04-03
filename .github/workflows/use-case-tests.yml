@@ -7,13 +7,13 @@ name: use-case-tests
 on:
   # for testing
   workflow_dispatch:
-  # # production
-  # schedule:
-  # #   # - cron: '0 7 * * MON'
-  #   - cron: '0 7 * * *'
-  # pull_request:
-  #   branches:
-  #     - main
+  # production
+  schedule:
+  #   # - cron: '0 7 * * MON'
+    - cron: '0 7 * * *'
+  pull_request:
+    branches:
+      - main
 env:
   DEBUG_FLAG: ${{ true }}
   # DEBUG_FLAG: ${{ false }}
@@ -28,9 +28,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        # node: [ '12', '14' ]
-        node: [ '12' ]
-
+        node: [ '12', '14' ]
     steps:
       - name: Check Auth
         if: github.event_name == 'workflow_dispatch' && github.actor != 'ricardojosegomezulmke' && github.actor != '195858'
@@ -73,7 +71,6 @@ jobs:
       - name: npm install
         run: |
           cd "${UC_TEST_HOME_DIR}"
-          npm update npm
           npm install
 
       - name: Run Tests
