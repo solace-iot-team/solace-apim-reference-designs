@@ -18,7 +18,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 # Scripts
 
   declare -a runScripts=(
-    "$scriptDir/../bootstrap.apim-system.local.sh"
+    "$scriptDir/../standup.apim-system.local.sh"
     "$scriptDir/run-test.sh"
   )
 
