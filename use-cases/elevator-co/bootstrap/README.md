@@ -7,7 +7,7 @@ Bootstrap Pipeline ([see src/index.ts](./src/index.ts)):
 - delete the organization
 - create the organization
 - register Solace Cloud Services for `prod` and `dev` (the API Gateways) with the organization
-- create the mainteanace API ([ApiMaintenance.async-api-spec.yml](./asyncapi-specs/ApiMaintenance.asyncapi-spec.yml))
+- create the API ([ApiMaintenance.async-api-spec.yml](./asyncapi-specs/ApiMaintenance.asyncapi-spec.yml))
 - create a `dev` and `prod` API Product with the API
 - register two developers `dev1@maintenance-co-a.de` and `dev2@maintenance-co-b.com`
 - create a `dev` and `prod` app for each developer
@@ -28,9 +28,6 @@ $ cp template.source.env.sh source.env.sh
 # edit the values ...
 
 $ source source.env.sh
-
-# check:
-$ env | grep APIM_BOOTSTRAP
 ````
 
 ## Run
