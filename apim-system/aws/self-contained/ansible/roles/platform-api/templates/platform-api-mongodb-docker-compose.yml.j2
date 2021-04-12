@@ -1,0 +1,68 @@
+version: "3.3"
+services:
+  mongodb:
+    container_name: platform-api-mongodb-2
+    image : mongo:latest
+    volumes:
+      - /data/db:/data/db
+    restart: unless-stopped
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: {{aws_log_group}}
+        tag: mongodb
+  platform-api-server:
+    container_name: platform-api-server-2
+    links:
+      - mongodb
+    image: solaceiotteam/platform-api-server:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - /data/platform-api:/platform-api-server/data
+    restart: unless-stopped
+    environment:
+      - DB_URL=mongodb://mongodb:27017/platform?retryWrites=true&w=majority
+      - LOG_LEVEL=info
+      - APP_ID=platform-api
+      - FILE_USER_REGISTRY=/platform-api-server/data/organization_users.json
+      - PLATFORM_PORT=3000
+      - ADMIN_USER={{solace_spa_adminuser}}
+      - ADMIN_PASSWORD={{solace_spa_adminpassword}}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: {{aws_log_group}}
+        tag: platform-api
+  portal-server:
+    container_name: portal-server
+    links:
+      - platform-api-server
+    image: solaceiotteam/apim-demo-portal:{{portal_version}}
+    ports:
+      - 80:8090
+    volumes:
+      - /data/portal:/portal/data
+    restart: unless-stopped
+    environment:
+      #sammode=dev disables login screen
+      - sammode={{sammode}}
+      #url of platform-api
+      - solace_spa_url=http://platform-api-server:3000/v1
+      #user-name of platform api (as defined in organization_users.json)
+      - solace_spa_user={{solace_spa_user}}
+      #user-password of platform api (as defined in organization_users.json)
+      - solace_spa_password={{solace_spa_password}}
+      #admin-name of platform api
+      - solace_spa_adminuser={{solace_spa_adminuser}}
+      #admin-password of platform api
+      - solace_spa_adminpassword={{solace_spa_adminpassword}}
+      #login name of portal
+      - solace_portal_login_user={{solace_portal_login_user}}
+      #password of portal
+      - solace_portal_login_password={{solace_portal_login_password}}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: {{aws_log_group}}
+        tag: portal
