@@ -14,8 +14,9 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 
 echo " >>> Docker-compose down for project: $APIM_SYSTEM_PROJECT_NAME ..."
 
+  export DEMO_PORTAL_SERVER_PORT=$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT
   dockerComposeFile="$scriptDir/docker-compose.yml"
-  docker-compose -p $APIM_SYSTEM_PROJECT_NAME -f "$dockerComposeFile" down
+  docker-compose -p $APIM_SYSTEM_PROJECT_NAME -f "$dockerComposeFile" down --volumes --rmi all
   if [[ $? != 0 ]]; then echo " >>> ERROR: docker compose down for '$APIM_SYSTEM_PROJECT_NAME'"; exit 1; fi
   docker ps -a
 

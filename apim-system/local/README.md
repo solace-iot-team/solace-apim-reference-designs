@@ -70,7 +70,7 @@ login with:
   password: {$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER_PWD}
 defaults:
   user:     orgadmin
-  password: orgadmin1231
+  password: orgadmin123!
 
 ````
 

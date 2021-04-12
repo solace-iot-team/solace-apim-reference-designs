@@ -26,21 +26,30 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
   platformApiServerDataVolumeInternal="/platform-api-server/data"
   fileUserRegistry="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY"
 
-############################################################################################################################
-# Run
-echo " >>> Docker-compose up for project: $APIM_SYSTEM_PROJECT_NAME ..."
-
   export PLATFORM_DATA_MOUNT_PATH=$platformApiServerDataVolumeMountPath
   export PLATFORM_DATA_INTERNAL_PATH=$platformApiServerDataVolumeInternal
   export LOG_LEVEL=$APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL
   export APP_ID=$APIM_SYSTEM_PROJECT_NAME
   export FILE_USER_REGISTRY=$fileUserRegistry
+  export ADMIN_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER
+  export ADMIN_PASSWORD=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD
   export DEMO_PORTAL_API_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER
   export DEMO_PORTAL_API_USER_PWD=$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER_PWD
   export DEMO_PORTAL_ADMIN_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER
-  export DEMO_PORTAL_AADMIN_USER_PWD=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD
+  export DEMO_PORTAL_ADMIN_USER_PWD=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD
+  export DEMO_PORTAL_SERVER_PORT=$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT
   export DOCKER_CLIENT_TIMEOUT=120
   export COMPOSE_HTTP_TIMEOUT=120
+
+############################################################################################################################
+# Run
+
+echo " >>> Docker-compose down for project: $APIM_SYSTEM_PROJECT_NAME ..."
+  docker-compose -p $APIM_SYSTEM_PROJECT_NAME -f "$dockerComposeFile" down --volumes
+  if [[ $? != 0 ]]; then echo " >>> ERROR: docker compose up for '$APIM_SYSTEM_PROJECT_NAME'"; exit 1; fi
+echo " >>> Success."
+
+echo " >>> Docker-compose up for project: $APIM_SYSTEM_PROJECT_NAME ..."
 
   docker-compose -p $APIM_SYSTEM_PROJECT_NAME -f "$dockerComposeFile" up -d
   if [[ $? != 0 ]]; then echo " >>> ERROR: docker compose up for '$APIM_SYSTEM_PROJECT_NAME'"; exit 1; fi
