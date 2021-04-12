@@ -7,8 +7,8 @@ experimental*
 # Ansible
 *.retry
 
-#secret keys
-**/keys/*
+#secret aws keys
+**/keys/aws*
 
 # Terraform
 # Local .terraform directories
