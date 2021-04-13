@@ -17,6 +17,8 @@ Bootstrap Pipeline ([see src/index.ts](./src/index.ts)):
 
 - Solace Cloud API Token & optional separate Event Portal API URL & Token - [see README for details](https://github.com/solace-iot-team/solace-apim-reference-designs).
 - 2 services in Solace Cloud to act as the API Gateways, `production` and `development`
+- docker, docker-compose
+- nodejs
 
 ## Configure
 
