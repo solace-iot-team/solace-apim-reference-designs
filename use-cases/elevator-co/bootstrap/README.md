@@ -32,8 +32,7 @@ $ cp template.source.env.sh source.env.sh
 $ source source.env.sh
 ````
 
-## Run
-### Local System
+## Local APIM System
 [See here for more details.](./apim-system/local)
 
 **standup:**
@@ -52,14 +51,14 @@ default: http://localhost:9090
 $ ./teardown.apim-system.local.sh
 ````
 
-### Bootstrap Use Case
+## Bootstrap Use Case
 
 ````bash
 $ npm install
 $ npm start
 ````
 
-### View in Demo Portal
+## View in Demo Portal
 
 **connect your browser to the `apim-demo-portal`:**
 ````
