@@ -2,7 +2,7 @@ version: "3.3"
 services:
   platform-api-server:
     container_name: platform-api-server-2
-    image: solaceiotteam/platform-api-server:latest
+    image: solaceiotteam/platform-api-server:{{platform_api_version}}
     ports:
       - 3000:3000
     volumes:

@@ -6,7 +6,10 @@ mongodb_cloud_api_password: {add_mongodb_cloud_api_password}
 
 #mongodb url for Platform-API 
 mongodb_url: {add_mongodb_url_including_username_and_password}
-  # portal version published in docker_hub
+
+# platform-api version
+platform_api_version: latest
+# portal version published in docker_hub
 portal_version: latest
 # sammode: dev -> login screen is disabled
 # sammode: prod -> login screen is enabled (username = solace_portal_login_user, password = solace_portal_login_password)

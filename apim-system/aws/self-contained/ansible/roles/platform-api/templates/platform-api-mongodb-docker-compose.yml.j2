@@ -15,7 +15,7 @@ services:
     container_name: platform-api-server-2
     links:
       - mongodb
-    image: solaceiotteam/platform-api-server:latest
+    image: solaceiotteam/platform-api-server:{{platform_api_version}}
     ports:
       - 3000:3000
     volumes:

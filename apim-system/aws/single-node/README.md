@@ -74,6 +74,7 @@ Adjust Ansible defaults in `vars/sensitive_ansible_vars.yml`
 :warning: It is strongly advised to change all default usernames and passwords 
 | Point of variation | default | purpose / sample |
 |--------------------|---------|---------|
+| platform-api version | latest | Version TAG of Platform-API |
 | portal_version | `latest` | Version TAG of Platform-API Portal Docker Container |
 | sammode | `prod`| enable / disable authentication of Platform-API-Portal |
 | solace_spa_user | `admin1` | Plaform-API username |

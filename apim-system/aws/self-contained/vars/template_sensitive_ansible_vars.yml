@@ -1,4 +1,6 @@
 --- 
+# platform-api version
+platform_api_version: latest
 # portal version published in docker_hub
 portal_version: latest
 # sammode: dev -> login screen is disabled
