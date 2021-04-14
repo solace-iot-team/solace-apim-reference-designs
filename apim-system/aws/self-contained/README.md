@@ -24,6 +24,10 @@ Linux based deployment host (tested on Mac OS)
 
 ### Adjust Defaults
 
+Invoke script `prepare_automation_configuration.sh` once:
+- `sensitive_ansible_vars.yml` will get created based on `template_sensitive_ansible_vars.yml`
+- `terraform.tfvars.json` will get created based on `template_terraform.tfvars.json`
+
 #### AWS Defaults
 Adjust AWS infrastructure defaults in `vars/terraform.tfvars.json`
 
@@ -52,7 +56,7 @@ Close ports if not needed in (`terraform/main.tf #resource "aws_security_group" 
 
 #### Ansible Defaults
 
-Adjust Ansible defaults in `vars/ansible_vars.yml` 
+Adjust Ansible defaults in `vars/sensitive_ansible_vars.yml` 
 
 :warning: It is strongly advised to change all default usernames and passwords 
 | Point of variation | default | purpose |
@@ -68,7 +72,7 @@ Adjust Ansible defaults in `vars/ansible_vars.yml`
 
 ### Bootstrap
 
-Bootstrapping can get triggered by calling `bootstrap.sh`. 
+Bootstrapping can get triggered by calling `create_infrastructure.sh`. 
 
 After successfully bootstrapping EC2 instance IP and DNS-name can get found in `generated/boxes.json`
 
@@ -79,7 +83,7 @@ After successfully bootstrapping EC2 instance IP and DNS-name can get found in `
 
 ### Destroy 
 
-The entire infrastructure can get removed by calling `destroy.sh`
+The entire infrastructure can get removed by calling `destroy_infrastructure.sh`
 
 ### Change existing infrastructure
 

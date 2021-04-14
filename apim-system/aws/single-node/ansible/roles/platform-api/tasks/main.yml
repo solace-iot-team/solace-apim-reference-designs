@@ -1,0 +1,86 @@
+# Installs and prepares Platform-API and Portal
+
+- debug:
+    msg: 
+      - "Portal authentication mode: {{sammode}}"
+
+- name: prepare opt for platform-api
+  file:
+    path:  /opt/platform-api
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: create /data/platform-api/docker
+  file:
+    path:  /data/platform-api/docker
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: create /data/platform-api/docker
+  file:
+    path:  /data/portal
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: remove and clean /data/platform-api/docker/tmp
+  file:
+    path:  /data/platform-api/docker/tmp
+    owner: root
+    group: root
+    state: absent
+  become: yes
+
+- name: recreate /data/platform-api/docker/tmp
+  file:
+    path:  /data/platform-api/docker/tmp
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: prepare opt for platform-api docker
+  file:
+    path:  /opt/platform-api/docker
+    owner: root
+    group: root
+    state: directory
+  become: yes
+
+- name: copy admin user configuration
+  template:
+    src: templates/organization_users.json.j2
+    dest: /data/platform-api/organization_users.json
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+
+- name: copy docker-compose for platform-api
+  template:
+    src: templates/platform-api-docker-compose.yml.j2
+    dest: /opt/platform-api/docker/compose.yml
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+
+- name: removing images
+  docker_compose:
+    project_src: /opt/platform-api/docker
+    state: absent
+    remove_images: local
+  become: yes
+
+- name: trigger docker-compose
+  docker_compose:
+    project_src: /opt/platform-api/docker
+    build: yes
+  become: yes
+  

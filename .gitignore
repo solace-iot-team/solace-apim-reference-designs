@@ -10,6 +10,10 @@ experimental*
 #secret aws keys
 **/keys/aws*
 
+#local secrets
+**/sensitive_*.yml
+**/terraform.tfvars.json
+
 # Terraform
 # Local .terraform directories
 **/.terraform/*
