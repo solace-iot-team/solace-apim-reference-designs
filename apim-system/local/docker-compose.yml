@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+  mongodb:
+    container_name: $APIM_SYSTEM_PROJECT_NAME-mongodb
+    image : mongo:latest
+    volumes:
+      - mongodbdata:/data/db
+    restart: unless-stopped
+  platform-api-server:
+    container_name: $APIM_SYSTEM_PROJECT_NAME-platform-api-server
+    links:
+      - mongodb
+    image: solaceiotteam/platform-api-server:latest
+    ports:
+      - ${APIM_SYSTEM_PLATFORM_API_SERVER_PORT}:3000
+    volumes:
+      - ${PLATFORM_DATA_MOUNT_PATH}:${PLATFORM_DATA_INTERNAL_PATH}
+    restart: unless-stopped
+    environment:
+      - DB_URL=mongodb://mongodb:27017/platform?retryWrites=true&w=majority
+      - LOG_LEVEL=${LOG_LEVEL}
+      - APP_ID=${APP_ID}
+      - FILE_USER_REGISTRY=${FILE_USER_REGISTRY}
+      - PLATFORM_PORT=3000
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+  demo-portal-server:
+    container_name: $APIM_SYSTEM_PROJECT_NAME-demo-portal-server
+    links:
+      - platform-api-server
+    image: solaceiotteam/apim-demo-portal:latest
+    ports:
+      - ${DEMO_PORTAL_SERVER_PORT}:8090
+    volumes:
+      - portaldata:/portal/data
+    restart: unless-stopped
+    environment:
+      #sammode=dev disables login screen
+      - sammode=prod
+      #url of platform-api
+      - solace_spa_url=http://platform-api-server:3000/v1
+      #user-name of platform api (as defined in organization_users.json)
+      - solace_spa_user=${DEMO_PORTAL_API_USER}
+      #user-password of platform api (as defined in organization_users.json)
+      - solace_spa_password=${DEMO_PORTAL_API_USER_PWD}
+      #admin-name of platform api
+      - solace_spa_adminuser=${DEMO_PORTAL_ADMIN_USER}
+      #admin-password of platform api
+      - solace_spa_adminpassword=${DEMO_PORTAL_ADMIN_USER_PWD}
+      #login name of portal
+      - solace_portal_login_user=${DEMO_PORTAL_API_USER}
+      #password of portal
+      - solace_portal_login_password=${DEMO_PORTAL_API_USER_PWD}
+volumes:
+  mongodbdata:
+  portaldata:

@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       UC_HOME_DIR: "use-cases/elevator-co"
-      UC_TEST_HOME_DIR: "use-cases/elevator-co/bootstrap"
+      UC_TEST_HOME_DIR: "use-cases/elevator-co/bootstrap/test"
       UC_TEST_OUTPUT_DIR: "use-cases/elevator-co/bootstrap/test/tmp"
       UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-test-elevator-co"
     strategy:
@@ -84,7 +84,7 @@ jobs:
           export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
           export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
           cd "${UC_TEST_HOME_DIR}"
-          test/run.sh
+          ./run.sh
 
       - name: Archive logs
         if: ${{ (failure() && !cancelled()) || (always() && (github.event_name=='workflow_dispatch' || env.DEBUG_FLAG=='true') ) }}
