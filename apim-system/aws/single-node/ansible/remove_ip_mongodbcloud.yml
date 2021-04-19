@@ -2,10 +2,11 @@
 - name: Remove IP with cloud.mongodb
   hosts: 127.0.0.1
   vars_files:
-    - ../vars/sensitive_ansible_vars.yml
-    - ../generated/ansible_infrastructure_vars.yml
+    - "../vars/ansible_vars.yml"
 
   tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
     - name: Remove IP with cloud.mongdo
       uri:
         url: "{{ mongodb_cloud_api_url }}/{{ platform_api_host_ip }}"

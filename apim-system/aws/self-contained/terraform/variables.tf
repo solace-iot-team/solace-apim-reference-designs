@@ -10,6 +10,18 @@ variable "ssh_key_filename" {
   type=string
 }
 
+variable "ansible_inventory_file_name" {
+  description = "Path and Filename of generated Ansible inventory"
+  default = "../generated/inventory"
+  type=string
+}
+
+variable "boxes_file_name" {
+  description = "Path and Filename of generated boxes inventory"
+  default = "../generated/boxes.json"
+  type=string
+}
+
 
 variable "ssh_key_name" {
   description = "SSH keyname"

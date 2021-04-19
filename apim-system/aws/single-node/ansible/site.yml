@@ -2,9 +2,11 @@
 - name: Create filesystem
   hosts: mount_ebs
   vars_files:
-    - ../vars/sensitive_ansible_vars.yml
+    - "../vars/ansible_vars.yml"
 
   tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+
     - name: Create filesystem on EBS devices /dev/xvdh on box1 
       filesystem:
         fstype: ext4
@@ -43,9 +45,10 @@
   roles:
     - platform-api
   vars_files:
-    - ../vars/sensitive_ansible_vars.yml
+   - "../vars/ansible_vars.yml"
 
   tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
     - name: copy
       copy:
         src: files/check_platform_api.sh

@@ -25,6 +25,7 @@ Linux based deployment host (tested on Mac OS)
 ### Adjust Defaults
 
 Invoke script `prepare_automation_configuration.sh` once:
+- `ansible_vars.yml` will get created based on `template_ansible_vars.yml`
 - `sensitive_ansible_vars.yml` will get created based on `template_sensitive_ansible_vars.yml`
 - `terraform.tfvars.json` will get created based on `template_terraform.tfvars.json`
 
@@ -55,8 +56,9 @@ Out of the box the EC2 instance is accessible from any IP-Address with ports ope
 Close ports if not needed in (`terraform/main.tf #resource "aws_security_group" "sg_dmz"`)
 
 #### Ansible Defaults
+Adjust Ansible defaults in `vars/ansible_vars.yml` like location of ssh keys, Ansible project var file. 
 
-Adjust Ansible defaults in `vars/sensitive_ansible_vars.yml` 
+Adjust Ansible project defaults in `vars/sensitive_ansible_vars.yml` 
 
 :warning: It is strongly advised to change all default usernames and passwords 
 | Point of variation | default | purpose |

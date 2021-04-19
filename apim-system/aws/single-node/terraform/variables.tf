@@ -9,6 +9,23 @@ variable "ssh_key_filename" {
   default = "../shared/keys/aws_key_box.pub"
   type=string
 }
+variable "ansible_inventory_file_name" {
+  description = "Path and Filename of generated Ansible inventory"
+  default = "../generated/inventory"
+  type=string
+}
+
+variable "boxes_file_name" {
+  description = "Path and Filename of generated boxes inventory"
+  default = "../generated/boxes.json"
+  type=string
+}
+
+variable "generated_infrastructure_vars_file" {
+  description = "Path to write Ansible var file"
+  default = "../generated/ansible_infrastructure_vars.yml"
+  type=string
+}
 
 
 variable "ssh_key_name" {

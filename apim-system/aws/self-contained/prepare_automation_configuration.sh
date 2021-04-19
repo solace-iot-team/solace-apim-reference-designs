@@ -1,12 +1,30 @@
 #!/bin/bash
 echo ">>>>> PREPARING LOCAL CONFIGURATION FOR SELF-CONTAINED ASYNC-API-PLATFORM"
 
-LOCAL_ANSIBLE_VARS=vars/sensitive_ansible_vars.yml
+ANSIBLE_CFG=ansible/ansible.cfg
+if [[ -f "$ANSIBLE_CFG" ]]; then
+   echo "$ANSIBLE_CFG already exists." 
+else
+  cp ansible/template_ansible.cfg ansible/ansible.cfg
+  echo "$ANSIBLE_CFG created based on template." 
+  echo "Please adjust content of this file before deploying infrastructure."
+fi
+
+LOCAL_ANSIBLE_VARS=vars/ansible_vars.yml
 if [[ -f "$LOCAL_ANSIBLE_VARS" ]]; then
    echo "$LOCAL_ANSIBLE_VARS already exists." 
 else
-  cp vars/template_sensitive_ansible_vars.yml vars/sensitive_ansible_vars.yml
+  cp vars/template_ansible_vars.yml vars/ansible_vars.yml
   echo "$LOCAL_ANSIBLE_VARS created based on template." 
+  echo "Please adjust content of this file before deploying infrastructure."
+fi
+
+LOCAL_SENSITIVE_ANSIBLE_VARS=vars/sensitive_ansible_vars.yml
+if [[ -f "$LOCAL_SENSITIVE_ANSIBLE_VARS" ]]; then
+   echo "$LOCAL_SENSITIVE_ANSIBLE_VARS already exists." 
+else
+  cp vars/template_sensitive_ansible_vars.yml vars/sensitive_ansible_vars.yml
+  echo "$LOCAL_SENSITIVE_ANSIBLE_VARS created based on template." 
   echo "Please adjust content of this file before deploying infrastructure."
 fi
 
