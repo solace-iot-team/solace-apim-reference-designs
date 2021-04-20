@@ -26,7 +26,7 @@ resource "local_file" "ansible_infrastructure_vars" {
        box_1_public_dns = module.box1.public_dns
        box_1_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
        aws_region = var.aws_region
-       allowed_inbound_cidr_blocks = var.allowed_inbound_cidr_blocks
+       allowed_inbound_cidr_blocks = tostring(var.allowed_inbound_cidr_blocks)
        instance_type_box_1 = var.instance_type_box_1
        tag_owner = var.tag_owner
        tag_project = var.tag_project
