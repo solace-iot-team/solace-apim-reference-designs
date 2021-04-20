@@ -1,9 +1,5 @@
 # Installs and prepares Platform-API and Portal
 
-- debug:
-    msg: 
-      - "Portal authentication mode: {{sammode}}"
-
 - name: prepare opt for platform-api
   file:
     path:  /opt/platform-api

@@ -1,3 +1,10 @@
+- name: Debug
+  hosts: platform_api
+  tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+  vars_files:
+   - "../vars/ansible_vars.yml"
+   
 - name: Install and start platform_api
   hosts: platform_api
   roles:
