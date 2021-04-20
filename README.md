@@ -31,8 +31,6 @@ Copy & save the token. It is needed to configure the use case scripts.
 The Use Case folders contains designs, sample AsyncAPI specs, bootstrap cli examples and more to showcase a particular use case.
 
 * [Use Case: Elevator-Co](./use-cases/elevator-co)
-
-
-
+* [Use Case: Car-Co](./use-cases/car-co)
 
 ---
