@@ -1,13 +1,72 @@
 # Installs and prepares Docker Host
+# Updates to latest greatest and prepares a fresh Ubuntu Box
+
+- name: Update apt repo and cache on all Debian/Ubuntu boxes
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Upgrade all packages on servers
+  apt: upgrade=dist force_apt_get=yes
+
+- name: Check if a reboot is needed on all servers
+  register: reboot_required_file
+  stat: path=/var/run/reboot-required get_md5=no
+
+- name: Reboot the box if kernel updated
+  reboot:
+    msg: "Reboot initiated by Ansible for kernel updates"
+    connect_timeout: 5
+    reboot_timeout: 300
+    pre_reboot_delay: 0
+    post_reboot_delay: 30
+    test_command: uptime
+  when: reboot_required_file.stat.exists
 
 - name: Install aptitude using apt
   apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
-  become: yes
 
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
-  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
-  become: yes
+  loop: [ 'apt-transport-https', 
+          'ca-certificates', 
+          'curl', 
+          'software-properties-common', 
+          'python3-pip', 
+          'virtualenv', 
+          'python3-setuptools', 
+          'unzip',
+          'tree']
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: Make sure we have a 'operator' group
+  group:
+    name: operator
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+
+- name: Add ubuntu user to operators and wheel group
+  user:
+    name: "{{ item }}"
+    state: present
+    group: operator
+    groups: 
+      - wheel
+      - operator
+    append: true
+    create_home: true
+    generate_ssh_key: false
+    shell: /bin/bash
+  with_items: "ubuntu"
 
 - name: Add Docker GPG apt Key
   apt_key:
