@@ -6,6 +6,7 @@
     - "../vars/ansible_vars.yml"
   tasks:
     - include_vars: "{{config_root}}/{{config_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
 
     - name: Render INVENTORY.md
       template:
