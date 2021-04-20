@@ -71,6 +71,13 @@
   debug: 
     msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
 
+- name: Remove docker image for platform-api-server
+  shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
+
+- name: Remove docker image for portal
+  shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}""
+
+
 - name: removing images
   docker_compose:
     project_src: /opt/platform-api/docker
