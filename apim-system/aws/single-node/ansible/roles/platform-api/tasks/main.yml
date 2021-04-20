@@ -73,9 +73,11 @@
 
 - name: Remove docker image for platform-api-server
   shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
+  ignore_errors: yes
 
 - name: Remove docker image for portal
   shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
+  ignore_errors: yes
 
 
 - name: removing images
