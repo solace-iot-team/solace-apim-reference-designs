@@ -1,0 +1,34 @@
+- name: Install and start platform_api
+  hosts: platform_api
+  roles:
+    - platform-api #deploys and executes docker-compose of platform api
+  vars_files:
+   - "../vars/ansible_vars.yml"
+
+  tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+    - name: copy
+      copy:
+        src: files/check_platform_api.sh
+        dest: /data/platform-api/docker
+        owner: root
+        group: root
+        mode: 0744
+      become: yes
+
+    - name: execute script to check platform-api status
+      script: files/check_platform_api.sh /data/platform-api/docker platform-api-server-2
+      become: yes
+
+    - name: check server status 
+      stat: 
+        path: /data/platform-api/docker/tmp/SERVER_INITIALIZED
+      register: check_result
+
+    - debug: msg="PLATFORM-API successfully initialized, up and running"
+      when: check_result.stat.exists
+
+    - debug: msg="PLATFORM-API NOT UP AND / OR INITIALIZED"
+      when: not check_result.stat.exists
+
+

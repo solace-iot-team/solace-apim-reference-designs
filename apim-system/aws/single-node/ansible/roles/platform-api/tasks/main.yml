@@ -71,6 +71,10 @@
     mode: 0644
   become: yes
 
+- name: print platform-api versions
+  debug: 
+    msg: "Deployed docker-compose [platform_api_version:{{platfrom_api_version}}] [portal_version:{{portal_version}}]"
+
 - name: removing images
   docker_compose:
     project_src: /opt/platform-api/docker
@@ -82,5 +86,6 @@
   docker_compose:
     project_src: /opt/platform-api/docker
     build: yes
+  when: 1==2
   become: yes
   
