@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://localhost:8811/common.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "Car Co safety alarm event",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timestamp"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tyre_pressure",
+        "battery_charge",
+        "oil_level"
+      ],
+      "properties": {
+        "tyre_pressure": {
+          "title": "tyre",
+          "type": "number"
+        },
+        "battery_charge": {
+          "title": "battery",
+          "type": "number"
+        },
+        "oil_level": {
+          "title": "oil",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
