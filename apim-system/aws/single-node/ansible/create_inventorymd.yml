@@ -8,10 +8,10 @@
     - include_vars: "{{config_root}}/{{config_vars_file}}"
     - include_vars: "{{generated_infrastructure_vars_file}}"
 
-    - name: Render INVENTORY.md
+    - name: Render README.md
       template:
         src: templates/INVENTORY.md.j2
-        dest: "{{inventory_root}}/INVENTORY.md"
+        dest: "{{inventory_root}}/README.md"
         owner: ubuntu
         group: operator
         mode: 0770      
