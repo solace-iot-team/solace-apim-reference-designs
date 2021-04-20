@@ -8,7 +8,7 @@
   tasks:
     - include_vars: "{{config_root}}/{{config_vars_file}}"
 
-    - debug: msg="[config_root/config_vars_file : {{config_root}}/{{config_vars_file}}]]"
+    - debug: msg="[config_root/config_vars_filevi  {{config_root}}/{{config_vars_file}}]]"
       when: check_result.stat.exists
 
     - name: copy

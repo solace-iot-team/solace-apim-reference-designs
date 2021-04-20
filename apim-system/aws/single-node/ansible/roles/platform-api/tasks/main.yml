@@ -69,7 +69,7 @@
 
 - name: print platform-api versions
   debug: 
-    msg: "Deployed docker-compose [platform_api_version:{{platfrom_api_version}}] [portal_version:{{portal_version}}]"
+    msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
 
 - name: removing images
   docker_compose:
