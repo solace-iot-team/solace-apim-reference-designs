@@ -3,13 +3,16 @@
 
 - name: Update apt repo and cache on all Debian/Ubuntu boxes
   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  become: yes
 
 - name: Upgrade all packages on servers
   apt: upgrade=dist force_apt_get=yes
+  become: yes
 
 - name: Check if a reboot is needed on all servers
   register: reboot_required_file
   stat: path=/var/run/reboot-required get_md5=no
+  become: yes
 
 - name: Reboot the box if kernel updated
   reboot:
@@ -20,9 +23,11 @@
     post_reboot_delay: 30
     test_command: uptime
   when: reboot_required_file.stat.exists
+  become: yes
 
 - name: Install aptitude using apt
   apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+  become: yes
 
 - name: Install required system packages
   apt: name={{ item }} state=latest update_cache=yes
@@ -35,16 +40,19 @@
           'python3-setuptools', 
           'unzip',
           'tree']
+  become: yes
 
 - name: Make sure we have a 'wheel' group
   group:
     name: wheel
     state: present
+  become: yes
 
 - name: Make sure we have a 'operator' group
   group:
     name: operator
     state: present
+  become: yes
 
 - name: Allow 'wheel' group to have passwordless sudo
   lineinfile:
@@ -53,6 +61,7 @@
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
+  become: yes
 
 - name: Add ubuntu user to operators and wheel group
   user:
@@ -67,7 +76,8 @@
     generate_ssh_key: false
     shell: /bin/bash
   with_items: "ubuntu"
-
+  become: yes
+  
 - name: Add Docker GPG apt Key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
