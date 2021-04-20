@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://localhost:8811/common.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "Car Co consumption event payload",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timestamp"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fuel",
+        "tyre",
+        "battery",
+        "oil"
+      ],
+      "properties": {
+        "fuel": {
+          "title": "fuel",
+          "type": "integer"
+        },
+        "tyre": {
+          "title": "tyre",
+          "type": "number"
+        },
+        "battery": {
+          "title": "battery",
+          "type": "number"
+        },
+        "oil": {
+          "title": "oil",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
