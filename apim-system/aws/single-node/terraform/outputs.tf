@@ -28,9 +28,9 @@ resource "local_file" "ansible_infrastructure_vars" {
        aws_region = var.aws_region
        allowed_inbound_cidr_blocks = var.allowed_inbound_cidr_blocks
        instance_type_box_1 = var.instance_type_box_1
-       platform_tag_owner = var.tag_owner
-       platform_tag_project = var.tag_project
-       platform_tag_name_prefix = var.tag_name_prefix
+       tag_owner = var.tag_owner
+       tag_project = var.tag_project
+       tag_name_prefix = var.tag_name_prefix
     }
   )
   filename = var.generated_infrastructure_vars_file
