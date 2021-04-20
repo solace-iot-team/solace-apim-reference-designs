@@ -14,7 +14,7 @@ Bootstrap Pipeline ([see src/index.ts](./src/index.ts)):
 
 
 - create a `dev` and `prod` API Product with the API
-- register two developers `dev1@partner-co-a.de` and `dev2@partner-co-b.com`
+- register two developers `dev1@partner-co-a.de` and `dev2@partner-co-b.fr`
 - create a `dev` and `prod` app for each developer
 - approve & set different permissions for both `prod` apps
 
