@@ -1,10 +1,3 @@
-- name: Debug
-  hosts: platform_api
-  tasks:
-    - include_vars: "{{config_root}}/{{config_vars_file}}"
-  vars_files:
-   - "../vars/ansible_vars.yml"
-   
 - name: Install and start platform_api
   hosts: platform_api
   roles:
@@ -14,6 +7,10 @@
 
   tasks:
     - include_vars: "{{config_root}}/{{config_vars_file}}"
+
+    - debug: msg="[config_root/config_vars_file : {{config_root}}/{{config_vars_file}}]]"
+      when: check_result.stat.exists
+
     - name: copy
       copy:
         src: files/check_platform_api.sh
