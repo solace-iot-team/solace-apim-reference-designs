@@ -91,6 +91,5 @@
   docker_compose:
     project_src: /opt/platform-api/docker
     build: yes
-  when: 1==2
   become: yes
   
