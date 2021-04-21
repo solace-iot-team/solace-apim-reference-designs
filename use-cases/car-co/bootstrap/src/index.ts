@@ -27,6 +27,10 @@ let bootstrapConfig = {
             apiSafety: {
                 name: 'safety-api',
                 asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiSafety.asyncapi-spec.yml'),    
+            },
+            apiFailure: {
+                name: 'failure-api',
+                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiFailure.asyncapi-spec.yml'),    
             }
         },
         apiProducts: {
@@ -65,6 +69,28 @@ let bootstrapConfig = {
                         { name: 'model', value: '*' },
                         { name: 'vin', value: '*' },
                         { name: 'event_type', value: 'safety' }
+                    ],
+                    protocols:[ 
+                        { name: Protocol.name.HTTP, version: '1.1' },
+                        { name: Protocol.name.HTTPS, version: '1.1' },
+                        { name: Protocol.name.MQTT, version: '3.1.1' },
+                        { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
+                        { name: Protocol.name.WS_MQTT, version: '3.1.1' },
+                        { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
+                    ]
+                },
+                failure: {
+                    name: 'failure-development',
+                    displayName: 'Failure Alarms Development',
+                    description: 'Failure Alarms Development API Product - auto approved, with mock dev events',
+                    approvalType: APIProduct.approvalType.AUTO,
+                    apis: ['string'],
+                    permissions: [
+                        { name: 'region_id', value: '*' }, 
+                        { name: 'make', value: '*' },
+                        { name: 'model', value: '*' },
+                        { name: 'vin', value: '*' },
+                        { name: 'event_type', value: 'failure' }
                     ],
                     protocols:[ 
                         { name: Protocol.name.HTTP, version: '1.1' },
@@ -176,6 +202,7 @@ let bootstrapConfig = {
 }
 bootstrapConfig.exposure.apiProducts.devProducts.consumption.apis = [bootstrapConfig.exposure.apis.apiConsumption.name];
 bootstrapConfig.exposure.apiProducts.devProducts.safety.apis = [bootstrapConfig.exposure.apis.apiSafety.name];
+bootstrapConfig.exposure.apiProducts.devProducts.failure.apis = [bootstrapConfig.exposure.apis.apiFailure.name];
 bootstrapConfig.exposure.apiProducts.prodProducts.consumption.apis = [bootstrapConfig.exposure.apis.apiConsumption.name];
 Helper.logConfig(bootstrapConfig);
 
@@ -264,6 +291,19 @@ const createSafetyApi = async() => {
     PlatformAPIClient.setApiUser();    
     try {
         let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.apis.apiSafety.name, apiSpec);
+        Helper.logApiResponse(response);
+    } catch(e) {
+        Helper.logError(e);
+        process.exit(1);
+    }
+    console.log('success.');
+}
+const createFailureApi = async() => {
+    console.log('create failure api ...');
+    const apiSpec: string = Helper.loadYamlFileAsJsonString(bootstrapConfig.exposure.apis.apiFailure.asyncapi_spec_file);
+    PlatformAPIClient.setApiUser();    
+    try {
+        let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.apis.apiFailure.name, apiSpec);
         Helper.logApiResponse(response);
     } catch(e) {
         Helper.logError(e);
@@ -401,7 +441,8 @@ const createDeveloperApps = async() => {
                 name: `${developer.devApp.name}`,
                 apiProducts: [ 
                     bootstrapConfig.exposure.apiProducts.devProducts.consumption.name,
-                    bootstrapConfig.exposure.apiProducts.devProducts.safety.name
+                    bootstrapConfig.exposure.apiProducts.devProducts.safety.name,
+                    bootstrapConfig.exposure.apiProducts.devProducts.failure.name
                 ],
                 credentials: Helper.createDefaultCredentials()
             },
@@ -452,6 +493,7 @@ const main = async() => {
     await registerEnvironmentsWithOrg();
     await createConsumptionApi();
     await createSafetyApi();
+    await createFailureApi();
     await createDevApiProducts();
     await createProdApiProducts();
     await createDevelopers();

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "timestamp": "2021-04-21-07:07:11-UTC"
+  },
+  "body": {
+    "type": "maintenance",
+    "component": "brake_lights_dash",
+    "details": "replacement_required"
+  }
+}

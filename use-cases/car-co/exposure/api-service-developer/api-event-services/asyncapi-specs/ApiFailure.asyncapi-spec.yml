@@ -26,13 +26,13 @@ components:
       schema:
         type: string
         enum:
-          - safety
+          - failure
   schemas:
-    safety:
+    failure:
       $schema: 'http://json-schema.org/draft-07/schema#'
       type: object
       additionalProperties: false
-      title: Car Co safety alarm event
+      title: Car Co failure alarm event
       required:
       - header
       - body
@@ -49,37 +49,37 @@ components:
           type: object
           additionalProperties: false
           required:
-          - tyre_pressure
-          - battery_charge
-          - oil_level
+          - type
+          - components
+          - details
           properties:
-            tyre_pressure:
-              title: tyre
-              type: number
-            battery_charge:
-              title: battery
-              type: number
-            oil_level:
-              title: oil
-              type: integer
+            type:
+              title: failure type
+              type: string
+            component:
+              title: component failed
+              type: string
+            details:
+              title: details of failure
+              type: string
       $id: >-
-        http://eventportal.solace.cloud/apim/car-co/safety/safety.json
+        http://eventportal.solace.cloud/apim/car-co/failure/failure.json
   messages:
-    safety:
+    failure:
       payload:
-        $ref: '#/components/schemas/safety'
+        $ref: '#/components/schemas/failure'
       schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
       contentType: application/json
       examples:
-        - payload: {"header":{"timestamp":"2021-04-20-14:33:40-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
-        - payload: {"header":{"timestamp":"2021-04-20-14:33:43-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
+        - payload: {"header":{"timestamp":"2021-04-21-06:07:11-UTC"},"body":{"type":"breakdown","component":"gear_box","details":"not_shifting_gears"}}
+        - payload: {"header":{"timestamp":"2021-04-21-07:07:11-UTC"},"body":{"type":"maintenance","component":"brake_lights_dash","details":"replacement_required"}}
 channels:
   'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/{event_type}':
     publish:
-      summary: "subscribe to safety alarm events from vehicle"
+      summary: "subscribe to failure alarm events from vehicle"
       description: |
-        Safety alarms are sent when certain diagnostics level fall below their safe driving levels.
-      operationId: onSafetyAlarm
+        Failure alarms are raised when urgent action is required to maintain/replace/recover components or vehicle.
+      operationId: onFailureAlarm
       bindings:
         mqtt:
           bindingVersion: ‘0.1.0’
@@ -89,7 +89,7 @@ channels:
           type: request
           method: POST
       message:
-        $ref: '#/components/messages/safety'
+        $ref: '#/components/messages/failure'
     parameters:
       region_id:
         $ref: '#/components/parameters/region_id'
@@ -103,7 +103,7 @@ channels:
         $ref: '#/components/parameters/event_type'
 asyncapi: 2.0.0
 info:
-  title: 'API:Safety'
-  description: Subscribe to vehicle safety alarms.
+  title: 'API:Failure'
+  description: Subscribe to vehicle failure alarms.
   x-view: provider
   version: 0.0.1

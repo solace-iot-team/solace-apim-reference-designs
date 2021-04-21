@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://localhost:8811/common.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "Car Co failure alarm event",
+  "required": [
+    "header",
+    "body"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timestamp"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "body": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "component",
+        "details"
+      ],
+      "properties": {
+        "type": {
+          "title": "failure type",
+          "type": "string"
+        },
+        "component": {
+          "title": "component failed",
+          "type": "string"
+        },
+        "details": {
+          "title": "details of failure",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
