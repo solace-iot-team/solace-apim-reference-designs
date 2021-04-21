@@ -71,21 +71,24 @@
   debug: 
     msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
 
-- name: Remove docker image for platform-api-server
-  shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
-  ignore_errors: yes
-
-- name: Remove docker image for portal
-  shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
-  ignore_errors: yes
-
-
-- name: removing images
+- name: stop platform-api services (if it is running at all)
   docker_compose:
     project_src: /opt/platform-api/docker
     state: absent
     remove_images: local
   become: yes
+  ignore_errors: yes
+
+- name: Remove docker image for platform-api-server (if it is available - error is ok)
+  shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
+  ignore_errors: yes
+
+- name: Remove docker image for portal (if it is available - error is ok)
+  shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
+  ignore_errors: yes
+
+
+
 
 - name: trigger docker-compose
   docker_compose:
