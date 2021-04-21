@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://localhost:8811/common.schema.json",
+  "$id": "http://localhost:8811/failure.schema.json",
   "type": "object",
   "additionalProperties": false,
   "title": "Car Co failure alarm event",
