@@ -1,7 +1,8 @@
 # Stops docker containers 
 # Unmounts EBS filesystem to be able to destroy infrastructure via Terraform
 - name: Preparing to destroy infrastructure
-  hosts: docker_hosts
+  hosts: mount_ebs
+
 
   tasks:
     - name: stop platform-api services 

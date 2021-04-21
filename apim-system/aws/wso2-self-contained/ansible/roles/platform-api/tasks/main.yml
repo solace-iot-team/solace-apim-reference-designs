@@ -62,14 +62,27 @@
   become: yes
 
 
-- name: copy docker-compose for platform-api-mongodb
+- name: copy docker-compose for platform-api
   template:
-    src: templates/platform-api-mongodb-docker-compose.yml.j2
+    src: templates/platform-api-docker-compose.yml.j2
     dest: /opt/platform-api/docker/compose.yml
     owner: root
     group: root
     mode: 0644
   become: yes
+
+- name: print platform-api versions
+  debug: 
+    msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
+
+- name: Remove docker image for platform-api-server
+  shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
+  ignore_errors: yes
+
+- name: Remove docker image for portal
+  shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
+  ignore_errors: yes
+
 
 - name: removing images
   docker_compose:

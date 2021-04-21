@@ -4,14 +4,13 @@
   hosts: 127.0.0.1
   connection: local
 
-  vars:
-    ssh_key_filename: aws_key_box
-
+  vars_files:
+    - "../vars/ansible_vars.yml"
   tasks:
 
     - name: generate SSH key "{{ssh_key_filename}}"
       openssh_keypair:
-        path: "../shared/keys/{{ssh_key_filename}}"
+        path: "{{ssh_key_dir}}/{{ssh_key_filename}}"
         type: rsa
         size: 4096
         state: present
