@@ -64,7 +64,7 @@
 
 - name: copy docker-compose for platform-api-mongodb
   template:
-    src: templates/platform-api-mongodb-docker-compose.yml.j2
+    src: templates/platform-api-docker-compose.yml.j2
     dest: /opt/platform-api/docker/compose.yml
     owner: root
     group: root
