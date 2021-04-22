@@ -1,21 +1,17 @@
 - name: Load vars
   hosts: platform_api
-  vars_files:
-   - "../vars/ansible_vars.yml"
 
   tasks:
-    - include_vars: "{{config_root}}/{{config_vars_file}}"
-    - debug: msg="solace_spa_user {{solace_spa_user}}"
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+    - include_vars: "{{sensitive_ansible_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
 
 - name: Install and start platform_api
   hosts: platform_api
   roles:
     - platform-api #deploys and executes docker-compose of platform api
-  vars_files:
-   - "../vars/ansible_vars.yml"
 
   tasks:
-    - include_vars: "{{config_root}}/{{config_vars_file}}"
 
     - name: copy
       copy:

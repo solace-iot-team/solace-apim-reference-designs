@@ -87,9 +87,6 @@
   shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
   ignore_errors: yes
 
-
-
-
 - name: trigger docker-compose
   docker_compose:
     project_src: /opt/platform-api/docker

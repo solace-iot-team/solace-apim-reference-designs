@@ -1,9 +1,5 @@
 # Installs and prepares Platform-API and Portal
 
-- debug:
-    msg: 
-      - "Portal authentication mode: {{sammode}}"
-
 - name: prepare opt for platform-api
   file:
     path:  /opt/platform-api
@@ -75,6 +71,14 @@
   debug: 
     msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
 
+- name: stop platform-api services (if it is running at all)
+  docker_compose:
+    project_src: /opt/platform-api/docker
+    state: absent
+    remove_images: local
+  become: yes
+  ignore_errors: yes
+
 - name: Remove docker image for platform-api-server
   shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
   ignore_errors: yes
@@ -82,14 +86,6 @@
 - name: Remove docker image for portal
   shell: "docker rmi solaceiotteam/apim-demo-portal:{{portal_version}}"
   ignore_errors: yes
-
-
-- name: removing images
-  docker_compose:
-    project_src: /opt/platform-api/docker
-    state: absent
-    remove_images: local
-  become: yes
 
 - name: trigger docker-compose
   docker_compose:

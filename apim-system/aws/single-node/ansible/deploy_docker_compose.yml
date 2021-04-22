@@ -12,6 +12,7 @@
     - platform-api #deploys and executes docker-compose of platform api
 
   tasks:
+
     - name: copy
       copy:
         src: files/check_platform_api.sh
@@ -35,5 +36,7 @@
 
     - debug: msg="PLATFORM-API NOT UP AND / OR INITIALIZED"
       when: not check_result.stat.exists
+
+      
 
 

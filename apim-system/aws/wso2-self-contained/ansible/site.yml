@@ -1,11 +1,11 @@
 # Deploys Platform API, MongoDB and Portal 
 - name: Create filesystem
   hosts: mount_ebs
-  vars_files:
-    - "../vars/ansible_vars.yml"
 
   tasks:
-    - include_vars: "{{config_root}}/{{config_vars_file}}"
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+    - include_vars: "{{sensitive_ansible_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
 
     - name: Create filesystem on EBS devices /dev/xvdh on box1 
       filesystem:
@@ -44,12 +44,8 @@
   hosts: platform_api
   roles:
     - platform-api
-  vars_files:
-    - "../vars/ansible_vars.yml"
-
 
   tasks:
-    - include_vars: "{{config_root}}/{{config_vars_file}}"
     - name: copy
       copy:
         src: files/check_platform_api.sh
