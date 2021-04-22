@@ -12,7 +12,7 @@ resource "local_file" "inventory_file" {
        aws_log_group = aws_cloudwatch_log_group.async-api-platform.name
     }
   )
-  filename = "../generated/inventory"
+  filename = var.ansible_inventory_file_name
 }
 
 resource "local_file" "boxes_file" {
@@ -29,7 +29,7 @@ resource "local_file" "boxes_file" {
 
     }
   )
-  filename = "../generated/boxes.json"
+  filename = var.boxes_file_name
 }
 
 resource "local_file" "ansible_infrastructure_vars" {
