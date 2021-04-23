@@ -159,7 +159,17 @@ resource "aws_security_group" "sg_dmz" {
       from_port = 3000
       protocol = "tcp"
       to_port = 3000
-     }
+     },{
+      cidr_blocks = var.allowed_inbound_cidr_blocks
+      ipv6_cidr_blocks = null
+      prefix_list_ids = null
+      security_groups = null
+      description = "mysql traffic for administration only"
+      self = true
+      from_port = 3306
+      protocol = "tcp"
+      to_port = 3606
+    }
     ]
 
     egress = [ {
