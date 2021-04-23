@@ -18,3 +18,7 @@ solace_spa_adminpassword: secret2
 solace_portal_login_user: portal
 #password of portal (set as env in docker-compose)
 solace_portal_login_password: secret3
+#mysql
+mysql_user: user1
+mysql_password: password1
+mysql_root_password: password2
