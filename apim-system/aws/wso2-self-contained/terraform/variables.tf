@@ -82,6 +82,24 @@ variable "ebs_volume_box_3_size" {
   type = number
 }
 
+variable "private_ip_box_1" {
+  description = "Internal IP-Address of box1"
+  default = "100.0.0.100"
+  type = string
+}
+
+variable "private_ip_box_2" {
+  description = "Internal IP-Address of box2"
+  default = "100.0.0.101"
+  type = string
+}
+
+variable "private_ip_box_3" {
+  description = "Internal IP-Address of box3"
+  default = "100.0.0.102"
+  type = string
+}
+
 variable "allowed_inbound_cidr_blocks" {
   description = "CIDR blocks allowed to access VPC"
   type = list(string)

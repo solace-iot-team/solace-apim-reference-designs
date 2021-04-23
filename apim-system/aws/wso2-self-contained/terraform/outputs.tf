@@ -37,16 +37,19 @@ resource "local_file" "ansible_infrastructure_vars" {
     {
        box_1_public_ip = module.box1.public_ip
        box_1_public_dns = module.box1.public_dns
+       box_1_private_ip = var.private_ip_box_1
        box_1_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
        aws_region = var.aws_region
        
        box_2_public_ip = module.box2.public_ip
        box_2_public_dns = module.box2.public_dns
+       box_2_private_ip = var.private_ip_box_2
        box_2_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
 
        box_3_public_ip = module.box2.public_ip
        box_3_public_dns = module.box2.public_dns
-       box_3_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
+      box_3_private_ip = var.private_ip_box_3
+      box_3_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
 
        allowed_inbound_cidr_blocks = "see configuration file"
        instance_type_box_1 = var.instance_type_box_1
