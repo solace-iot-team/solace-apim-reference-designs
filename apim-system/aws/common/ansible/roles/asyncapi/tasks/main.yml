@@ -20,8 +20,8 @@
     url: "http://{{platform_api_host_ip}}:3000/v1/{{org_name}}/environments"
     method: POST
     force_basic_auth: yes
-    user: "{{solace_spa_adminuser}}"
-    password: "{{solace_spa_adminpassword}}"
+    user: "{{solace_spa_user}}"
+    password: "{{solace_spa_password}}"
     body_format: json
     headers:
       Content-Type: application/json
