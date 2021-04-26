@@ -1,0 +1,16 @@
+# Installs and prepares Docker Host
+# Updates to latest greatest and prepares a fresh Ubuntu Box
+
+- name: Create org
+  uri:
+    url: http://{{platform_api_host_ip}}:3000/v1/organizations
+    method: POST
+    user: {{solace_spa_adminuser}}
+    pssword: {{solace_spa_adminpassword}}
+    body_format: json
+    body: { name: {{org_name}}, cloud-token: {{org_token}}
+
+
+
+    
+
