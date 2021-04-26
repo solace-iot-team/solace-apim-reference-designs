@@ -7,7 +7,7 @@
     method: POST
     user: "{{solace_spa_adminuser}}"
     password: "{{solace_spa_adminpassword}}"
-    body_format: raw
+    body_format: json
     headers:
       Content-Type: application/json
     body: "{ \"name\": \"{{org_name}}\", \"cloud-token\": \"{{org_token}}\"}"
