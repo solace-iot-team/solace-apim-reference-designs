@@ -10,7 +10,7 @@
     body_format: raw
     headers:
       Content-Type: application/json
-    body: "{ \"name\": \"{{org_name}}\", \"cloud-token\": \"{{org_token}}\""
+    body: "{ \"name\": \"{{org_name}}\", \"cloud-token\": \"{{org_token}}\"}"
 
 
 
