@@ -9,7 +9,8 @@ Inventory of Solace IoT-Team Demo Single-Node Demo
 |--------|---------|--------------|
 |Platform-API | {{platform_api_version}} | solaceiotteam/platform-api-server:{{platform_api_version}} |
 |Portal | {{portal_version}} | solaceiotteam/apim-demo-portal:{{portal_version}} |
-|MongoDB | latest | mongo:latest | 
+|MongoDB | latest | mongo:latest |
+|MySQL | 5.7 | mysql:5.7 |
 |WSO2-IdentityServer | TBD | TBD |
 |WSO2-API-Manager | TBD | TBD |
 
@@ -20,17 +21,18 @@ Inventory of Solace IoT-Team Demo Single-Node Demo
 | Platform-API | http://{{platform_api_host_ip}}:3000/v1 |Admin-User: {{solace_spa_adminuser}} Password: {{solace_spa_adminpassword}} <br/> User: {{solace_spa_user}} Password: {{solace_spa_user}} |
 | AWS-Host | {{platform_api_host_ip}} <br/> {{platform_api_host_dns}} | AWS EC2 Box of Single-Node setup <br> Linux Login: `ubuntu`|
 | MongoDB | n/a | not accessible outside Docker, no ports exposed |
+| MySQL | {{box_1_private_ip}}:3306 (only accessible within VPC)| Mysql-user: {{mysql_user}} Mysql-password: {{mysql_password}}, Mysql-root-password: {{mysql_root_password}} \
 |WSO2-IdentityServer | TBD | TBD |
 |WSO2-API-Manager | TBD | TBD |
 
 ### Reference
 #### AWS Virtual Servers
 
-| VM | Role | IP |  Note |
+| VM | Role | Public-IP | VPC-IP | Note |
 |-----|--------|------|
-| box_1| Platform-API, Portal, MongoDB and MySQL | `{{box_1_public_ip}}`| |
-| box_2| WSO2-IdentityServer| `{{box_2_public_ip}}`| |
-| box_3| WSO2-API-Manager| `{{box_3_public_ip}}`| |
+| box_1| Platform-API, Portal, MongoDB and MySQL | `{{box_1_public_ip}}`| `{{box_1_private_ip}}` | |
+| box_2| WSO2-IdentityServer| `{{box_2_public_ip}}`| `{{box_1_private_ip}}` | |
+| box_3| WSO2-API-Manager| `{{box_3_public_ip}}`| `{{box_1_private_ip}}` | |
 
 
 #### AWS Resources Tags

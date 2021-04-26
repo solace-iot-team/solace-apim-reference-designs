@@ -40,6 +40,16 @@
   roles:
     - dockerhost
 
+- name: Install MySQL Client on all boxes
+  hosts: all
+  tasks:
+    - name: Install MySQL Client
+      apt: name={{ item }} state=installed update_cache=yes
+      with_items:
+        - mysql-client-5.7
+        - python-mysqldb
+        - libmysqlclient-dev
+
 - name: Install and start platform_api
   hosts: platform_api
   roles:
