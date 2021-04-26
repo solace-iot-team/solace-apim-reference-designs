@@ -46,7 +46,7 @@
     - name: Install MySQL Client
       apt:
         name: ['mysql-client-5.7', 'python-mysqldb', 'libmysqlclient-dev']
-        state: present
+        state: latest
         update_cache: yes
       become: yes
 
