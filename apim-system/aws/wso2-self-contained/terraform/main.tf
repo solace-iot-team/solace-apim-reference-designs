@@ -150,7 +150,7 @@ resource "aws_security_group" "sg_dmz" {
       protocol = "tcp"
       to_port = 80
      }, {
-      cidr_blocks = var.allowed_inbound_administration_cidr_blocks
+      cidr_blocks = var.allowed_inbound_cidr_blocks
       ipv6_cidr_blocks = null
       prefix_list_ids = null
       security_groups = null
