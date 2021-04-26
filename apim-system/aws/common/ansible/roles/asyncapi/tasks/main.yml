@@ -27,10 +27,23 @@
       Content-Type: application/json
     status_code: 201
     body: "{ \"name\": \"{{item.name}}\", \"description\": \"{{item.description}}\", \"serviceId\": \"{{item.serviceid}}\"}"
-  ignore_errors: yes
   loop: "{{org_environments}}"
+  ignore_errors: yes
 
-
+- name: Create Developer
+  uri:
+    url: "http://{{platform_api_host_ip}}:3000/v1/{{org_name}}/developers"
+    method: POST
+    force_basic_auth: yes
+    user: "{{solace_spa_user}}"
+    password: "{{solace_spa_password}}"
+    body_format: json
+    headers:
+      Content-Type: application/json
+    status_code: 201
+    body: "{ \"userName\": \"{{item.userName}}\", \"email\": \"{{item.email}}\", \"firstName\": \"{{item.firstName}}\", \"lastName\": \"{{item.lastName}}\"}"
+  loop: "{{org_developers}}"
+  ignore_errors: yes
 
     
 
