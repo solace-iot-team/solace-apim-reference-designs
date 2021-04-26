@@ -1,3 +1,5 @@
 {
-	"{{item.name}}": "{{item.password}}"
+    {% for item in solace_spa_users %}
+	    "{{item.name}}":"{{item.password}}"
+	{% endfor %}
 }
