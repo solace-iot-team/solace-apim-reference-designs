@@ -105,8 +105,14 @@ variable "allowed_inbound_cidr_blocks" {
   type = list(string)
 }
 
+variable "allowed_inbound_ssh_cidr_blocks" {
+  description = "CIDR blocks allowed to access VPC via SSH"
+  type = list(string)
+}
+
+
 variable "allowed_inbound_administration_cidr_blocks" {
-  description = "CIDR blocks allowed to access VPC for administration purposes SSH, MySQL, ..."
+  description = "CIDR blocks allowed to access VPC for administration tasks MySQL, ..."
   type = list(string)
 }
 

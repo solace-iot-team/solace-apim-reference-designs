@@ -130,7 +130,7 @@ resource "aws_security_group" "sg_dmz" {
     vpc_id = aws_vpc.vpc.id
 
     ingress = [ {
-      cidr_blocks = var.allowed_inbound_administration_cidr_blocks
+      cidr_blocks = var.allowed_inbound_ssh_cidr_blocks
       ipv6_cidr_blocks = null
       prefix_list_ids = null
       security_groups = null
