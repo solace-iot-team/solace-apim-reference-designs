@@ -9,6 +9,7 @@
     - include_vars: "{{org_file}}"
 
 - name: Register org
-  hosts: local
+  hosts: 127.0.0.1
+  connection: local
   roles:
     - asyncapi
