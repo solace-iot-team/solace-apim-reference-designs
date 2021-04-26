@@ -45,13 +45,9 @@
   tasks:
     - name: Install MySQL Client
       apt:
-        name: "{{ item }}"
+        name: ['mysql-client-5.7', 'python-mysqldb', 'libmysqlclient-dev']
         state: present
         update_cache: yes
-      with_items:
-        - mysql-client-5.7
-        - python-mysqldb
-        - libmysqlclient-dev
       become: yes
 
 - name: Install and start platform_api
