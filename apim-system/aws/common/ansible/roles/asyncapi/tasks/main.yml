@@ -3,7 +3,7 @@
 
 - name: Create org
   uri:
-    url: http://{{platform_api_host_ip}}:3000/v1/organizations
+    url: "http://{{platform_api_host_ip}}:3000/v1/organizations"
     method: POST
     user: {{solace_spa_adminuser}}
     pssword: {{solace_spa_adminpassword}}
