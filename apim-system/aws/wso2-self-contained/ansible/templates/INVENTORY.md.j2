@@ -19,21 +19,32 @@ Inventory of Solace IoT-Team Demo Single-Node Demo
 |--------|------------|-------|
 | Portal | http://{{platform_api_host_ip}} | Username: {{solace_portal_login_user}} Password: {{solace_portal_login_password}} |
 | Platform-API | http://{{platform_api_host_ip}}:3000/v1 |Admin-User: {{solace_spa_adminuser}} Password: {{solace_spa_adminpassword}} <br/> User: {{solace_spa_user}} Password: {{solace_spa_user}} |
-| AWS-Host | {{platform_api_host_ip}} <br/> {{platform_api_host_dns}} | AWS EC2 Box of Single-Node setup <br> Linux Login: `ubuntu`|
 | MongoDB | n/a | not accessible outside Docker, no ports exposed |
 | MySQL | {{box_1_private_ip}}:3306 (only accessible within VPC)| Mysql-user: {{mysql_user}} Mysql-password: {{mysql_password}}, Mysql-root-password: {{mysql_root_password}} \
 |WSO2-IdentityServer | TBD | TBD |
 |WSO2-API-Manager | TBD | TBD |
 
 ### Reference
+
 #### AWS Virtual Servers
 
 | VM | Role | Public-IP | VPC-IP | Note |
 |-----|--------|------|------|----|
-| box_1| Platform-API, Portal, MongoDB and MySQL | `{{box_1_public_ip}}`| `{{box_1_private_ip}}` | |
-| box_2| WSO2-IdentityServer| `{{box_2_public_ip}}`| `{{box_2_private_ip}}` | |
-| box_3| WSO2-API-Manager| `{{box_3_public_ip}}`| `{{box_3_private_ip}}` | |
+| box_1| Platform-API, Portal, MongoDB and MySQL | `{{box_1_public_ip}}`| `{{box_1_private_ip}}` | Ubuntu 18.04 LTS user: `ubuntu` |
+| box_2| WSO2-IdentityServer| `{{box_2_public_ip}}`| `{{box_2_private_ip}}` | Ubuntu 18.04 LTS user: `ubuntu` |
+| box_3| WSO2-API-Manager| `{{box_3_public_ip}}`| `{{box_3_private_ip}}` | Ubuntu 18.04 LTS user: `ubuntu`  |
 
+#### AWS Firewall - Open Ports
+
+Simple AWS Firewall based on `aws_security_group` policies.
+Firewall policies are applied to all boxes within VPC.
+
+| Port | Boxes | Note |
+|------|-------|------|
+| 80   | all   |      |
+| 22   | all   |      |
+| 3000 | all   |      |
+| 3303 | all   | limited to `["80.147.126.20/32","18.159.11.184/32"]` |
 
 #### AWS Resources Tags
 
@@ -59,3 +70,5 @@ Working directory: `solace-iot-team-demo/single-node`
 |box_1 | `ssh -i keys/aws_key_box ubuntu@{{box_1_public_ip}}`|
 |box_2 | `ssh -i keys/aws_key_box ubuntu@{{box_2_public_ip}}`|
 |box_3 | `ssh -i keys/aws_key_box ubuntu@{{box_3_public_ip}}`|
+
+
