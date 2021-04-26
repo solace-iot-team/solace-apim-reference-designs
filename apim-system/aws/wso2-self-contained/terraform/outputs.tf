@@ -51,7 +51,8 @@ resource "local_file" "ansible_infrastructure_vars" {
       box_3_private_ip = var.private_ip_box_3
       box_3_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
 
-       allowed_inbound_cidr_blocks = "see configuration file"
+       allowed_inbound_cidr_blocks = "see configuration file",
+       allowed_inbound_administration_cidr_blocks = "see configuration file",
        instance_type_box_1 = var.instance_type_box_1
        tag_owner = var.tag_owner
        tag_project = var.tag_project
