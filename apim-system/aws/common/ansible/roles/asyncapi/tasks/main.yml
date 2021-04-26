@@ -8,7 +8,7 @@
     user: "{{solace_spa_adminuser}}"
     password: "{{solace_spa_adminpassword}}"
     body_format: json
-    body: "{ 'name': '{{org_name}}', 'cloud-token': '{{org_token}}'"
+    body: "{ \"name\": \"{{org_name}}\", \"cloud-token\": \"{{org_token}}\""
 
 
 
