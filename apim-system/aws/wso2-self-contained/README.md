@@ -32,6 +32,7 @@ Linux based deployment host (tested on Mac OS)
 
 Invoke script `prepare_automation_configuration.sh` once:
 - `sensitive_ansible_vars.yml` will get created based on `template_sensitive_ansible_vars.yml`
+- `sensitive_org_vars.yml` will get created based on `template_sensitive_org_vars.yml`
 - `terraform.tfvars.json` will get created based on `template_terraform.tfvars.json`
 
 #### AWS Defaults
@@ -51,20 +52,14 @@ Adjust AWS infrastructure defaults in `vars/terraform.tfvars.json`
 | ebs_volume_box_1_size | `10`| Size in GB of mounted EBS volume of EC2 Box1 instance. MongoDB will store its data on this volume |  
 | ebs_volume_box_2_size | `10`| Size in GB of mounted EBS volume of EC2 Box2 instance.|  
 | ebs_volume_box_3_size | `10`| Size in GB of mounted EBS volume of EC2 Box3 instance.|  
-| allowed_inbound_cidr_blocks | `["0.0.0.0.0/0"]` | List of CIDR blocks allowed to access setup |
+| allowed_inbound_cidr_blocks | `["0.0.0.0.0/0"]` | List of CIDR blocks allowed to access Portal and Platform-API |
+| allowed_inbound_ssh_cidr_blocks | `["0.0.0.0.0/0"]` | List of CIDR blocks allowed to access setup via SSH |
+| allowed_inbound_administration_cidr_blocks | `["0.0.0.0.0/0"]` | List of CIDR blocks allowed to access MySQL |
 | name_prefix | `async-api-wso2-selfcontained` | Prefix for AWS resources names (EC2, ....)  |
 | tag_name_prefix | `async-api-wso2-selfcontained` | Prefix for TAGS of AWS resources  |
 | tag_owner | `theOwner` | TAG `owner` of AWS resources  |
 | tag_project | `async-api-wso2-selfcontained` | TAG `project` of AWS resources  |
 
-
-Out of the box the EC2 instance is accessible from any IP-Address with ports opened
-
-- 22 (SSH)
-- 80 (Unencryted HTTP Traffic to Async-API Web Portal)
-- 3000 (Unencrypted HTTP REST API of Async-API Platform API)
-
-Close ports if not needed in (`terraform/main.tf #resource "aws_security_group" "sg_dmz"`)
 
 #### Ansible Defaults
 
@@ -76,12 +71,16 @@ Adjust Ansible defaults in `vars/sensitive_ansible_vars.yml`
 | platform-api version | latest | Version TAG of Platform-API |
 | portal_version | `latest` | Version TAG of Platform-API Portal Docker Container |
 | sammode | `prod`| enable / disable authentication of Platform-API-Portal |
-| solace_spa_user | `admin1` | Plaform-API username |
+| solace_spa_users | list of users | Plaform-API usernames to access Platform-API |
+| solace_spa_user | `admin1` | the platform-api user for e.g. portal (one entry of `solace_spa_users`)|
 | solace_spa_password | `secret1` | Plaform-API secret1 |
 | solace_spa_adminuser | `admin2` | Admin of Platform-API username| 
 | solace_spa_adminpassword | `secret2` | Password of Admin Platform-API user| 
 |solace_portal_login_user | `portal`| Username to access web portal |
 |solace_portal_login_password | `secret3` | Password to access web portal   
+|mysql_user | `user1` | Pre-deployed MySql user
+|mysql_password | `password1` | Password ofo pre-deployed MySql user
+|mysql_root_password | `password2` | Root-Password of MySql
 
 ### Bootstrap
 
@@ -90,8 +89,14 @@ Bootstrapping can get triggered by calling `create_infrastructure.sh`.
 After successfully bootstrapping EC2 instance IP and DNS-name can get found in `generated/boxes.json`
 
 - Async-API Web Portal can get accessed at `http://<ec2-server-name | ec2-server-ip>`
-- Async-API Platform API Swagger / OpenAPI specification can get accesses at: `http://http:<ec2-server-name | ec2-server-ip>:3000/api-explorer` 
+- Async-API Platform API Swagger / OpenAPI specification can get accesses at: `http://http:<ec2-server-name | ec2-server-ip>:3000`
 
+### Deploy Organization and Environments
+
+An `Organization` with `Environments` and `Developers` can get populated by
+
+- adjusting `sensitive_org_vars.yml`
+- invoking `register_org.yml`
 
 
 ### Destroy 

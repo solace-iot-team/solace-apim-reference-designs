@@ -1,0 +1,9 @@
+--- 
+# org bootstrapping
+org_name: theOrg
+org_token: theOrgToken
+org_environments:
+  - {name: dev, description: development, serviceid: theServiceId}
+org_developers:
+  - {userName: dev-demo1, email: demo1@myvirtuallab.org, firstName: Sample1, lastName: Developer1 }
+

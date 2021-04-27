@@ -26,6 +26,14 @@ else
   echo "$LOCAL_ANSIBLE_VARS created based on template." 
   echo "Please adjust content of this file before deploying infrastructure."
 fi
+LOCAL_ANSIBLE_ORG_VARS=vars/sensitive_org_vars.yml
+if [[ -f "LOCAL_ANSIBLE_ORG_VARS" ]]; then
+   echo "LOCAL_ANSIBLE_ORG_VARS already exists."
+else
+  cp vars/template_sensitive_org_vars.yml vars/sensitive_org_vars.yml
+  echo "$LOCAL_ANSLOCAL_ANSIBLE_ORG_VARSIBLE_VARS created based on template."
+  echo "Please adjust content of this file before deploying infrastructure."
+fi
 
 LOCAL_TERRAFORM_VARS=vars/terraform.tfvars.json
 if [[ -f "$LOCAL_TERRAFORM_VARS" ]]; then

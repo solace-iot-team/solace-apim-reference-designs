@@ -9,19 +9,14 @@ sammode: prod
 
 #list of all platform api users (set in organization_users.json)
 solace_spa_users:
-  - user1:
-      name: user1
-      password: password1
-  - user2:
-      name: user2
-      password: password2
-  - user3:
-      name: admin1
-      password: secret1
+  - {name: admin11, password: abc}
+  - {name: admin12, password: efg}
+  - {name: admin13, password: hij}
 
 # the platform-api user for e.g. portal
-solace_spa_user: admin1
-solace_spa_password: secret1
+# must be one of solace_sap_users and the same password
+solace_spa_user: admin11
+solace_spa_password: abc
 #admin-name of platform api (set as env in docker-compose)
 solace_spa_adminuser: admin2
 #admin-password of platform api (set as env in docker-compose)
