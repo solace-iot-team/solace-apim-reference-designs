@@ -51,7 +51,7 @@ variable "ebs_volume_box_1_size" {
 
 variable "private_ip_box_1" {
   description = "Internal IP-Address of box1"
-  default = "100.0.0.100"
+  default = "10.0.0.100"
   type = string
 }
 
