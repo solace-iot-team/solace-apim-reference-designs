@@ -49,8 +49,25 @@ variable "ebs_volume_box_1_size" {
   type = number
 }
 
+variable "private_ip_box_1" {
+  description = "Internal IP-Address of box1"
+  default = "100.0.0.100"
+  type = string
+}
+
 variable "allowed_inbound_cidr_blocks" {
   description = "CIDR blocks allowed to access VPC"
+  type = list(string)
+}
+
+variable "allowed_inbound_ssh_cidr_blocks" {
+  description = "CIDR blocks allowed to access VPC via SSH"
+  type = list(string)
+}
+
+
+variable "allowed_inbound_administration_cidr_blocks" {
+  description = "CIDR blocks allowed to access VPC for administration tasks MySQL, ..."
   type = list(string)
 }
 

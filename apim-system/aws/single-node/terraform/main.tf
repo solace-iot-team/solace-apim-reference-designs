@@ -129,38 +129,48 @@ resource "aws_security_group" "sg_dmz" {
     name = "${var.name_prefix}_sg_dmz"
     vpc_id = aws_vpc.vpc.id
 
-    ingress = [ {
-      cidr_blocks = var.allowed_inbound_cidr_blocks
-      ipv6_cidr_blocks = null
-      prefix_list_ids = null
-      security_groups = null
-      description = "ssh inbound"
-      self = true
-      from_port = 22
-      protocol = "tcp"
-      to_port = 22
-     }, {
-      cidr_blocks = var.allowed_inbound_cidr_blocks
-      ipv6_cidr_blocks = null
-      prefix_list_ids = null
-      security_groups = null
-      description = "http traffic for portal"
-      self = true
-      from_port = 80
-      protocol = "tcp"
-      to_port = 80
-     }, {
-      cidr_blocks = var.allowed_inbound_cidr_blocks
-      ipv6_cidr_blocks = null
-      prefix_list_ids = null
-      security_groups = null
-      description = "http traffic for platform-api"
-      self = true
-      from_port = 3000
-      protocol = "tcp"
-      to_port = 3000
-     }
-    ]
+  ingress = [ {
+    cidr_blocks = var.allowed_inbound_ssh_cidr_blocks
+    ipv6_cidr_blocks = null
+    prefix_list_ids = null
+    security_groups = null
+    description = "ssh inbound"
+    self = true
+    from_port = 22
+    protocol = "tcp"
+    to_port = 22
+  }, {
+    cidr_blocks = var.allowed_inbound_cidr_blocks
+    ipv6_cidr_blocks = null
+    prefix_list_ids = null
+    security_groups = null
+    description = "http traffic for portal"
+    self = true
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
+  }, {
+    cidr_blocks = var.allowed_inbound_cidr_blocks
+    ipv6_cidr_blocks = null
+    prefix_list_ids = null
+    security_groups = null
+    description = "http traffic for platform-api"
+    self = true
+    from_port = 3000
+    protocol = "tcp"
+    to_port = 3000
+  },{
+    cidr_blocks = var.allowed_inbound_administration_cidr_blocks
+    ipv6_cidr_blocks = null
+    prefix_list_ids = null
+    security_groups = null
+    description = "mysql traffic for administration only"
+    self = true
+    from_port = 3306
+    protocol = "tcp"
+    to_port = 3606
+  }
+  ]
 
     egress = [ {
       cidr_blocks = [ "0.0.0.0/0" ]
@@ -184,7 +194,7 @@ resource "aws_security_group" "sg_dmz" {
 module "box1"{
   source = "../../common/terraform/modules/box"
   name_box = "box1"
-  private_ip_box = "10.0.0.100"
+  private_ip_box = var.private_ip_box_1
   subnet_id = aws_subnet.dmz.id
   security_group_id = aws_security_group.sg_dmz.id
   ssh_key_box = var.ssh_key_name
