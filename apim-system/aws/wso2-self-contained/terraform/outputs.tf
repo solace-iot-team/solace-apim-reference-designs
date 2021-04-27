@@ -46,8 +46,8 @@ resource "local_file" "ansible_infrastructure_vars" {
        box_2_private_ip = var.private_ip_box_2
        box_2_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
 
-       box_3_public_ip = module.box2.public_ip
-       box_3_public_dns = module.box2.public_dns
+       box_3_public_ip = module.box3.public_ip
+       box_3_public_dns = module.box3.public_dns
       box_3_private_ip = var.private_ip_box_3
       box_3_comment =  "Project [${var.tag_project}] Owner [${var.tag_owner}]"
 
