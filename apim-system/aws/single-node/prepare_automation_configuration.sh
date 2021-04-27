@@ -28,6 +28,15 @@ else
   echo "Please adjust content of this file before deploying infrastructure."
 fi
 
+LOCAL_SENSITIVE_ORG_VARS=vars/sensitive_org_vars.yml
+if [[ -f "LOCAL_SENSITIVE_ORG_VARS" ]]; then
+   echo "LOCAL_SENSITIVE_ORG_VARS already exists."
+else
+  cp vars/template_sensitive_org_vars.yml vars/sensitive_org_vars.yml
+  echo "LOCAL_SENSITIVE_ORG_VARS created based on template."
+  echo "Please adjust content of this file before deploying infrastructure."
+fi
+
 LOCAL_TERRAFORM_VARS=vars/terraform.tfvars.json
 if [[ -f "$LOCAL_TERRAFORM_VARS" ]]; then
    echo "$LOCAL_TERRAFORM_VARS already exists." 
