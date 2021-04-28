@@ -6,9 +6,9 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 # Environment Variables
 
   if [ -z "$APIM_BOOTSTRAP_USE_CASE_NAME" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_BOOTSTRAP_USE_CASE_NAME"; exit 1; fi
-  if [ ! -d "$APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - env var APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT, directory does not exist: '$APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT'"; exit 1; fi
-  fileUserRegistry="$APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT/$APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY"
-  if [ ! -f "$fileUserRegistry" ]; then echo ">>> ERROR: - $scriptName - env var APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY, file does not exist: '$fileUserRegistry'"; exit 1; fi
+  if [ ! -d "$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - env var APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT, directory does not exist: '$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT'"; exit 1; fi
+  fileUserRegistry="$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT/$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"
+  if [ ! -f "$fileUserRegistry" ]; then echo ">>> ERROR: - $scriptName - env var APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY, file does not exist: '$fileUserRegistry'"; exit 1; fi
 
 
 ############################################################################################################################

@@ -4,25 +4,25 @@ import { AppPatch, AppStatus, Organization } from '@solace-iot-team/platform-api
 import { PlatformManagementService, Environment, EnvironmentsService, ApisService, APIProduct, Protocol, ApiProductsService, Developer, DevelopersService, App, AppsService } from '@solace-iot-team/platform-api-openapi-client';
 
 const bootstrapConfig = {
-    PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_PROTOCOL'),
-    PLATFORM_HOST: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_HOST'),
-    PLATFORM_PORT: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_PORT'),
-    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER'),
-    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER_PWD'),
-    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_NAME'),
-    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER'),
-    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER_PWD'),
-    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_API_URL'),
-    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_TOKEN'),
-    // SOLACE_CLOUD_EVENT_PORTAL_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_API_URL'),
-    SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
-    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
-    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
+    PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PROTOCOL'),
+    PLATFORM_HOST: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_HOST'),
+    PLATFORM_PORT: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PORT'),
+    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER'),
+    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER_PWD'),
+    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_NAME'),
+    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER'),
+    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER_PWD'),
+    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_API_URL'),
+    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_TOKEN'),
+    // SOLACE_CLOUD_EVENT_PORTAL_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_API_URL'),
+    SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
+    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
+    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
     exposure: {
         maintenance: {
             api: {
                 name: 'maintenance-api',
-                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiMaintenance.asyncapi-spec.yml'),    
+                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiMaintenance.asyncapi-spec.yml'),
             },
             apiProducts: {
                 dev: {
@@ -31,11 +31,11 @@ const bootstrapConfig = {
                     description: 'Maintenance Development API Product - auto approved, dev data',
                     approvalType: APIProduct.approvalType.AUTO,
                     permissions: [
-                        { name: 'resource_region_id', value: '*' }, 
+                        { name: 'resource_region_id', value: '*' },
                         { name: 'resource_type', value: '*' },
                         { name: 'resource_id', value: '*' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTP, version: '1.1' },
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.MQTT, version: '3.1.1' },
@@ -50,15 +50,15 @@ const bootstrapConfig = {
                     description: 'Maintenance Production API Product - requires approval',
                     approvalType: APIProduct.approvalType.MANUAL,
                     permissions: [
-                        { name: 'resource_region_id', value: 'fr, de, us-east, us-west' }, 
+                        { name: 'resource_region_id', value: 'fr, de, us-east, us-west' },
                         { name: 'resource_type', value: 'elev-make-1, elev-make-2' },
                         { name: 'resource_id', value: '*' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
                         { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
-                    ]                                        
+                    ]
                 }
             }
         }
@@ -75,10 +75,10 @@ const bootstrapConfig = {
                 prodApp: {
                     name: 'Dev1-maintenance-prod-app',
                     permissions: [
-                        { name: 'resource_region_id', value: 'fr, de' }, 
+                        { name: 'resource_region_id', value: 'fr, de' },
                         { name: 'resource_type', value: 'elev-make-1' },
                         { name: 'resource_id', value: '*' }
-                    ]                
+                    ]
                 }
             },
             developer_2: {
@@ -91,10 +91,10 @@ const bootstrapConfig = {
                 prodApp: {
                     name: 'Dev2-maintenance-prod-app',
                     permissions: [
-                        { name: 'resource_region_id', value: 'us-east' }, 
+                        { name: 'resource_region_id', value: 'us-east' },
                         { name: 'resource_type', value: 'elev-make-2' },
                         { name: 'resource_id', value: '*' }
-                        ]                
+                        ]
                 }
             }
         }
@@ -115,12 +115,12 @@ const prodEnvironment: Environment = {
 const environments = {
     dev: devEnvironment,
     prod: prodEnvironment
-} 
+}
 
 // pipeline
 const initializeOpenAPI = () => {
     const base: string = PlatformAPIClient.getBaseUrl(bootstrapConfig.PLATFORM_PROTOCOL, bootstrapConfig.PLATFORM_HOST, bootstrapConfig.PLATFORM_PORT);
-    PlatformAPIClient.initialize(base, bootstrapConfig.PLATFORM_ADMIN_USER, bootstrapConfig.PLATFORM_ADMIN_PWD, bootstrapConfig.ORG_API_USR, bootstrapConfig.ORG_API_PWD);  
+    PlatformAPIClient.initialize(base, bootstrapConfig.PLATFORM_ADMIN_USER, bootstrapConfig.PLATFORM_ADMIN_PWD, bootstrapConfig.ORG_API_USR, bootstrapConfig.ORG_API_PWD);
 }
 const deleteOrg = async() => {
     console.log(`deleting org '${bootstrapConfig.ORG_NAME}' ...`);
@@ -141,7 +141,7 @@ const createOrg = async() => {
     PlatformAPIClient.setManagementUser();
     let request: Organization = {
         name: bootstrapConfig.ORG_NAME,
-        'cloud-token': bootstrapConfig.SOLACE_CLOUD_TOKEN        
+        'cloud-token': bootstrapConfig.SOLACE_CLOUD_TOKEN
     }
     try {
         let response: Organization = await PlatformManagementService.createOrganization(request);
@@ -164,14 +164,14 @@ const registerEnvironmentsWithOrg = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }    
+        }
     }
     console.log('success.');
 }
 const createMaintenanceApi = async() => {
     console.log('create maintenance api ...');
     const apiSpec: string = Helper.loadYamlFileAsJsonString(bootstrapConfig.exposure.maintenance.api.asyncapi_spec_file);
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     try {
         let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.maintenance.api.name, apiSpec);
         Helper.logApiResponse(response);
@@ -183,7 +183,7 @@ const createMaintenanceApi = async() => {
 }
 const createApiProducts = async() => {
     console.log('create api products ...');
-    PlatformAPIClient.setApiUser(); 
+    PlatformAPIClient.setApiUser();
     let apiProducts = bootstrapConfig.exposure.maintenance.apiProducts;
     let k: keyof typeof apiProducts;
     for(k in apiProducts) {
@@ -192,12 +192,12 @@ const createApiProducts = async() => {
             name: apiProduct.name,
             displayName: apiProduct.displayName,
             description: apiProduct.description,
-            apis: [ 
+            apis: [
                 bootstrapConfig.exposure.maintenance.api.name
             ],
             approvalType: apiProduct.approvalType,
             attributes: apiProduct.permissions,
-            environments: [ 
+            environments: [
                 environments[k].name
             ],
             protocols: apiProduct.protocols,
@@ -210,13 +210,13 @@ const createApiProducts = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }    
+        }
     }
     console.log('success.');
 }
 const createDevelopers = async() => {
     console.log('create developers ...');
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -239,7 +239,7 @@ const createDevelopers = async() => {
 }
 const createDeveloperApps = async() => {
     console.log('create developer apps ...');
-    PlatformAPIClient.setApiUser();   
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -254,7 +254,7 @@ const createDeveloperApps = async() => {
                 name: `${developer.prodApp.name}`,
                 apiProducts: [ bootstrapConfig.exposure.maintenance.apiProducts.prod.name ],
                 credentials: Helper.createDefaultCredentials()
-            }            
+            }
         ];
         for(let request of requests) {
             try {
@@ -263,14 +263,14 @@ const createDeveloperApps = async() => {
             } catch(e) {
                 Helper.logError(e);
                 process.exit(1);
-            }        
+            }
         }
     }
     console.log('success.');
 }
 const approvePendingApps = async() => {
     console.log('approve pending prod apps with permissions ...');
-    PlatformAPIClient.setApiUser();   
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -285,7 +285,7 @@ const approvePendingApps = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }        
+        }
     }
     console.log('success.');
 }
@@ -303,6 +303,3 @@ const main = async() => {
 }
 
 main();
-
-
-

@@ -3,9 +3,9 @@
 <p align="center"><img src="./images/apim.unifying-overview.png" /></p>
 
 
-## The Solace Platform API
+## The API Management Connector
 
-[See Solace Platform API on Github.](https://github.com/solace-iot-team/platform-api)
+[See API-M Connector on Github.](https://github.com/solace-iot-team/platform-api)
 
 
 <p align="center"><img src="./images/apim.platform-api.png" height="300"/></p>

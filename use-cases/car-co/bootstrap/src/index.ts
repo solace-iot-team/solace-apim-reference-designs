@@ -4,33 +4,33 @@ import { AppPatch, AppStatus, Organization } from '@solace-iot-team/platform-api
 import { PlatformManagementService, Environment, EnvironmentsService, ApisService, APIProduct, Protocol, ApiProductsService, Developer, DevelopersService, App, AppsService } from '@solace-iot-team/platform-api-openapi-client';
 
 let bootstrapConfig = {
-    PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_PROTOCOL'),
-    PLATFORM_HOST: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_HOST'),
-    PLATFORM_PORT: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_PORT'),
-    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER'),
-    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER_PWD'),
-    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_NAME'),
-    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER'),
-    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER_PWD'),
-    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_API_URL'),
-    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_TOKEN'),
-    // SOLACE_CLOUD_EVENT_PORTAL_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_API_URL'),
-    SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
-    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
-    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
+    PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PROTOCOL'),
+    PLATFORM_HOST: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_HOST'),
+    PLATFORM_PORT: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PORT'),
+    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER'),
+    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER_PWD'),
+    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_NAME'),
+    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER'),
+    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER_PWD'),
+    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_API_URL'),
+    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_TOKEN'),
+    // SOLACE_CLOUD_EVENT_PORTAL_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_API_URL'),
+    SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
+    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
+    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
     exposure: {
         apis: {
             apiConsumption: {
                 name: 'consumption-api',
-                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiConsumption.asyncapi-spec.yml'),    
+                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiConsumption.asyncapi-spec.yml'),
             },
             apiSafety: {
                 name: 'safety-api',
-                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiSafety.asyncapi-spec.yml'),    
+                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiSafety.asyncapi-spec.yml'),
             },
             apiFailure: {
                 name: 'failure-api',
-                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiFailure.asyncapi-spec.yml'),    
+                asyncapi_spec_file: Helper.checkIfFileExists('./asyncapi-specs/ApiFailure.asyncapi-spec.yml'),
             }
         },
         apiProducts: {
@@ -42,13 +42,13 @@ let bootstrapConfig = {
                     approvalType: APIProduct.approvalType.AUTO,
                     apis: ['string'],
                     permissions: [
-                        { name: 'region_id', value: '*' }, 
+                        { name: 'region_id', value: '*' },
                         { name: 'make', value: '*' },
                         { name: 'model', value: '*' },
                         { name: 'vin', value: '*' },
                         { name: 'event_type', value: 'consumption' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTP, version: '1.1' },
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.MQTT, version: '3.1.1' },
@@ -64,13 +64,13 @@ let bootstrapConfig = {
                     approvalType: APIProduct.approvalType.AUTO,
                     apis: ['string'],
                     permissions: [
-                        { name: 'region_id', value: '*' }, 
+                        { name: 'region_id', value: '*' },
                         { name: 'make', value: '*' },
                         { name: 'model', value: '*' },
                         { name: 'vin', value: '*' },
                         { name: 'event_type', value: 'safety' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTP, version: '1.1' },
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.MQTT, version: '3.1.1' },
@@ -86,13 +86,13 @@ let bootstrapConfig = {
                     approvalType: APIProduct.approvalType.AUTO,
                     apis: ['string'],
                     permissions: [
-                        { name: 'region_id', value: '*' }, 
+                        { name: 'region_id', value: '*' },
                         { name: 'make', value: '*' },
                         { name: 'model', value: '*' },
                         { name: 'vin', value: '*' },
                         { name: 'event_type', value: 'failure' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTP, version: '1.1' },
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.MQTT, version: '3.1.1' },
@@ -110,17 +110,17 @@ let bootstrapConfig = {
                     approvalType: APIProduct.approvalType.MANUAL,
                     apis: ['string'],
                     permissions: [
-                        { name: 'region_id', value: 'fr, de, it' }, 
+                        { name: 'region_id', value: 'fr, de, it' },
                         { name: 'make', value: '*' },
                         { name: 'model', value: '*' },
                         { name: 'vin', value: '*' },
                         { name: 'event_type', value: 'consumption' }
                     ],
-                    protocols:[ 
+                    protocols:[
                         { name: Protocol.name.HTTPS, version: '1.1' },
                         { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
                         { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
-                    ]                                        
+                    ]
                 }
             }
         },
@@ -132,13 +132,13 @@ let bootstrapConfig = {
     //                 description: 'Consumption Development API Product - auto approved, with mock dev events',
     //                 approvalType: APIProduct.approvalType.AUTO,
     //                 permissions: [
-    //                     { name: 'region_id', value: '*' }, 
+    //                     { name: 'region_id', value: '*' },
     //                     { name: 'make', value: '*' },
     //                     { name: 'model', value: '*' },
     //                     { name: 'vin', value: '*' },
     //                     { name: 'event_type', value: 'consumption' }
     //                 ],
-    //                 protocols:[ 
+    //                 protocols:[
     //                     { name: Protocol.name.HTTP, version: '1.1' },
     //                     { name: Protocol.name.HTTPS, version: '1.1' },
     //                     { name: Protocol.name.MQTT, version: '3.1.1' },
@@ -153,16 +153,16 @@ let bootstrapConfig = {
     //                 description: 'Consumption Production API Product - requires approval',
     //                 approvalType: APIProduct.approvalType.MANUAL,
     //                 permissions: [
-    //                     { name: 'region_id', value: 'fr, de, it' }, 
+    //                     { name: 'region_id', value: 'fr, de, it' },
     //                     { name: 'make', value: '*' },
     //                     { name: 'model', value: '*' },
     //                     { name: 'vin', value: '*' }
     //                 ],
-    //                 protocols:[ 
+    //                 protocols:[
     //                     { name: Protocol.name.HTTPS, version: '1.1' },
     //                     { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
     //                     { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
-    //                 ]                                        
+    //                 ]
     //             }
     //         }
     //     }
@@ -180,7 +180,7 @@ let bootstrapConfig = {
                     name: 'Dev1-consumption-prod-app',
                     permissions: [
                         { name: 'region_id', value: 'de' },
-                    ]                
+                    ]
                 }
             },
             developer_2: {
@@ -194,7 +194,7 @@ let bootstrapConfig = {
                     name: 'Dev2-consumption-prod-app',
                     permissions: [
                         { name: 'region_id', value: 'fr' }
-                    ]                
+                    ]
                 }
             }
         }
@@ -219,12 +219,12 @@ const prodEnvironment: Environment = {
 const environments = {
     dev: devEnvironment,
     prod: prodEnvironment
-} 
+}
 
 // pipeline
 const initializeOpenAPI = () => {
     const base: string = PlatformAPIClient.getBaseUrl(bootstrapConfig.PLATFORM_PROTOCOL, bootstrapConfig.PLATFORM_HOST, bootstrapConfig.PLATFORM_PORT);
-    PlatformAPIClient.initialize(base, bootstrapConfig.PLATFORM_ADMIN_USER, bootstrapConfig.PLATFORM_ADMIN_PWD, bootstrapConfig.ORG_API_USR, bootstrapConfig.ORG_API_PWD);  
+    PlatformAPIClient.initialize(base, bootstrapConfig.PLATFORM_ADMIN_USER, bootstrapConfig.PLATFORM_ADMIN_PWD, bootstrapConfig.ORG_API_USR, bootstrapConfig.ORG_API_PWD);
 }
 const deleteOrg = async() => {
     console.log(`deleting org '${bootstrapConfig.ORG_NAME}' ...`);
@@ -245,7 +245,7 @@ const createOrg = async() => {
     PlatformAPIClient.setManagementUser();
     let request: Organization = {
         name: bootstrapConfig.ORG_NAME,
-        'cloud-token': bootstrapConfig.SOLACE_CLOUD_TOKEN        
+        'cloud-token': bootstrapConfig.SOLACE_CLOUD_TOKEN
     }
     try {
         let response: Organization = await PlatformManagementService.createOrganization(request);
@@ -268,14 +268,14 @@ const registerEnvironmentsWithOrg = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }    
+        }
     }
     console.log('success.');
 }
 const createConsumptionApi = async() => {
     console.log('create consumption api ...');
     const apiSpec: string = Helper.loadYamlFileAsJsonString(bootstrapConfig.exposure.apis.apiConsumption.asyncapi_spec_file);
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     try {
         let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.apis.apiConsumption.name, apiSpec);
         Helper.logApiResponse(response);
@@ -288,7 +288,7 @@ const createConsumptionApi = async() => {
 const createSafetyApi = async() => {
     console.log('create safety api ...');
     const apiSpec: string = Helper.loadYamlFileAsJsonString(bootstrapConfig.exposure.apis.apiSafety.asyncapi_spec_file);
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     try {
         let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.apis.apiSafety.name, apiSpec);
         Helper.logApiResponse(response);
@@ -301,7 +301,7 @@ const createSafetyApi = async() => {
 const createFailureApi = async() => {
     console.log('create failure api ...');
     const apiSpec: string = Helper.loadYamlFileAsJsonString(bootstrapConfig.exposure.apis.apiFailure.asyncapi_spec_file);
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     try {
         let response: string = await ApisService.createApi(bootstrapConfig.ORG_NAME, bootstrapConfig.exposure.apis.apiFailure.name, apiSpec);
         Helper.logApiResponse(response);
@@ -313,7 +313,7 @@ const createFailureApi = async() => {
 }
 const createDevApiProducts = async() => {
     console.log('create dev api products ...');
-    PlatformAPIClient.setApiUser(); 
+    PlatformAPIClient.setApiUser();
     let apiProducts = bootstrapConfig.exposure.apiProducts.devProducts;
     let k: keyof typeof apiProducts;
     for(k in apiProducts) {
@@ -325,7 +325,7 @@ const createDevApiProducts = async() => {
             apis: apiProduct.apis,
             approvalType: apiProduct.approvalType,
             attributes: apiProduct.permissions,
-            environments: [ 
+            environments: [
                 environments.dev.name
             ],
             protocols: apiProduct.protocols,
@@ -338,13 +338,13 @@ const createDevApiProducts = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }    
+        }
     }
     console.log('success.');
 }
 const createProdApiProducts = async() => {
     console.log('create prod api products ...');
-    PlatformAPIClient.setApiUser(); 
+    PlatformAPIClient.setApiUser();
     let apiProducts = bootstrapConfig.exposure.apiProducts.prodProducts;
     let k: keyof typeof apiProducts;
     for(k in apiProducts) {
@@ -356,7 +356,7 @@ const createProdApiProducts = async() => {
             apis: apiProduct.apis,
             approvalType: apiProduct.approvalType,
             attributes: apiProduct.permissions,
-            environments: [ 
+            environments: [
                 environments.prod.name
             ],
             protocols: apiProduct.protocols,
@@ -369,13 +369,13 @@ const createProdApiProducts = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }    
+        }
     }
     console.log('success.');
 }
 // const createApiProducts = async() => {
 //     console.log('create api products ...');
-//     PlatformAPIClient.setApiUser(); 
+//     PlatformAPIClient.setApiUser();
 //     let apiProducts = bootstrapConfig.exposure.consumption.apiProducts;
 //     let k: keyof typeof apiProducts;
 //     for(k in apiProducts) {
@@ -384,12 +384,12 @@ const createProdApiProducts = async() => {
 //             name: apiProduct.name,
 //             displayName: apiProduct.displayName,
 //             description: apiProduct.description,
-//             apis: [ 
+//             apis: [
 //                 bootstrapConfig.exposure.apis.apiConsumption.name
 //             ],
 //             approvalType: apiProduct.approvalType,
 //             attributes: apiProduct.permissions,
-//             environments: [ 
+//             environments: [
 //                 environments[k].name
 //             ],
 //             protocols: apiProduct.protocols,
@@ -402,13 +402,13 @@ const createProdApiProducts = async() => {
 //         } catch(e) {
 //             Helper.logError(e);
 //             process.exit(1);
-//         }    
+//         }
 //     }
 //     console.log('success.');
 // }
 const createDevelopers = async() => {
     console.log('create developers ...');
-    PlatformAPIClient.setApiUser();    
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -431,7 +431,7 @@ const createDevelopers = async() => {
 }
 const createDeveloperApps = async() => {
     console.log('create developer apps ...');
-    PlatformAPIClient.setApiUser();   
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -439,7 +439,7 @@ const createDeveloperApps = async() => {
         let requests: Array<App> = [
             {
                 name: `${developer.devApp.name}`,
-                apiProducts: [ 
+                apiProducts: [
                     bootstrapConfig.exposure.apiProducts.devProducts.consumption.name,
                     bootstrapConfig.exposure.apiProducts.devProducts.safety.name,
                     bootstrapConfig.exposure.apiProducts.devProducts.failure.name
@@ -450,7 +450,7 @@ const createDeveloperApps = async() => {
                 name: `${developer.prodApp.name}`,
                 apiProducts: [ bootstrapConfig.exposure.apiProducts.prodProducts.consumption.name ],
                 credentials: Helper.createDefaultCredentials()
-            }            
+            }
         ];
         for(let request of requests) {
             try {
@@ -459,14 +459,14 @@ const createDeveloperApps = async() => {
             } catch(e) {
                 Helper.logError(e);
                 process.exit(1);
-            }        
+            }
         }
     }
     console.log('success.');
 }
 const approvePendingApps = async() => {
     console.log('approve pending prod apps with permissions ...');
-    PlatformAPIClient.setApiUser();   
+    PlatformAPIClient.setApiUser();
     let developers = bootstrapConfig.consumption.developers;
     let k: keyof typeof developers;
     for(k in developers) {
@@ -481,7 +481,7 @@ const approvePendingApps = async() => {
         } catch(e) {
             Helper.logError(e);
             process.exit(1);
-        }        
+        }
     }
     console.log('success.');
 }
@@ -502,6 +502,3 @@ const main = async() => {
 }
 
 main();
-
-
-

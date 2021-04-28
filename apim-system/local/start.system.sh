@@ -5,38 +5,38 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 ############################################################################################################################
 # Environment Variables
 
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_PORT" ]; then export APIM_SYSTEM_PLATFORM_API_SERVER_PORT=9090; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL" ]; then export APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL=debug; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_PORT" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_PORT=9090; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL=debug; fi
   if [ -z "$APIM_SYSTEM_PROJECT_NAME" ]; then export APIM_SYSTEM_PROJECT_NAME="apim-system"; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER_PWD"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD"; exit 1; fi
   if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT" ]; then export APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT=9091; fi
 
 ############################################################################################################################
 # Settings
   dockerComposeFile="$scriptDir/docker-compose.yml"
-  platformApiServerDataVolumeMountPath="$APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT"
+  platformApiServerDataVolumeMountPath="$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT"
   if [ ! -d "$platformApiServerDataVolumeMountPath" ]; then echo ">>> ERROR: - $scriptName - data volume not found: $platformApiServerDataVolumeMountPath"; exit 1; fi
-  externalFileUserRegistry="$platformApiServerDataVolumeMountPath/$APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY"
+  externalFileUserRegistry="$platformApiServerDataVolumeMountPath/$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"
   if [ ! -f "$externalFileUserRegistry" ]; then echo ">>> ERROR: - $scriptName - user file not found: $externalFileUserRegistry"; exit 1; fi
   platformApiServerDataVolumeInternal="/platform-api-server/data"
-  fileUserRegistry="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY"
+  fileUserRegistry="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"
 
   export PLATFORM_DATA_MOUNT_PATH=$platformApiServerDataVolumeMountPath
   export PLATFORM_DATA_INTERNAL_PATH=$platformApiServerDataVolumeInternal
-  export LOG_LEVEL=$APIM_SYSTEM_PLATFORM_API_SERVER_LOG_LEVEL
+  export LOG_LEVEL=$APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL
   export APP_ID=$APIM_SYSTEM_PROJECT_NAME
   export FILE_USER_REGISTRY=$fileUserRegistry
-  export ADMIN_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER
-  export ADMIN_PASSWORD=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD
-  export DEMO_PORTAL_API_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER
-  export DEMO_PORTAL_API_USER_PWD=$APIM_SYSTEM_PLATFORM_API_SERVER_ORG_API_USER_PWD
-  export DEMO_PORTAL_ADMIN_USER=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER
-  export DEMO_PORTAL_ADMIN_USER_PWD=$APIM_SYSTEM_PLATFORM_API_SERVER_ADMIN_USER_PWD
+  export ADMIN_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER
+  export ADMIN_PASSWORD=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD
+  export DEMO_PORTAL_API_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER
+  export DEMO_PORTAL_API_USER_PWD=$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD
+  export DEMO_PORTAL_ADMIN_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER
+  export DEMO_PORTAL_ADMIN_USER_PWD=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD
   export DEMO_PORTAL_SERVER_PORT=$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT
   export DOCKER_CLIENT_TIMEOUT=120
   export COMPOSE_HTTP_TIMEOUT=120
@@ -56,7 +56,7 @@ echo " >>> Docker-compose up for project: $APIM_SYSTEM_PROJECT_NAME ..."
 
   docker ps -a
 
-  containerName="$APIM_SYSTEM_PROJECT_NAME-platform-api-server"
+  containerName="$APIM_SYSTEM_PROJECT_NAME-apim-connector"
   echo "   >>> check docker logs for '$containerName' ..."
     WORKING_DIR=$scriptDir/tmp; mkdir -p $WORKING_DIR; rm -rf $WORKING_DIR/*;
     dockerLogsFile="$WORKING_DIR/$containerName.docker.logs"
