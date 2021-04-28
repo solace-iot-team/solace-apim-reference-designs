@@ -1,0 +1,1 @@
+../../common/standup.apim-system.local.sh

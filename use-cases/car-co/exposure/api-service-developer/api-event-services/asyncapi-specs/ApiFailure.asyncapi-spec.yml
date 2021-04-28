@@ -1,0 +1,109 @@
+components:
+  parameters:
+    region_id:
+      schema:
+        type: string
+        enum:
+          - fr
+          - de
+          - it
+    make:
+      schema:
+        type: string
+        enum:
+          - 108
+          - 2008
+    model:
+      schema:
+        type: string
+        enum:
+          - M2018
+          - MTPA
+    vin:
+      schema:
+        type: string
+    event_type:
+      schema:
+        type: string
+        enum:
+          - failure
+  schemas:
+    failure:
+      $schema: 'http://json-schema.org/draft-07/schema#'
+      type: object
+      additionalProperties: false
+      title: Car Co failure alarm event
+      required:
+      - header
+      - body
+      properties:
+        header:
+          type: object
+          additionalProperties: false
+          required:
+          - timestamp
+          properties:
+            timestamp:
+              type: string
+        body:
+          type: object
+          additionalProperties: false
+          required:
+          - type
+          - components
+          - details
+          properties:
+            type:
+              title: failure type
+              type: string
+            component:
+              title: component failed
+              type: string
+            details:
+              title: details of failure
+              type: string
+      $id: >-
+        http://eventportal.solace.cloud/apim/car-co/failure/failure.json
+  messages:
+    failure:
+      payload:
+        $ref: '#/components/schemas/failure'
+      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
+      contentType: application/json
+      examples:
+        - payload: {"header":{"timestamp":"2021-04-21-06:07:11-UTC"},"body":{"type":"breakdown","component":"gear_box","details":"not_shifting_gears"}}
+        - payload: {"header":{"timestamp":"2021-04-21-07:07:11-UTC"},"body":{"type":"maintenance","component":"brake_lights_dash","details":"replacement_required"}}
+channels:
+  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/{event_type}':
+    publish:
+      summary: "subscribe to failure alarm events from vehicle"
+      description: |
+        Failure alarms are raised when urgent action is required to maintain/replace/recover components or vehicle.
+      operationId: onFailureAlarm
+      bindings:
+        mqtt:
+          bindingVersion: ‘0.1.0’
+          qos: 1
+        http:
+          bindingVersion: ‘0.1.0’
+          type: request
+          method: POST
+      message:
+        $ref: '#/components/messages/failure'
+    parameters:
+      region_id:
+        $ref: '#/components/parameters/region_id'
+      make:
+        $ref: '#/components/parameters/make'
+      model:
+        $ref: '#/components/parameters/model'
+      vin:
+        $ref: '#/components/parameters/vin'
+      event_type:
+        $ref: '#/components/parameters/event_type'
+asyncapi: 2.0.0
+info:
+  title: 'API:Failure'
+  description: Subscribe to vehicle failure alarms.
+  x-view: provider
+  version: 0.0.1

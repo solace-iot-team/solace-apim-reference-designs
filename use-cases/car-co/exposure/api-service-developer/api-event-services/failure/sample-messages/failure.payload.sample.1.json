@@ -1,0 +1,10 @@
+{
+  "header": {
+    "timestamp": "2021-04-21-06:07:11-UTC"
+  },
+  "body": {
+    "type": "breakdown",
+    "component": "gear_box",
+    "details": "not_shifting_gears"
+  }
+}

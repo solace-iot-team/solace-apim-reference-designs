@@ -1,0 +1,1 @@
+../../common/teardown.apim-system.local.sh

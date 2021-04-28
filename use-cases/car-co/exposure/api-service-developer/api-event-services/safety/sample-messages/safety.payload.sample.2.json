@@ -1,0 +1,10 @@
+{
+  "header": {
+    "timestamp": "2021-04-20-14:33:43-UTC"
+  },
+  "body": {
+    "tyre_pressure": 1.2,
+    "battery_charge": 1.4,
+    "oil_level": 75
+  }
+}
