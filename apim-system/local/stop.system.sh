@@ -6,7 +6,7 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 # Environment Variables
 
   if [ -z "$APIM_SYSTEM_PROJECT_NAME" ]; then export APIM_SYSTEM_PROJECT_NAME="apim-system"; fi
-  if [ -z "$APIM_SYSTEM_PLATFORM_API_SERVER_PORT" ]; then export APIM_SYSTEM_PLATFORM_API_SERVER_PORT=9090; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_PORT" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_PORT=9090; fi
   if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT" ]; then export APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT=9091; fi
 
 ############################################################################################################################
