@@ -40,9 +40,9 @@ $ source source.env.sh
 $ ./standup.apim-system.local.sh
 ````
 
-**connect your browser to the `platform-api-server`:**
+**connect your browser to the `apim-connector`:**
 ````
-http://localhost:{$APIM_BOOTSTRAP_PLATFORM_API_SERVER_PORT}
+http://localhost:{$APIM_BOOTSTRAP_CONNECTOR_SERVER_PORT}
 default: http://localhost:9090
 ````
 
@@ -66,8 +66,8 @@ http://localhost:{$APIM_BOOTSTRAP_DEMO_PORTAL_SERVER_PORT}
 default: http://localhost:9091
 
 login with:
-  user:     {$APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER}
-  password: {$APIM_BOOTSTRAP_PLATFORM_API_SERVER_ORG_API_USER_PWD}
+  user:     {$APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER}
+  password: {$APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER_PWD}
 defaults:
   user:     elevator_co_admin
   password: elevator_co_admin_123!
