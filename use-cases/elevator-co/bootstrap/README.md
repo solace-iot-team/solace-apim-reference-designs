@@ -33,7 +33,7 @@ $ source source.env.sh
 ````
 
 ## Local APIM System
-[See here for more details.](./apim-system/local)
+[See here for more details.](/apim-system/local)
 
 **standup:**
 ````bash
