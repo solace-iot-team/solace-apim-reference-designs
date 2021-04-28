@@ -1,4 +1,4 @@
-# APIM System: Local
+# API-M Connector System: Local
 
 ## Prerequisites
 
@@ -10,8 +10,8 @@
 ### Create an Organization User file and Mount Directory
 Example:
 ````bash
-mkdir ./tmp/platform-api-server-data
-cd ./tmp/platform-api-server-data
+mkdir ./tmp/apim-connector-data
+cd ./tmp/apim-connector-data
 vi organization_users.json
 # add users, see Example below
 ````
@@ -42,7 +42,7 @@ env | grep APIM_SYSTEM
 
 Starts the system in local docker containers using [docker-compose.yml](./docker-compose.yml).
 - mongo db
-- platform-api-server
+- apim-connector
 - apim-demo-portal
 
 
@@ -53,9 +53,9 @@ Starts the system in local docker containers using [docker-compose.yml](./docker
 **checks:**
 ```bash
 docker ps
-docker logs apim-system-platform-api-server
+docker logs apim-system-apim-connector
 ```
-**connect your browser to the `platform-api-server`:**
+**connect your browser to the `apim-connector`:**
 ````
 http://localhost:{$APIM_SYSTEM_PLATFORM_API_SERVER_PORT}
 default: http://localhost:9090

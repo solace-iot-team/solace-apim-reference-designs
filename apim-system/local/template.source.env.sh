@@ -5,7 +5,7 @@
 # <enter values>
 # source source.env.sh
 
-export APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT="./docker-mounts/platform-api-server-data"
+export APIM_SYSTEM_PLATFORM_API_SERVER_DATA_VOLUME_MOUNT="./docker-mounts/apim-connector-data"
 export APIM_SYSTEM_PLATFORM_API_SERVER_FILE_USER_REGISTRY="organization_users.json"
 export APIM_SYSTEM_PLATFORM_API_SERVER_PORT=9090
 # debug, info, error

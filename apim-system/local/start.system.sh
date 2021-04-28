@@ -56,7 +56,7 @@ echo " >>> Docker-compose up for project: $APIM_SYSTEM_PROJECT_NAME ..."
 
   docker ps -a
 
-  containerName="$APIM_SYSTEM_PROJECT_NAME-platform-api-server"
+  containerName="$APIM_SYSTEM_PROJECT_NAME-apim-connector"
   echo "   >>> check docker logs for '$containerName' ..."
     WORKING_DIR=$scriptDir/tmp; mkdir -p $WORKING_DIR; rm -rf $WORKING_DIR/*;
     dockerLogsFile="$WORKING_DIR/$containerName.docker.logs"
