@@ -154,6 +154,16 @@ resource "aws_security_group" "sg_dmz" {
       ipv6_cidr_blocks = null
       prefix_list_ids = null
       security_groups = null
+      description = "https traffic for portal"
+      self = true
+      from_port = 443
+      protocol = "tcp"
+      to_port = 443
+     }, {
+      cidr_blocks = var.allowed_inbound_cidr_blocks
+      ipv6_cidr_blocks = null
+      prefix_list_ids = null
+      security_groups = null
       description = "http traffic for portal"
       self = true
       from_port = 80
