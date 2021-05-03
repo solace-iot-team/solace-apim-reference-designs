@@ -135,7 +135,7 @@ resource "aws_security_group" "sg_dmz" {
       prefix_list_ids = null
       security_groups = null
       description = "ICMP PINGs"
-      self = trues
+      self = true
       from_port = 1
       protocol = "icmp"
       to_port = 1
