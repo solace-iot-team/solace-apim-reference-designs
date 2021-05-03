@@ -178,7 +178,7 @@ resource "aws_security_group" "sg_dmz" {
       self = true
       from_port = 3306
       protocol = "tcp"
-      to_port = 3606
+      to_port = 3306
     }
     ]
 
