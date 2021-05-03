@@ -136,9 +136,9 @@ resource "aws_security_group" "sg_dmz" {
       security_groups = null
       description = "ICMP PINGs"
       self = true
-      from_port = 1
+      from_port = 8
       protocol = "icmp"
-      to_port = 1
+      to_port = 0
      },{
       cidr_blocks = var.allowed_inbound_ssh_cidr_blocks
       ipv6_cidr_blocks = null
