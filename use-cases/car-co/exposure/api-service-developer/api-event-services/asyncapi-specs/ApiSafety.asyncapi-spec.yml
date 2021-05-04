@@ -107,3 +107,6 @@ info:
   description: Subscribe to vehicle safety alarms.
   x-view: provider
   version: 0.0.1
+  x-origin:
+    vendor: solace
+    name: apim-connector

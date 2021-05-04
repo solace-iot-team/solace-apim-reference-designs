@@ -107,3 +107,7 @@ info:
   description: Subscribe to vehicle failure alarms.
   x-view: provider
   version: 0.0.1
+  x-origin:
+    vendor: solace
+    name: apim-connector
+  
