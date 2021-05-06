@@ -8,6 +8,9 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT"; exit 1; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"; exit 1; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_PORT" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_PORT=9090; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE" ]; then
+    export APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE="solaceiotteam/platform-api-server:latest";
+  fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL=debug; fi
   if [ -z "$APIM_SYSTEM_PROJECT_NAME" ]; then export APIM_SYSTEM_PROJECT_NAME="apim-system"; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER"; exit 1; fi
@@ -15,9 +18,13 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER"; exit 1; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD"; exit 1; fi
   if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT" ]; then export APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT=9091; fi
+  if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_DOCKER_IMAGE" ]; then
+    export APIM_SYSTEM_DEMO_PORTAL_SERVER_DOCKER_IMAGE="solaceiotteam/apim-demo-portal:latest";
+  fi
 
 ############################################################################################################################
 # Settings
+
   dockerComposeFile="$scriptDir/docker-compose.yml"
   platformApiServerDataVolumeMountPath="$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT"
   if [ ! -d "$platformApiServerDataVolumeMountPath" ]; then echo ">>> ERROR: - $scriptName - data volume not found: $platformApiServerDataVolumeMountPath"; exit 1; fi
