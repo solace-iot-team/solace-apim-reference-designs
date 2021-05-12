@@ -22,11 +22,6 @@ components:
     vin:
       schema:
         type: string
-    event_type:
-      schema:
-        type: string
-        enum:
-          - consumption
   schemas:
     consumption:
       $schema: 'http://json-schema.org/draft-07/schema#'
@@ -78,7 +73,7 @@ components:
         - payload: {"header":{"timestamp":"2021-04-20-11:28:47-UTC"},"body":{"fuel":10,"tyre":1.8,"battery":2.4,"oil":90}}
         - payload: {"header":{"timestamp":"2021-04-20-11:28:49-UTC"},"body":{"fuel":10,"tyre":1.8,"battery":2.4,"oil":90}}
 channels:
-  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/{event_type}':
+  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/consumption':
     publish:
       summary: "subscribe to consumption events from vehicle"
       description: |
@@ -103,8 +98,6 @@ channels:
         $ref: '#/components/parameters/model'
       vin:
         $ref: '#/components/parameters/vin'
-      event_type:
-        $ref: '#/components/parameters/event_type'
 asyncapi: 2.0.0
 info:
   title: 'API:Consumption'
