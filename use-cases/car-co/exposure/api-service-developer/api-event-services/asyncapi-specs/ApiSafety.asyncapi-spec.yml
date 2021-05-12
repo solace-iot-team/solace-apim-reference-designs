@@ -22,11 +22,6 @@ components:
     vin:
       schema:
         type: string
-    event_type:
-      schema:
-        type: string
-        enum:
-          - safety
   schemas:
     safety:
       $schema: 'http://json-schema.org/draft-07/schema#'
@@ -74,7 +69,7 @@ components:
         - payload: {"header":{"timestamp":"2021-04-20-14:33:40-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
         - payload: {"header":{"timestamp":"2021-04-20-14:33:43-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
 channels:
-  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/{event_type}':
+  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/safety':
     publish:
       summary: "subscribe to safety alarm events from vehicle"
       description: |
@@ -99,8 +94,6 @@ channels:
         $ref: '#/components/parameters/model'
       vin:
         $ref: '#/components/parameters/vin'
-      event_type:
-        $ref: '#/components/parameters/event_type'
 asyncapi: 2.0.0
 info:
   title: 'API:Safety'

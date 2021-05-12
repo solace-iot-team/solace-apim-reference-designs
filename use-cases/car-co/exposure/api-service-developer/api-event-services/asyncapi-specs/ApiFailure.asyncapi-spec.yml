@@ -22,11 +22,6 @@ components:
     vin:
       schema:
         type: string
-    event_type:
-      schema:
-        type: string
-        enum:
-          - failure
   schemas:
     failure:
       $schema: 'http://json-schema.org/draft-07/schema#'
@@ -74,7 +69,7 @@ components:
         - payload: {"header":{"timestamp":"2021-04-21-06:07:11-UTC"},"body":{"type":"breakdown","component":"gear_box","details":"not_shifting_gears"}}
         - payload: {"header":{"timestamp":"2021-04-21-07:07:11-UTC"},"body":{"type":"maintenance","component":"brake_lights_dash","details":"replacement_required"}}
 channels:
-  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/{event_type}':
+  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/failure':
     publish:
       summary: "subscribe to failure alarm events from vehicle"
       description: |
@@ -99,8 +94,6 @@ channels:
         $ref: '#/components/parameters/model'
       vin:
         $ref: '#/components/parameters/vin'
-      event_type:
-        $ref: '#/components/parameters/event_type'
 asyncapi: 2.0.0
 info:
   title: 'API:Failure'
@@ -110,4 +103,3 @@ info:
   x-origin:
     vendor: solace
     name: apim-connector
-  
