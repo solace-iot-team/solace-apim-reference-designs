@@ -160,48 +160,6 @@ let bootstrapConfig = {
               }
             }
         },
-    //     consumption: {
-    //         apiProducts: {
-    //             dev: {
-    //                 name: 'consumption-development',
-    //                 displayName: 'Consumption Development',
-    //                 description: 'Consumption Development API Product - auto approved, with mock dev events',
-    //                 approvalType: APIProduct.approvalType.AUTO,
-    //                 permissions: [
-    //                     { name: 'region_id', value: '*' },
-    //                     { name: 'make', value: '*' },
-    //                     { name: 'model', value: '*' },
-    //                     { name: 'vin', value: '*' },
-    //                     { name: 'event_type', value: 'consumption' }
-    //                 ],
-    //                 protocols:[
-    //                     { name: Protocol.name.HTTP, version: '1.1' },
-    //                     { name: Protocol.name.HTTPS, version: '1.1' },
-    //                     { name: Protocol.name.MQTT, version: '3.1.1' },
-    //                     { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
-    //                     { name: Protocol.name.WS_MQTT, version: '3.1.1' },
-    //                     { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
-    //                 ]
-    //             },
-    //             prod: {
-    //                 name: 'consumption-production',
-    //                 displayName: 'Consumption Production',
-    //                 description: 'Consumption Production API Product - requires approval',
-    //                 approvalType: APIProduct.approvalType.MANUAL,
-    //                 permissions: [
-    //                     { name: 'region_id', value: 'fr, de, it' },
-    //                     { name: 'make', value: '*' },
-    //                     { name: 'model', value: '*' },
-    //                     { name: 'vin', value: '*' }
-    //                 ],
-    //                 protocols:[
-    //                     { name: Protocol.name.HTTPS, version: '1.1' },
-    //                     { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
-    //                     { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
-    //                 ]
-    //             }
-    //         }
-    //     }
     },
     consumption: {
         developers: {
@@ -411,39 +369,6 @@ const createProdApiProducts = async() => {
     }
     console.log('success.');
 }
-// const createApiProducts = async() => {
-//     console.log('create api products ...');
-//     PlatformAPIClient.setApiUser();
-//     let apiProducts = bootstrapConfig.exposure.consumption.apiProducts;
-//     let k: keyof typeof apiProducts;
-//     for(k in apiProducts) {
-//         let apiProduct = apiProducts[k];
-//         let request: APIProduct = {
-//             name: apiProduct.name,
-//             displayName: apiProduct.displayName,
-//             description: apiProduct.description,
-//             apis: [
-//                 bootstrapConfig.exposure.apis.apiConsumption.name
-//             ],
-//             approvalType: apiProduct.approvalType,
-//             attributes: apiProduct.permissions,
-//             environments: [
-//                 environments[k].name
-//             ],
-//             protocols: apiProduct.protocols,
-//             pubResources: [],
-//             subResources: []
-//           };
-//         try {
-//             let response: APIProduct = await ApiProductsService.createApiProduct(bootstrapConfig.ORG_NAME, request);
-//             Helper.logApiResponse(response);
-//         } catch(e) {
-//             Helper.logError(e);
-//             process.exit(1);
-//         }
-//     }
-//     console.log('success.');
-// }
 const createDevelopers = async() => {
     console.log('create developers ...');
     PlatformAPIClient.setApiUser();
