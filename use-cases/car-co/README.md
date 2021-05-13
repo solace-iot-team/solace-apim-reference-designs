@@ -12,6 +12,6 @@
 ## Details
 
 * [exposure/api-service-developer](./exposure/api-service-developer)
-
+* [exposure/api-team](./exposure/api-team)
 
 ---
