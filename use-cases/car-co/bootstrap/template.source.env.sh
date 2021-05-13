@@ -30,6 +30,8 @@ export APIM_BOOTSTRAP_CONNECTOR_SERVER_FILE_USER_REGISTRY="organization_users.js
 export APIM_BOOTSTRAP_CONNECTOR_SERVER_DOCKER_IMAGE="solaceiotteam/apim-connector-server:latest"
 
 # Demo Portal
+export APIM_BOOTSTRAP_DEMO_PORTAL_USER="portal_user"
+export APIM_BOOTSTRAP_DEMO_PORTAL_USER_PWD="portal_user_123!"
 export APIM_BOOTSTRAP_DEMO_PORTAL_SERVER_PORT=9091
 export APIM_BOOTSTRAP_DEMO_PORTAL_SERVER_DOCKER_IMAGE="solaceiotteam/apim-demo-portal:latest"
 
