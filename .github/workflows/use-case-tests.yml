@@ -18,7 +18,7 @@ env:
   DEBUG_FLAG: ${{ true }}
   # DEBUG_FLAG: ${{ false }}
 jobs:
-  use_case_elevator_co:
+  use_case_tests:
     runs-on: ubuntu-18.04
     env:
       UC_TEST_ELEVATOR_CO_HOME_DIR: "use-cases/elevator-co"
@@ -68,11 +68,6 @@ jobs:
           echo "docker --version"; docker --version
           echo "docker-compose --version"; docker-compose --version
 
-      # - name: npm install
-      #   run: |
-      #     cd "${UC_TEST_HOME_DIR}"
-      #     npm install
-
       - name: Run Tests
         run: |
           export APIM_BOOTSTRAP_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
@@ -81,29 +76,16 @@ jobs:
           export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}
           export APIM_BOOTSTRAP_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
           export APIM_BOOTSTRAP_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
-          echo "############# elevator-co #############"
-          cd "${GITHUB_WORKSPACE}/${UC_TEST_ELEVATOR_CO_HOME_DIR}/bootstrap"
-          npm install
-          cd "test"
-          ./run.sh
           echo "############# car-co #############"
           cd "${GITHUB_WORKSPACE}/${UC_TEST_CAR_CO_HOME_DIR}/bootstrap"
           npm install
           cd "test"
           ./run.sh
-
-      # - name: Run Elevator-Co Tests
-      #   run: |
-      #     export APIM_BOOTSTRAP_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
-      #     export APIM_BOOTSTRAP_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
-      #     export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_API_URL=${{ secrets.SOLACE_EVENT_PORTAL_BETA_API_URL }}
-      #     export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}
-      #     export APIM_BOOTSTRAP_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
-      #     export APIM_BOOTSTRAP_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
-      #     cd "${UC_TEST_ELEVATOR_CO_HOME_DIR}/bootstrap"
-      #     npm install
-      #     cd "test"
-      #     ./run.sh
+          echo "############# elevator-co #############"
+          cd "${GITHUB_WORKSPACE}/${UC_TEST_ELEVATOR_CO_HOME_DIR}/bootstrap"
+          npm install
+          cd "test"
+          ./run.sh
 
       - name: Archive logs
         if: ${{ (failure() && !cancelled()) || (always() && (github.event_name=='workflow_dispatch' || env.DEBUG_FLAG=='true') ) }}
