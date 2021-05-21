@@ -77,7 +77,7 @@
 
 - name: print platform-api versions
   debug: 
-    msg: "Deployed docker-compose [platform_api_version:{{platform_api_version}}] [portal_version:{{portal_version}}]"
+    msg: "Deployed docker-compose [apim_connector_version:{{apim_connector_version}}] [portal_version:{{portal_version}}]"
 
 - name: stop platform-api services (if it is running at all)
   docker_compose:
@@ -87,8 +87,8 @@
   become: yes
   ignore_errors: yes
 
-- name: Remove docker image for platform-api-server (if it is available - error is ok)
-  shell: "docker rmi solaceiotteam/platform-api-server:{{platform_api_version}}"
+- name: Remove docker image for apim_connector_version (if it is available - error is ok)
+  shell: "docker rmi solaceiotteam/apim-connector:{{apim_connector_version}}"
   ignore_errors: yes
 
 - name: Remove docker image for portal (if it is available - error is ok)
