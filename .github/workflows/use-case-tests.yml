@@ -85,6 +85,7 @@ jobs:
           cd "${GITHUB_WORKSPACE}/${UC_TEST_ELEVATOR_CO_HOME_DIR}/bootstrap"
           npm install
           cd "test"
+          ./run.sh
           echo "############# car-co #############"
           cd "${GITHUB_WORKSPACE}/${UC_TEST_CAR_CO_HOME_DIR}/bootstrap"
           npm install
