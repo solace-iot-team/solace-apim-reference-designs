@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prestart": "tsc",
-    "start": "node dist/new-index.js",
+    "start": "node dist/index.js",
     "test": "npm start",
     "dev": "nodemon src/index.ts"
   },
