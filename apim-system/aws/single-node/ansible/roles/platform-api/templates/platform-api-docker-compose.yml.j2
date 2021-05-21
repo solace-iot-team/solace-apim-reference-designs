@@ -17,7 +17,7 @@ services:
       - AUTH_EXTRACTION_USER_PRINCIPAL={{auth_extraction_user_principal}}
       - AUTH_EXTRACTION_ORGS={{auth_extraction_orgs}}
       - AUTH_EXTRACTION_ROLES={{auth_extraction_roles}}
-      - AUTH_VERIFICATION_KEY={{auth_verification_key}}
+      - AUTH_VERIFICATION_KEY=/platform-api-server/data/{{auth_verification_key}}
       - AUTH_VERIFICATION_ISSUER={{auth_verification_issuer}}
       - AUTH_VERIFICATION_AUD={{auth_verification_aud}}
       - AUTH_DISCOVERY_OIDC_URL={{auth_discovery_oidc_url}}

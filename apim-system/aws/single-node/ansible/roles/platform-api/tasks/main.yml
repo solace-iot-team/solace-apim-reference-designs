@@ -88,7 +88,7 @@
   ignore_errors: yes
 
 - name: Remove docker image for apim_connector_version (if it is available - error is ok)
-  shell: "docker rmi solaceiotteam/apim-connector:{{apim_connector_version}}"
+  shell: "docker rmi solaceiotteam/apim-connector-server:{{apim_connector_version}}"
   ignore_errors: yes
 
 - name: Remove docker image for portal (if it is available - error is ok)
