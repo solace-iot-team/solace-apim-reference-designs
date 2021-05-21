@@ -1,0 +1,1 @@
+../../../apim-system/local/get.logs.sh
