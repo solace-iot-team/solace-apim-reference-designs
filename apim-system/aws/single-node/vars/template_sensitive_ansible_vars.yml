@@ -12,6 +12,7 @@ apim_connector_version: latest
 # apim-connector auth details 
 # key for apim-connector to verify issued jwt-tokens
 #   with no oauth/jwt enabled, a dummy is sufficient
+auth_verification_key_dir: /some/location
 auth_verification_key: jwt_dummy.pem
 auth_extraction_user_principal: default
 auth_extraction_orgs: default
