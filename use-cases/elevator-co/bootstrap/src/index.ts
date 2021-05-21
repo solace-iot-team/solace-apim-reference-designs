@@ -1,5 +1,5 @@
-import { Helper } from './helper';
-import { PlatformAPIClient } from './platformapiclient';
+import { Helper } from './lib/helper';
+import { PlatformAPIClient } from './lib/platformapiclient';
 import { AppPatch, AppStatus, Organization } from '@solace-iot-team/platform-api-openapi-client';
 import { PlatformManagementService, Environment, EnvironmentsService, ApisService, APIProduct, Protocol, ApiProductsService, Developer, DevelopersService, App, AppsService } from '@solace-iot-team/platform-api-openapi-client';
 
@@ -7,17 +7,17 @@ const bootstrapConfig = {
     PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PROTOCOL'),
     PLATFORM_HOST: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_HOST'),
     PLATFORM_PORT: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PORT'),
-    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER'),
-    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ADMIN_USER_PWD'),
-    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_NAME'),
-    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER'),
-    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER_PWD'),
-    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_API_URL'),
-    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_TOKEN'),
+    PLATFORM_ADMIN_USER: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_ADMIN_USER'),
+    PLATFORM_ADMIN_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_ADMIN_USER_PWD'),
+    ORG_NAME: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_ORG_NAME'),
+    ORG_API_USR: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_ORG_API_USER'),
+    ORG_API_PWD: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_ORG_API_USER_PWD'),
+    SOLACE_CLOUD_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_SOLACE_CLOUD_API_URL'),
+    SOLACE_CLOUD_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_SOLACE_CLOUD_TOKEN'),
     // SOLACE_CLOUD_EVENT_PORTAL_URL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_API_URL'),
-    SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
-    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
-    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
+    // SOLACE_CLOUD_EVENT_PORTAL_TOKEN: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_SOLACE_EVENT_PORTAL_TOKEN'),
+    SOLACE_CLOUD_DEV_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_SOLACE_CLOUD_DEV_GW_SERVICE_ID'),
+    SOLACE_CLOUD_PROD_GW_SERVICE_ID: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_SOLACE_CLOUD_PROD_GW_SERVICE_ID'),
     exposure: {
         maintenance: {
             api: {

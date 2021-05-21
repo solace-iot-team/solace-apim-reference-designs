@@ -4,19 +4,28 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 
 ############################################################################################################################
 # Environment Variables
-
+  # general
+  if [ -z "$APIM_SYSTEM_PROJECT_NAME" ]; then export APIM_SYSTEM_PROJECT_NAME="apim-reference"; fi
+  # apim connector
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_DATA_VOLUME_MOUNT"; exit 1; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"; exit 1; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_PORT" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_PORT=9090; fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE" ]; then
-    export APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE="solaceiotteam/platform-api-server:latest";
+    export APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE="solaceiotteam/apim-connector-server:latest";
   fi
   if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL" ]; then export APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL=debug; fi
-  if [ -z "$APIM_SYSTEM_PROJECT_NAME" ]; then export APIM_SYSTEM_PROJECT_NAME="apim-system"; fi
-  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER"; exit 1; fi
-  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_USER_PRINCIPAL" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_USER_PRINCIPAL"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ORGS" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ORGS"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ROLES" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ROLES"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_KEY" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_KEY"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_ISSUER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_ISSUER"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_AUD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_AUD"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_DISCOVERY_OIDC_URL" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_CONNECTOR_SERVER_AUTH_DISCOVERY_OIDC_URL"; exit 1; fi
+  # demo portal
+  if [ -z "$APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER_PWD"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER"; exit 1; fi
+  if [ -z "$APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER_PWD" ]; then echo ">>> ERROR: - $scriptName - missing env var: APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER_PWD"; exit 1; fi
   if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT" ]; then export APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT=9091; fi
   if [ -z "$APIM_SYSTEM_DEMO_PORTAL_SERVER_DOCKER_IMAGE" ]; then
     export APIM_SYSTEM_DEMO_PORTAL_SERVER_DOCKER_IMAGE="solaceiotteam/apim-demo-portal:latest";
@@ -32,19 +41,29 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
   if [ ! -f "$externalFileUserRegistry" ]; then echo ">>> ERROR: - $scriptName - user file not found: $externalFileUserRegistry"; exit 1; fi
   platformApiServerDataVolumeInternal="/platform-api-server/data"
   fileUserRegistry="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_CONNECTOR_SERVER_FILE_USER_REGISTRY"
+  jwtKey="$platformApiServerDataVolumeInternal/$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_KEY"
 
   export PLATFORM_DATA_MOUNT_PATH=$platformApiServerDataVolumeMountPath
   export PLATFORM_DATA_INTERNAL_PATH=$platformApiServerDataVolumeInternal
   export LOG_LEVEL=$APIM_SYSTEM_CONNECTOR_SERVER_LOG_LEVEL
   export APP_ID=$APIM_SYSTEM_PROJECT_NAME
   export FILE_USER_REGISTRY=$fileUserRegistry
-  export ADMIN_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER
-  export ADMIN_PASSWORD=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD
-  export DEMO_PORTAL_API_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER
-  export DEMO_PORTAL_API_USER_PWD=$APIM_SYSTEM_CONNECTOR_SERVER_ORG_API_USER_PWD
-  export DEMO_PORTAL_ADMIN_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER
-  export DEMO_PORTAL_ADMIN_USER_PWD=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD
+  # export ADMIN_USER=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER
+  # export ADMIN_PASSWORD=$APIM_SYSTEM_CONNECTOR_SERVER_ADMIN_USER_PWD
+  export AUTH_EXTRACTION_USER_PRINCIPAL=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_USER_PRINCIPAL
+  export AUTH_EXTRACTION_ORGS=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ORGS
+  export AUTH_EXTRACTION_ROLES=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_EXTRACTION_ROLES
+  export AUTH_VERIFICATION_KEY=$jwtKey
+  export AUTH_VERIFICATION_ISSUER=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_ISSUER
+  export AUTH_VERIFICATION_AUD=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_VERIFICATION_AUD
+  export AUTH_DISCOVERY_OIDC_URL=$APIM_SYSTEM_CONNECTOR_SERVER_AUTH_DISCOVERY_OIDC_URL
+
+  export DEMO_PORTAL_API_USER=$APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER
+  export DEMO_PORTAL_API_USER_PWD=$APIM_SYSTEM_DEMO_PORTAL_ORG_API_USER_PWD
+  export DEMO_PORTAL_ADMIN_USER=$APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER
+  export DEMO_PORTAL_ADMIN_USER_PWD=$APIM_SYSTEM_DEMO_PORTAL_ADMIN_USER_PWD
   export DEMO_PORTAL_SERVER_PORT=$APIM_SYSTEM_DEMO_PORTAL_SERVER_PORT
+
   export DOCKER_CLIENT_TIMEOUT=120
   export COMPOSE_HTTP_TIMEOUT=120
 

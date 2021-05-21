@@ -4,10 +4,10 @@
 scriptDir=$(pwd)
 
 # USE CASE SPECIFIC BOOTSTRAP ENVIRONMENT
-export APIM_BOOTSTRAP_USE_CASE_NAME="uc-elevator-co"
-export APIM_BOOTSTRAP_ORG_NAME="elevator-co"
-export APIM_BOOTSTRAP_ORG_API_USER="elevator_co_admin"
-export APIM_BOOTSTRAP_ORG_API_USER_PWD="elevator_co_admin_123!"
+export APIM_BOOTSTRAP_USE_CASE_NAME="uc-car-co"
+export APIM_BOOTSTRAP_ORG_NAME="car-co"
+export APIM_BOOTSTRAP_ORG_API_USER="car_co_admin"
+export APIM_BOOTSTRAP_ORG_API_USER_PWD="car_co_admin_123!"
 export APIM_BOOTSTRAP_ADMIN_USER="admin"
 export APIM_BOOTSTRAP_ADMIN_USER_PWD="p3zvZFF7ka4Wrj4p"
 # Connector Server

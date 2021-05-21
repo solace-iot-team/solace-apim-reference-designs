@@ -66,11 +66,11 @@ http://localhost:{$APIM_BOOTSTRAP_DEMO_PORTAL_SERVER_PORT}
 default: http://localhost:9091
 
 login with:
-  user:     {$APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER}
-  password: {$APIM_BOOTSTRAP_CONNECTOR_SERVER_ORG_API_USER_PWD}
+  user:     {$APIM_BOOTSTRAP_DEMO_PORTAL_USER}
+  password: {$APIM_BOOTSTRAP_DEMO_PORTAL_USER_PWD}
 defaults:
-  user:     elevator_co_admin
-  password: elevator_co_admin_123!
+  user:     portal_user
+  password: portal_user_123!
 ````
 
 
