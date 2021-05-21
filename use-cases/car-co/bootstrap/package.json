@@ -1,6 +1,6 @@
 {
-  "name": "bootstrap-uc-elevator-co",
-  "description": "bootstrap use case elevator company demo",
+  "name": "bootstrap-uc-car-co",
+  "description": "bootstrap use case car company demo",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
