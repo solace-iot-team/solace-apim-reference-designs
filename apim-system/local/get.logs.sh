@@ -10,8 +10,8 @@ scriptName=$(basename $(test -L "$0" && readlink "$0" || echo "$0"));
 ############################################################################################################################
 # Run
 
-  echo " >>> Getting server logs ..."
-    containerName=$APIM_SYSTEM_PROJECT_NAME-apim-connector
+containerName=$APIM_SYSTEM_PROJECT_NAME-apim-connector
+echo " >>> Getting apim-connector server logs for container $containerName..."
     runScript="docker logs $containerName"
     $runScript
     if [[ $? != 0 ]]; then echo " >>> ERROR: $runScript "; exit 1; fi
