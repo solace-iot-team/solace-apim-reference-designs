@@ -21,10 +21,9 @@ jobs:
   use_case_elevator_co:
     runs-on: ubuntu-18.04
     env:
-      UC_HOME_DIR: "use-cases/elevator-co"
-      UC_TEST_HOME_DIR: "use-cases/elevator-co/bootstrap/test"
-      UC_TEST_OUTPUT_DIR: "use-cases/elevator-co/bootstrap/test/tmp"
-      UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-test-elevator-co"
+      UC_TEST_ELEVATOR_HOME_DIR: "use-cases/elevator-co/bootstrap/test"
+      UC_TEST_OUTPUT_DIR: "use-cases/common/test/tmp"
+      UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-tests"
     strategy:
       max-parallel: 1
       matrix:
@@ -68,12 +67,12 @@ jobs:
           echo "docker --version"; docker --version
           echo "docker-compose --version"; docker-compose --version
 
-      - name: npm install
-        run: |
-          cd "${UC_TEST_HOME_DIR}"
-          npm install
+      # - name: npm install
+      #   run: |
+      #     cd "${UC_TEST_HOME_DIR}"
+      #     npm install
 
-      - name: Run Tests
+      - name: Run Elevator Tests
         run: |
           export APIM_BOOTSTRAP_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
           export APIM_BOOTSTRAP_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
@@ -81,7 +80,9 @@ jobs:
           export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}
           export APIM_BOOTSTRAP_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
           export APIM_BOOTSTRAP_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
-          cd "${UC_TEST_HOME_DIR}"
+          cd "${UC_TEST_ELEVATOR_HOME_DIR}/.."
+          npm install
+          cd "${UC_TEST_ELEVATOR_HOME_DIR}"
           ./run.sh
 
       - name: Archive logs
