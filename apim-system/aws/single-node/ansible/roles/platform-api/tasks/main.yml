@@ -57,6 +57,14 @@
     mode: 0644
   become: yes
 
+- name: copy auth_verification_key 
+  template:
+    src: "{{auth_verification_key_dir}}/{{auth_verification_key}}"
+    dest: /data/platform-api/{{auth_verification_key}}
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
 
 - name: copy docker-compose for platform-api
   template:
