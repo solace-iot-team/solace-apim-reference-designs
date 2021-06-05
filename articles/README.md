@@ -1,5 +1,5 @@
 # Articles
 
-[Considerations for Asynchronous API Management](./1_considerations.md)
+[Considerations for Unifying Synchronous & Asynchronous API Management](./1_considerations.md)
 
 ---
