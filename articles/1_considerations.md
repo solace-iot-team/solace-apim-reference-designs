@@ -2,6 +2,22 @@
 
 Author: Ricardo Gomez-Ulmke | June 2021
 
+
+## TODO
+
+- Sync or request/response APIs: REST, gRPC, GraphQL
+- Async:
+  - using webhooks via HTTP (server originating)
+  - using 'proper' messaging protocols
+  - Server-Sent Events (GET streams/order-updates): connection stays open and event will come in until closed (client originating)
+  - websockets: plain text, soap, application protocol on top
+  - GraphQL Subscriptions: client initiated streaming
+  - gRPC Client & Server Streaming
+- Why Event API Services?
+  - separate internal from external events
+    - internal: a lot of detail
+    - external: abstracted, adapted to consumer workflow needs
+
 ## Introduction
 
 TODO:
@@ -9,6 +25,7 @@ TODO:
 - the goal
 - what is explained here
 - what isn't
+- target audience
 
 ### Example Use Cases for Our Discussion
 
@@ -461,7 +478,19 @@ The AsyncAPI Specification already provides the mechanism to document topic para
 
 When a consumer application makes a subscription to a topic, we also have to check that this application is actually allowed to subscribe to the topic (pattern), and it not, disallow the subscription.
 
+Looking at the permissioning mechanisms described above, it becomes clear that this is a feature that should be immplemented in the API Gateway infrastructure, rather than in separate services specific to an API. We want to avoid any additional coupling of ``API Event Services`` with the actual provisioned API and keep these services as lean as possible.
+Also, the permissioning example above shows that approval and setting of permissions is depending on the agreements with our ``PartnerCo``s. The approval workflow for a developer application should probably be integrated with ``ConnectedVehiclesCo``'s contract management system, so the API Management system should provide hooks or call-outs to invoke 3rd party systems.
+
 ## Architectural Concepts
+
+- TODO: rate limiting for publish APIs - DDOS attack - how to?
+- TODO: handle slow consumers - queues
+- TODO: plans:
+  - connections,
+  - queue size
+  - number of assets, orders, vehicles, flights - this is not the same as subscriptions
+  - replay depth
+  - quality of service for updates? probably not, use case requires it or not
 
 ### AsyncAPI Management in Isolation
 
@@ -478,9 +507,20 @@ When a consumer application makes a subscription to a topic, we also have to che
 <p align="center"><i>Figure 1 - Async API Management</i></p>
 
 
+### API Management Infrastructure Services
+
+TODO: should this be a separate picture - with all the services identified above?
+
 ### Unified API Management
 
 - TODO: Sync GW must be able to convert a RESTful request to using a request-reply API for the API Event Service ==> keep the EDA structure clean
+
+WSO2 EDA presentation:
+- TODO: table of key differences
+- TODO: table of what can be re-used
+  - OAuth2: scopes ==> topics permissions ==> say that above, not all about ACLs
+
+
 
 <p align="center"><img src="./images/apim.1_considerations.unified.png" height="800"/></p>
 <p align="center"><i>Figure 2 - Unified Sync & Async API Management</i></p>
@@ -489,13 +529,15 @@ When a consumer application makes a subscription to a topic, we also have to che
 
 ## Conclusion
 
-transactional v. updates/changes ==> mix APIs in one product
+- transactional, historical v. updates/changes ==> mix APIs in one product
 
-**_Note: You do not want to tightly-couple the internal Async API Event Services with the externally offered Async APIs._**
-**_Note: There is only a loose relationship between the Async API Product published in the Developer Portal and the internal services providing the event interfaces for that API Product._**
-**_We now have re-used the alarm event within our organization based on a micro-service approach within our EDA architecture._**
+- **_Note: You do not want to tightly-couple the internal Async API Event Services with the externally offered Async APIs._**
+- **_Note: There is only a loose relationship between the Async API Product published in the Developer Portal and the internal services providing the event interfaces for that API Product._**
+- **_We now have re-used the alarm event within our organization based on a micro-service approach within our EDA architecture._**
+- **_Note: It is important that your Event Mesh does NOT require for every single topic to be defined & configured upfront but supports dynamic topics created by publishers at run-time._**
+- **Permissioning**
+- **API Management system should provide hooks or call-outs to invoke 3rd party systems.**
 
-**_Note: It is important that your Event Mesh does NOT require for every single topic to be defined & configured upfront but supports dynamic topics created by publishers at run-time._**
 
 
 ---
