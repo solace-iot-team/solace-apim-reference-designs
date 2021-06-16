@@ -1,7 +1,7 @@
 import { Helper } from './lib/helper';
 import { PlatformAPIClient } from './lib/platformapiclient';
 import { AppPatch, AppStatus, Organization } from '@solace-iot-team/platform-api-openapi-client';
-import { PlatformManagementService, Environment, EnvironmentsService, ApisService, APIProduct, Protocol, ApiProductsService, Developer, DevelopersService, App, AppsService } from '@solace-iot-team/platform-api-openapi-client';
+import { AdministrationService, Environment, EnvironmentsService, ApisService, APIProduct, Protocol, ApiProductsService, Developer, DevelopersService, App, AppsService } from '@solace-iot-team/platform-api-openapi-client';
 
 const bootstrapConfig = {
     PLATFORM_PROTOCOL: Helper.getMandatoryEnvVarValue('APIM_BOOTSTRAP_CONNECTOR_SERVER_PROTOCOL'),
@@ -102,15 +102,30 @@ const bootstrapConfig = {
 }
 Helper.logConfig(bootstrapConfig);
 
+const devGwExposedProtocols: Array<Protocol> = [
+  { name: Protocol.name.HTTP, version: '1.1' },
+  { name: Protocol.name.HTTPS, version: '1.1' },
+  { name: Protocol.name.MQTT, version: '3.1.1' },
+  { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
+  { name: Protocol.name.WS_MQTT, version: '3.1.1' },
+  { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
+]
+const prodGwExposedProtocols: Array<Protocol> = [
+  { name: Protocol.name.HTTPS, version: '1.1' },
+  { name: Protocol.name.SECURE_MQTT, version: '3.1.1' },
+  { name: Protocol.name.WSS_MQTT, version: '3.1.1' }
+]
 const devEnvironment: Environment = {
     name: 'development',
     description: 'development environment',
-    serviceId: bootstrapConfig.SOLACE_CLOUD_DEV_GW_SERVICE_ID
+    serviceId: bootstrapConfig.SOLACE_CLOUD_DEV_GW_SERVICE_ID,
+    exposedProtocols: devGwExposedProtocols
 }
 const prodEnvironment: Environment = {
     name: 'production',
     description: 'production environment',
-    serviceId: bootstrapConfig.SOLACE_CLOUD_PROD_GW_SERVICE_ID
+    serviceId: bootstrapConfig.SOLACE_CLOUD_PROD_GW_SERVICE_ID,
+    exposedProtocols: prodGwExposedProtocols
 }
 const environments = {
     dev: devEnvironment,
@@ -126,7 +141,7 @@ const deleteOrg = async() => {
     console.log(`deleting org '${bootstrapConfig.ORG_NAME}' ...`);
     PlatformAPIClient.setManagementUser();
     try {
-        await PlatformManagementService.deleteOrganization(bootstrapConfig.ORG_NAME);
+        await AdministrationService.deleteOrganization(bootstrapConfig.ORG_NAME);
     } catch(e) {
         console.log(`deleteOrg error = ${JSON.stringify(e, null, 2)}`);
         if(e.status !== 404 && e.status !== 201) {
@@ -144,7 +159,7 @@ const createOrg = async() => {
         'cloud-token': bootstrapConfig.SOLACE_CLOUD_TOKEN
     }
     try {
-        let response: Organization = await PlatformManagementService.createOrganization(request);
+        let response: Organization = await AdministrationService.createOrganization(request);
         Helper.logApiResponse(response);
     } catch(e) {
         Helper.logError(e);
