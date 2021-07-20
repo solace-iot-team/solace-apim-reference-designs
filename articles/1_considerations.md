@@ -4,15 +4,6 @@ Author: Ricardo Gomez-Ulmke | June 2021
 
 
 ## TODO
-
-- Sync or request/response APIs: REST, gRPC, GraphQL
-- Async:
-  - using webhooks via HTTP (server originating)
-  - using 'proper' messaging protocols
-  - Server-Sent Events (GET streams/order-updates): connection stays open and event will come in until closed (client originating)
-  - websockets: plain text, soap, application protocol on top
-  - GraphQL Subscriptions: client initiated streaming
-  - gRPC Client & Server Streaming
 - Why Event API Services?
   - separate internal from external events
     - internal: a lot of detail
@@ -20,12 +11,26 @@ Author: Ricardo Gomez-Ulmke | June 2021
 
 ## Introduction
 
-TODO:
-- the problem, the ask
-- the goal
-- what is explained here
-- what isn't
-- target audience
+In this article, I explore various use cases that I have come across in the past few years which have the following in common:
+
+* the underlying platform & application infrastructure consists of a mix of request/response services and event-driven services
+* the implementations follow the concept of Event-Driven Architecture (EDA) at a multi-site, multi-region scale
+* API Management for both, synchronous and asynchronous APIs, has been identified as the key enabler for governance and adoption within and outside the organization
+
+Synchronous, or RESTful, API Management is a well established approach to publicise, govern, and manage APIs for internal and external consumption.
+Asynchronous API Management on the other hand is only recently emerging, partly based on EDA gaining more and more traction in the enterprise. API Management vendors are listening and have started to implement Evented or Asynchronous API Management based on the AsyncAPI Specification ([[5]](#[5])), which is often used as the basis in these toolsets
+as it is intuitively understood for it's conceptual similarity to the OpenAPI Spec.
+
+However, in some cases, the lack of EDA experience leads to the selection of protocols and API Gateways that is not aligned with a core concept of EDA: loosely coupled micro-services communicating via a Message or Event Broker which, in larger implementations, is actually deployed as a multi-site, multi-region Event Mesh.
+(A good overview, general discussion about Event-Driven Architectures (EDA) and the concept of an Event Mesh is offered in [[3]](#[3]) and [[4]](#[4]).)
+So, we see implementations based on extensions of familiar synchronous protocols, such as HTTP (using webhooks), Server-Sent Events, plain Websockets, GraphQL Subscriptions or gRPC Client & Server streaming.
+
+While all of these are valid streaming and event protocols, they are not very suitable to implementing your EDA.
+
+Here, I focus on **EDA + API Management**, using protocols such as MQTT, AMQP, and JMS, suitable for large-scale enterprise-wide deployments and supported by a wide range of vendors and open source implementations of Message / Event Brokers.
+
+This article is for architects and software engineers who already have a good understanding of both, EDA & API Management, and I share my considerations and conclusions of how to go about unifying Evented or Asynchronous APIs from your EDA with Synchronous APIs.
+
 
 ### Example Use Cases for Our Discussion
 
@@ -485,7 +490,7 @@ Also, the permissioning example above shows that approval and setting of permiss
 
 - TODO: rate limiting for publish APIs - DDOS attack - how to?
 - TODO: handle slow consumers - queues
-- TODO: plans:
+- TODO: plans: see Card
   - connections,
   - queue size
   - number of assets, orders, vehicles, flights - this is not the same as subscriptions
@@ -519,6 +524,7 @@ WSO2 EDA presentation:
 - TODO: table of key differences
 - TODO: table of what can be re-used
   - OAuth2: scopes ==> topics permissions ==> say that above, not all about ACLs
+- TODO: discuss metrics and how they differ
 
 
 
@@ -551,5 +557,6 @@ WSO2 EDA presentation:
 
 <a name="[4]"/>[4] Forrester - Event-Driven Architecture And Design: Five Big Mistakes And Five Best Practices, November 10, 2020
 
+<a name="[5]"/>[5] [AsyncAPI.com](https://www.asyncapi.com/docs/specifications/v2.0.0)
 
 ---
