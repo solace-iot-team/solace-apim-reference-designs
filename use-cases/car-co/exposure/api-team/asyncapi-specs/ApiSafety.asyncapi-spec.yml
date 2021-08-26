@@ -1,0 +1,105 @@
+components:
+  parameters:
+    region_id:
+      schema:
+        type: string
+        enum:
+          - fr
+          - de
+          - it
+    make:
+      schema:
+        type: string
+        enum:
+          - 108
+          - 2008
+    model:
+      schema:
+        type: string
+        enum:
+          - M2018
+          - MTPA
+    vin:
+      schema:
+        type: string
+  schemas:
+    safety:
+      $schema: 'http://json-schema.org/draft-07/schema#'
+      type: object
+      additionalProperties: false
+      title: Car Co safety alarm event
+      required:
+      - header
+      - body
+      properties:
+        header:
+          type: object
+          additionalProperties: false
+          required:
+          - timestamp
+          properties:
+            timestamp:
+              type: string
+        body:
+          type: object
+          additionalProperties: false
+          required:
+          - tyre_pressure
+          - battery_charge
+          - oil_level
+          properties:
+            tyre_pressure:
+              title: tyre
+              type: number
+            battery_charge:
+              title: battery
+              type: number
+            oil_level:
+              title: oil
+              type: integer
+      $id: >-
+        http://eventportal.solace.cloud/apim/car-co/safety/safety.json
+  messages:
+    safety:
+      payload:
+        $ref: '#/components/schemas/safety'
+      schemaFormat: application/vnd.aai.asyncapi+json;version=2.0.0
+      contentType: application/json
+      examples:
+        - payload: {"header":{"timestamp":"2021-04-20-14:33:40-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
+        - payload: {"header":{"timestamp":"2021-04-20-14:33:43-UTC"},"body":{"tyre_pressure":1.2,"battery_charge":1.4,"oil_level":75}}
+channels:
+  'apim/car-co/api/V1/json/{region_id}/{make}/{model}/{vin}/safety':
+    publish:
+      summary: "subscribe to safety alarm events from vehicle"
+      description: |
+        Safety alarms are sent when certain diagnostics level fall below their safe driving levels.
+      operationId: onSafetyAlarm
+      bindings:
+        mqtt:
+          bindingVersion: ‘0.1.0’
+          qos: 1
+        http:
+          bindingVersion: ‘0.1.0’
+          type: request
+          method: POST
+      message:
+        $ref: '#/components/messages/safety'
+    parameters:
+      region_id:
+        $ref: '#/components/parameters/region_id'
+      make:
+        $ref: '#/components/parameters/make'
+      model:
+        $ref: '#/components/parameters/model'
+      vin:
+        $ref: '#/components/parameters/vin'
+asyncapi: 2.0.0
+info:
+  title: 'API:Safety'
+  description: Subscribe to vehicle safety alarms.
+  x-view: provider
+  version: 0.0.1
+  x-origin:
+    vendor: solace
+    name: apim-connector

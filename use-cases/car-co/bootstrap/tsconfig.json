@@ -1,0 +1,17 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "strict": true,
+    "skipLibCheck": true,                          
+    "forceConsistentCasingInFileNames": true        
+  },
+  "exclude": ["node_modules", "dist"]
+}

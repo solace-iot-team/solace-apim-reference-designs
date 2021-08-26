@@ -6,13 +6,14 @@ services:
     volumes:
       - mongodbdata:/data/db
     restart: unless-stopped
-  platform-api-server:
-    container_name: $APIM_SYSTEM_PROJECT_NAME-platform-api-server
+  apim-connector:
+    container_name: $APIM_SYSTEM_PROJECT_NAME-apim-connector
     links:
       - mongodb
-    image: solaceiotteam/platform-api-server:latest
+    # image: solaceiotteam/platform-api-server:latest
+    image: ${APIM_SYSTEM_CONNECTOR_SERVER_DOCKER_IMAGE}
     ports:
-      - ${APIM_SYSTEM_PLATFORM_API_SERVER_PORT}:3000
+      - ${APIM_SYSTEM_CONNECTOR_SERVER_PORT}:3000
     volumes:
       - ${PLATFORM_DATA_MOUNT_PATH}:${PLATFORM_DATA_INTERNAL_PATH}
     restart: unless-stopped
@@ -22,23 +23,31 @@ services:
       - APP_ID=${APP_ID}
       - FILE_USER_REGISTRY=${FILE_USER_REGISTRY}
       - PLATFORM_PORT=3000
-      - ADMIN_USER=${ADMIN_USER}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - AUTH_EXTRACTION_USER_PRINCIPAL=${AUTH_EXTRACTION_USER_PRINCIPAL}
+      - AUTH_EXTRACTION_ORGS=${AUTH_EXTRACTION_ORGS}
+      - AUTH_EXTRACTION_ROLES=${AUTH_EXTRACTION_ROLES}
+      - AUTH_VERIFICATION_KEY=${AUTH_VERIFICATION_KEY}
+      - AUTH_VERIFICATION_ISSUER=${AUTH_VERIFICATION_ISSUER}
+      - AUTH_VERIFICATION_AUD=${AUTH_VERIFICATION_AUD}
+      - AUTH_DISCOVERY_OIDC_URL=${AUTH_DISCOVERY_OIDC_URL}
+      - APIS_PROXY_MODE=${APIS_PROXY_MODE}
+      # - ADMIN_USER=${ADMIN_USER}
+      # - ADMIN_PASSWORD=${ADMIN_PASSWORD}
   demo-portal-server:
     container_name: $APIM_SYSTEM_PROJECT_NAME-demo-portal-server
     links:
-      - platform-api-server
-    image: solaceiotteam/apim-demo-portal:latest
+      - apim-connector
+    image: ${APIM_SYSTEM_DEMO_PORTAL_SERVER_DOCKER_IMAGE}
     ports:
       - ${DEMO_PORTAL_SERVER_PORT}:8090
     volumes:
-      - portaldata:/portal/data
+      - portaldata:/data/apim-portal
     restart: unless-stopped
     environment:
       #sammode=dev disables login screen
       - sammode=prod
-      #url of platform-api
-      - solace_spa_url=http://platform-api-server:3000/v1
+      #url of apim-connector
+      - solace_spa_url=http://apim-connector:3000/v1
       #user-name of platform api (as defined in organization_users.json)
       - solace_spa_user=${DEMO_PORTAL_API_USER}
       #user-password of platform api (as defined in organization_users.json)

@@ -18,13 +18,13 @@ env:
   DEBUG_FLAG: ${{ true }}
   # DEBUG_FLAG: ${{ false }}
 jobs:
-  use_case_elevator_co:
+  use_case_tests:
     runs-on: ubuntu-18.04
     env:
-      UC_HOME_DIR: "use-cases/elevator-co"
-      UC_TEST_HOME_DIR: "use-cases/elevator-co/bootstrap/test"
-      UC_TEST_OUTPUT_DIR: "use-cases/elevator-co/bootstrap/test/tmp"
-      UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-test-elevator-co"
+      UC_TEST_ELEVATOR_CO_HOME_DIR: "use-cases/elevator-co"
+      UC_TEST_CAR_CO_HOME_DIR: "use-cases/car-co"
+      UC_TEST_OUTPUT_DIR: "use-cases/common/test/tmp"
+      UC_TEST_OUTPUT_NAME: "apim-reference-designs-use-case-tests"
     strategy:
       max-parallel: 1
       matrix:
@@ -68,22 +68,23 @@ jobs:
           echo "docker --version"; docker --version
           echo "docker-compose --version"; docker-compose --version
 
-      - name: npm install
-        run: |
-          cd "${UC_TEST_HOME_DIR}"
-          npm install
-
       - name: Run Tests
         run: |
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER=${{ secrets.PLATFORM_ADMIN_USER }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_ADMIN_USER_PWD=${{ secrets.PLATFORM_ADMIN_PASSWORD }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_API_URL=${{ secrets.SOLACE_EVENT_PORTAL_BETA_API_URL }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}""
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
-          export APIM_BOOTSTRAP_PLATFORM_API_SERVER_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
-          cd "${UC_TEST_HOME_DIR}"
+          export APIM_BOOTSTRAP_SOLACE_CLOUD_API_URL=${{ secrets.SOLACE_CLOUD_API_URL }}
+          export APIM_BOOTSTRAP_SOLACE_CLOUD_TOKEN=${{ secrets.SOLACE_CLOUD_TOKEN }}
+          export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_API_URL=${{ secrets.SOLACE_EVENT_PORTAL_BETA_API_URL }}
+          export APIM_BOOTSTRAP_SOLACE_EVENT_PORTAL_TOKEN=${{ secrets.SOLACE_EVENT_PORTAL_BETA_TOKEN }}
+          export APIM_BOOTSTRAP_SOLACE_CLOUD_DEV_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_DEV_GW_SERVICE_ID }}
+          export APIM_BOOTSTRAP_SOLACE_CLOUD_PROD_GW_SERVICE_ID=${{ secrets.SOLACE_CLOUD_PROD_GW_SERVICE_ID }}
+          echo "############# car-co #############"
+          cd "${GITHUB_WORKSPACE}/${UC_TEST_CAR_CO_HOME_DIR}/bootstrap"
+          npm install
+          cd "test"
+          ./run.sh
+          echo "############# elevator-co #############"
+          cd "${GITHUB_WORKSPACE}/${UC_TEST_ELEVATOR_CO_HOME_DIR}/bootstrap"
+          npm install
+          cd "test"
           ./run.sh
 
       - name: Archive logs

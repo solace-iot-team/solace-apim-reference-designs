@@ -7,9 +7,9 @@
 [Discussions](https://github.com/solace-iot-team/solace-apim-reference-designs/discussions)
 
 ## Prerequisites
-In order to use the Solace Platform API you need the following:
+In order to run the examples & use cases you need the following:
 - a Solace Cloud Account and the rights to generate API Tokens
-- a provisioned Solace Platform API System
+- an instance of the API Management Connector
 
 ## Generate a Solace Cloud API Token
 
@@ -21,7 +21,7 @@ Permissions:
 
 Copy & save the token. It is needed to configure the use case scripts.
 
-## Provision a Solace Platform API System
+## Provision an Instance of the API Management Connector
 
 * [Local system in docker containers](./apim-system/local)
 * [System in AWS] - coming soon
@@ -31,8 +31,6 @@ Copy & save the token. It is needed to configure the use case scripts.
 The Use Case folders contains designs, sample AsyncAPI specs, bootstrap cli examples and more to showcase a particular use case.
 
 * [Use Case: Elevator-Co](./use-cases/elevator-co)
-
-
-
+* [Use Case: Car-Co](./use-cases/car-co)
 
 ---

@@ -1,0 +1,26 @@
+{
+	"portal_user": {
+    "password": "portal_user_123!",
+    "roles": [
+      "org-admin"
+    ]
+  },
+	"car_co_admin": {
+    "password": "car_co_admin_123!",
+    "roles": [
+      "org-admin"
+    ]
+  },
+	"elevator_co_admin": {
+    "password": "elevator_co_admin_123!",
+    "roles": [
+      "org-admin"
+    ]
+  },
+	"admin": {
+    "password": "p3zvZFF7ka4Wrj4p",
+    "roles": [
+      "platform-admin"
+    ]
+  }
+}
