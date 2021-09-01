@@ -1,4 +1,4 @@
-# Dockerk Compose Template for Axway Central 
+# Docker Compose Template for Axway Central 
 
 Sets up all components of Solace API-Management connector and Solace-Axway-Amplify-Agent using docker-compose:
 
