@@ -13,6 +13,7 @@ experimental*
 #local secrets
 **/sensitive_*.yml
 **/terraform.tfvars.json
+**/.env.local
 
 # Terraform
 # Local .terraform directories

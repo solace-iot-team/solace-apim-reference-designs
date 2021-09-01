@@ -1,0 +1,20 @@
+{
+    "example": {
+      "password": "changeme",
+      "roles": [
+        "org-admin"
+      ]
+    },
+      "user": {
+      "password": "changeme",
+      "roles": [
+        "org-admin"
+      ]
+    },
+      "admin": {
+      "password": "changeme",
+      "roles": [
+        "platform-admin"
+      ]
+    }
+  }
