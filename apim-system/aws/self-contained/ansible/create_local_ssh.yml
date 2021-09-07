@@ -1,0 +1,17 @@
+# Creates RSA Public/Private Key Pair
+# Keypair will be used for AWS infrastructure
+- name: generate SSH key
+  hosts: 127.0.0.1
+  connection: local
+
+  vars_files:
+    - "../vars/ansible_vars.yml"
+  tasks:
+
+    - name: generate SSH key "{{ssh_key_filename}}"
+      openssh_keypair:
+        path: "{{ssh_key_dir}}/{{ssh_key_filename}}"
+        type: rsa
+        size: 4096
+        state: present
+        force: no

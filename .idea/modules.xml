@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../solace-apim-infra-management/solace-apim-infra-management.iml" filepath="$PROJECT_DIR$/../../solace-apim-infra-management/solace-apim-infra-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/solace-apim-reference-designs.iml" filepath="$PROJECT_DIR$/solace-apim-reference-designs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../solace-private-apim-aws-infra-inventory/solace-private-apim-aws-infra-inventory.iml" filepath="$PROJECT_DIR$/../../solace-private-apim-aws-infra-inventory/solace-private-apim-aws-infra-inventory.iml" />
+    </modules>
+  </component>
+</project>

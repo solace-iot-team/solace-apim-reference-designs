@@ -1,0 +1,10 @@
+{
+{% for item in solace_spa_users %}
+   "{{item.name}}":{
+      "password":"{{item.password}}",
+      "roles":[
+         "{{item.role}}"
+      ]
+     }{{ ", " if not loop.last else "" }}
+{% endfor %}
+}

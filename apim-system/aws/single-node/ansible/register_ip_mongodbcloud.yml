@@ -1,0 +1,18 @@
+# Registers IP withcloud.mongodb
+- name: Register IP with cloud.mongodb
+  hosts: 127.0.0.1
+
+  tasks:
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+    - include_vars: "{{sensitive_ansible_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
+
+    - name: Register IP with cloud.mongdo
+      uri:
+        url: "{{ mongodb_cloud_api_url }}"
+        method: POST
+        body_format: json
+        user: "{{mongodb_cloud_api_user}}"
+        password: "{{mongodb_cloud_api_password}}"
+        body: '[{"ipAddress" : "{{platform_api_host_ip}}","comment" : "{{ platform_api_comment }}"}]'
+        status_code: 201

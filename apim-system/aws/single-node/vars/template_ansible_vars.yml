@@ -1,0 +1,7 @@
+--- 
+# root relative to ansible folder
+config_root: "../vars"
+sensitive_ansible_vars_file: "../vars/sensitive_ansible_vars.yml"
+ssh_key_dir: "../shared/keys"
+ssh_key_filename: aws_key_box
+generated_infrastructure_vars_file: "../generated/ansible_infrastructure_vars.yml"

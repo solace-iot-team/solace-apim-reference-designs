@@ -1,0 +1,77 @@
+# Deploys Platform API, MongoDB and Portal 
+- name: Create filesystem
+  hosts: mount_ebs
+  vars_files:
+    - "../vars/ansible_vars.yml"
+
+  tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+
+    - name: Create filesystem on EBS devices /dev/xvdh on box1 
+      filesystem:
+        fstype: ext4
+        dev: /dev/xvdh
+      become: yes
+
+    - name: Create mount point /data
+      file:
+        path: /data
+        owner: root
+        group: root
+        state: directory
+      become: yes
+
+    - name: Mount filesystem
+      mount:
+        path: /data
+        src: /dev/xvdh
+        fstype: ext4
+        state: mounted
+      become: yes  
+
+    - name: Create file /data/readme.md
+      file:
+        path: /data/readme.md
+        state: touch
+      become: yes
+
+- name: Install Docker hosts
+  hosts: docker_hosts
+  
+  roles:
+    - dockerhost
+
+- name: Install and start platform_api
+  hosts: platform_api
+  vars_files:
+    - "../vars/ansible_vars.yml"
+  roles:
+    - platform-api
+
+  tasks:
+    - include_vars: "{{config_root}}/{{config_vars_file}}"
+    - name: copy
+      copy:
+        src: files/check_platform_api.sh
+        dest: /data/platform-api/docker
+        owner: root
+        group: root
+        mode: 0744
+      become: yes
+
+    - name: execute script to check platform-api status
+      script: files/check_platform_api.sh /data/platform-api/docker platform-api-server-2
+      become: yes
+
+    - name: check server status 
+      stat: 
+        path: /data/platform-api/docker/tmp/SERVER_INITIALIZED
+      register: check_result
+
+    - debug: msg="PLATFORM-API successfully initialized, up and running"
+      when: check_result.stat.exists
+
+    - debug: msg="PLATFORM-API NOT UP AND / OR INITIALIZED"
+      when: not check_result.stat.exists
+
+

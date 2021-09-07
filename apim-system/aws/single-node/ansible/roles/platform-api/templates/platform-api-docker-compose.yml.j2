@@ -1,0 +1,64 @@
+version: "3.3"
+services:
+  apim-connector:
+    container_name: apim-connector
+    image: solaceiotteam/apim-connector-server:{{apim_connector_version}}
+    ports:
+      - 3000:3000
+    volumes:
+      - /data/platform-api:/platform-api-server/data
+    restart: unless-stopped
+    environment:
+      - DB_URL={{mongodb_url}}
+      - LOG_LEVEL=info
+      - APP_ID=platform-api
+      - FILE_USER_REGISTRY=/platform-api-server/data/organization_users.json
+      - PLATFORM_PORT=3000
+      - AUTH_EXTRACTION_USER_PRINCIPAL={{auth_extraction_user_principal}}
+      - AUTH_EXTRACTION_ORGS={{auth_extraction_orgs}}
+      - AUTH_EXTRACTION_ROLES={{auth_extraction_roles}}
+      - AUTH_VERIFICATION_KEY=/platform-api-server/data/{{auth_verification_key}}
+      - AUTH_VERIFICATION_ISSUER={{auth_verification_issuer}}
+      - AUTH_VERIFICATION_AUD={{auth_verification_aud}}
+      - AUTH_DISCOVERY_OIDC_URL={{auth_discovery_oidc_url}}
+
+      #- ADMIN_USER={{solace_spa_adminuser}}
+      #- ADMIN_PASSWORD={{solace_spa_adminpassword}}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: {{aws_log_group}}
+        tag: apim-connector
+  portal-server:
+    container_name: portal-server
+    links:
+      - apim-connector
+    image: solaceiotteam/apim-demo-portal:{{portal_version}}
+    ports:
+      - 80:8090
+    volumes:
+      - /data/portal:/portal/data
+    restart: unless-stopped
+    environment:
+      #sammode=dev disables login screen
+      - sammode={{sammode}}
+      - samcontext={{samcontext}}
+      #url of connector-api
+      - solace_spa_url=http://apim-connector:3000/v1
+      #user-name of apim-connector (as defined in organization_users.json)
+      - solace_spa_user={{solace_spa_user}}
+      #user-password of apim-connector (as defined in organization_users.json)
+      - solace_spa_password={{solace_spa_password}}
+      #admin-name of apim-connector
+      - solace_spa_adminuser={{solace_spa_adminuser}}
+      #admin-password of apim-connector
+      - solace_spa_adminpassword={{solace_spa_adminpassword}}
+      #login name of portal
+      - solace_portal_login_user={{solace_portal_login_user}}
+      #password of portal
+      - solace_portal_login_password={{solace_portal_login_password}}
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: {{aws_log_group}}
+        tag: portal

@@ -1,0 +1,16 @@
+# Creates RSA Public/Private Key Pair
+# Keypair will be used for AWS infrastructure
+- name: generate SSH key
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+
+    - name: generate SSH key "{{ssh_key_filename}}"
+      openssh_keypair:
+        path: "{{ssh_key_dir}}/{{ssh_key_filename}}"
+        type: rsa
+        size: 4096
+        state: present
+        force: no

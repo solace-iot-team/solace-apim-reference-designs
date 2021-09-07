@@ -1,0 +1,23 @@
+# Stops docker containers 
+# Unmounts EBS filesystem to be able to destroy infrastructure via Terraform
+- name: Preparing to destroy infrastructure
+  hosts: mount_ebs
+
+  tasks:
+    - name: stop platform-api services 
+      docker_compose:
+        project_src: /opt/platform-api/docker
+        state: absent
+      become: yes
+
+    - name: Unmount filesystem
+      mount:
+        path: /data
+        src: /dev/xvdh
+        fstype: ext4
+        state: unmounted
+      become: yes  
+
+
+
+

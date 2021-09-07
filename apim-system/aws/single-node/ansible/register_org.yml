@@ -1,0 +1,15 @@
+- name: Load vars for registration of org
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+    - include_vars: "{{sensitive_ansible_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
+    - include_vars: "{{org_file}}"
+
+- name: Register org
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+    - asyncapi

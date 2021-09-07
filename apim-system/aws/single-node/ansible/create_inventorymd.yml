@@ -1,0 +1,16 @@
+- name: generate INVENTORY.MD
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+    - include_vars: "{{ lookup('env','SOLINVENTORY_CONFIG') or '../vars' }}/ansible_vars.yml"
+    - include_vars: "{{sensitive_ansible_vars_file}}"
+    - include_vars: "{{generated_infrastructure_vars_file}}"
+
+    - name: Render README.md
+      template:
+        src: templates/INVENTORY.md.j2
+        dest: "{{inventory_root}}/README.md"
+        owner: ubuntu
+        group: operator
+        mode: 0770      
