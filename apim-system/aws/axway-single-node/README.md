@@ -17,7 +17,7 @@ This folder containers
 
 ## High level architecture 
 
-![Solace Axway Demo Setup](https://github.com/solace-iot-team/solace-apim-reference-designs/blob/develop/apim-system/aws/axway-single-node/solace-axway-demo-setup.png)
+![Solace Axway Demo Setup](solace-axway-demo-setup.png)
 
 ## Files on Host Systems
 
