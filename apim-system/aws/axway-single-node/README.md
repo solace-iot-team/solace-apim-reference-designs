@@ -69,7 +69,8 @@ You have to obtain these configuration details from Axway Central self-service p
 * your Axway-Central Organization-Id
 * your Axway-Central Environment name
 * your Axway-Central Service-Client-Id
-* your Axway-Central Service-Client Public and Private Key 
+* your Axway-Central Service-Client Public and Private Key
+  * to convert the PEM file into a single-line format you can use `awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' cert-name.pem` and copy the result int `.env` file. 
 
 
 ## Configuring the Environment Variables
