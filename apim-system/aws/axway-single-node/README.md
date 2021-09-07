@@ -15,6 +15,10 @@ This folder containers
 * a sample file user registry
 * nginx configuration file
 
+## High level architecture 
+
+![Solace Axway Demo Setup](https://github.com/solace-iot-team/solace-apim-reference-designs/blob/develop/apim-system/aws/axway-single-node/solace-axway-demo-setup.png)
+
 ## Files on Host Systems
 
 Some configuration files and data directories are mounted from the host system:
