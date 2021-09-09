@@ -2,7 +2,7 @@ version: "3.7"
 services:
   mongodb:
     container_name: apim-mongodb
-    image : mongo:latest
+    image : ${MONGO_DOCKER_IMAGE}
     volumes:
       - ${MONGODB_DATA_MOUNT_PATH}:/data/db
     restart: unless-stopped
