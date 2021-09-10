@@ -2,7 +2,7 @@ version: "3.7"
 services:
   mongodb:
     container_name: $APIM_SYSTEM_PROJECT_NAME-mongodb
-    image : mongo:latest
+    image : mongo:5.0.2
     volumes:
       - mongodbdata:/data/db
     restart: unless-stopped
