@@ -142,7 +142,7 @@ const deleteOrg = async() => {
     PlatformAPIClient.setManagementUser();
     try {
         await AdministrationService.deleteOrganization(bootstrapConfig.ORG_NAME);
-    } catch(e) {
+    } catch(e: any) {
         console.log(`deleteOrg error = ${JSON.stringify(e, null, 2)}`);
         if(e.status !== 404 && e.status !== 201) {
             Helper.logError(e);
