@@ -1,5 +1,13 @@
 version: "3.7"
 services:
+  mongodb:
+    container_name: openshift-apim-mongodb
+    image : centos/mongodb-36-centos7:latest
+    volumes:
+      - ${MONGODB_DATA_MOUNT_PATH}:/var/lib/mongodb/data
+    environment:
+      - MONGODB_ADMIN_PASSWORD=${MONGODB_ADMIN_PASSWORD
+    restart: unless-stopped
   apim-connector:
     container_name: openshift-example-apim-connector
     image: "solaceiotteam/apim-connector-server:0.3.0"
@@ -11,7 +19,7 @@ services:
     restart: unless-stopped
     environment:
       # DB-URL="mongodb://{admin-user}:{admin-password}@localhost:{external-port}/{db-name}?retryWrites=true"
-      - DB_URL=mongodb://admin:${MONGODB_ADMIN_PASSWORD}@localhost:${MONGODB_EXTERNAL_PORT}/admin?retryWrites=true&w=majority
+      - DB_URL=mongodb://admin:${MONGODB_ADMIN_PASSWORD}@openshift-apim-mongodb:${MONGODB_EXTERNAL_PORT}/admin?retryWrites=true&w=majority
       - LOG_LEVEL=trace
       - APP_ID="openshift-connector"
       - FILE_USER_REGISTRY=/data/organization_users.json
