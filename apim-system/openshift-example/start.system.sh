@@ -24,7 +24,7 @@ mkdir -p $MONGO_VOLUME
 # Admin user defaults to 'admin'
 #
 # connect: mongodb://{admin-user}:{admin-password}@localhost:{external-port}/{auth-db-name}?retryWrites=true
-# connect: mongodb://admin:admin123@localhost:27017/platform?retryWrites=true
+# connect: mongodb://admin:admin123@localhost:27020/admin?retryWrites=true
 
 docker run -d \
   -e MONGODB_USER=$MONGODB_USER \

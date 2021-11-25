@@ -11,7 +11,9 @@ services:
     restart: unless-stopped
     environment:
       # DB-URL="mongodb://{admin-user}:{admin-password}@localhost:{external-port}/{db-name}?retryWrites=true"
-      - DB_URL=mongodb://admin:${MONGODB_ADMIN_PASSWORD}@localhost:${MONGODB_EXTERNAL_PORT}/admin?retryWrites=true&w=majority
+      # host.docker.internal for MAC
+      - DB_URL=mongodb://admin:${MONGODB_ADMIN_PASSWORD}@host.docker.internal:${MONGODB_EXTERNAL_PORT}/admin?retryWrites=true&w=majority
+      # - DB_URL=mongodb://admin:${MONGODB_ADMIN_PASSWORD}@localhost:${MONGODB_EXTERNAL_PORT}/admin?retryWrites=true&w=majority
       - LOG_LEVEL=trace
       - APP_ID="openshift-connector"
       - FILE_USER_REGISTRY=/data/organization_users.json
