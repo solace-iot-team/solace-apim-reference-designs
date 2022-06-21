@@ -1,0 +1,120 @@
+asyncapi: '2.4.0'
+id: urn:com:acme:retail:provider:till-system:receipts
+info:
+  title: AcmeRetail-CentralIT-TillSystem-v1
+  version: '1.0.1'
+  description: |
+    Provider Service API for the Central IT Till System.
+
+    ### Features
+
+    * Receive till receipts from stores
+
+  license:
+    name: MIT
+
+defaultContentType: application/json
+
+channels:
+
+  acme/retail/till-system/v1/{storeId}/receipt:
+    description: The topic to receive till receipts from stores on.
+    parameters:
+      storeId:
+        $ref: '#/components/parameters/storeId'
+    publish:
+      summary: Receive till receipts from stores.
+      operationId: receiveStoreTillReceipts
+      message:
+        $ref: '#/components/messages/storeTillReceipt'
+
+components:
+  messages:
+    storeTillReceipt:
+      name: storeTillReceipt
+      title: Store Till Receipt
+      summary: Store Till Receipt.
+      contentType: application/json
+      # traits:
+      #   - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        $ref: "#/components/schemas/storeTillReceipt"
+
+  schemas:
+    header:
+      description: Generic message header.
+      type: object
+      properties:
+        sentAt:
+          type: string
+          format: date-time
+          description: Date and time when the message was sent.
+    storeTillReceipt:
+      type: object
+      properties:
+        payload:
+          $ref: "#/components/schemas/storeTillReceiptPayload"
+        header:
+          $ref: "#/components/schemas/header"
+    storeTillReceiptPayload:
+      type: array
+      items:
+        $ref: '#/components/schemas/tillReceiptLine'
+    tillReceiptLine:
+      type: object
+      properties:
+        sku:
+          $ref: "#/components/schemas/sku"
+        quantity:
+          $ref: "#/components/schemas/quantity"
+        price:
+          $ref: "#/components/schemas/price"
+        currency:
+          $ref: "#/components/schemas/currency"
+      required:
+        - sku
+        - quantity
+        - price
+        - currency
+
+    sku:
+      description: SKU.
+      type: string
+      minLength: 4
+      maxLength: 255
+      pattern: ^[A-Za-z0-9_-]*$
+    currency:
+      type: string
+      enum:
+      - usd
+      - eur
+    quantity:
+      type: integer
+      minimum: 0
+      maximum: 100
+    price:
+      type: number
+      minimum: 0
+
+
+
+  # securitySchemes:
+  #   saslScram:
+  #     type: scramSha256
+  #     description: Provide your username and password for SASL/SCRAM authentication
+
+  parameters:
+    storeId:
+      description: The ID of the store.
+      schema:
+        type: string
+
+  # messageTraits:
+  #   commonHeaders:
+  #     headers:
+  #       type: object
+  #       properties:
+  #         my-app-header:
+  #           type: integer
+  #           minimum: 0
+  #           maximum: 100
