@@ -17,7 +17,7 @@ defaultContentType: application/json
 
 channels:
 
-  acme/retail/till-system/v1/{storeId}/receipt:
+  catalyst-labs/acme/retail/till-system/v1/{storeId}/receipt:
     description: The topic to receive till receipts from stores on.
     parameters:
       storeId:
