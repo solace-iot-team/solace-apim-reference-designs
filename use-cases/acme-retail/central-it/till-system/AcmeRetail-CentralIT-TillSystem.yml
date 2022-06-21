@@ -42,13 +42,7 @@ components:
 
   schemas:
     header:
-      description: Generic message header.
-      type: object
-      properties:
-        sentAt:
-          type: string
-          format: date-time
-          description: Date and time when the message was sent.
+      $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.yml"
     storeTillReceipt:
       type: object
       properties:
