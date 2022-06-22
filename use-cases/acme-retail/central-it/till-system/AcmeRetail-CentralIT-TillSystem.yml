@@ -2,7 +2,7 @@ asyncapi: '2.4.0'
 id: urn:com:acme:retail:provider:till-system:receipts
 info:
   title: AcmeRetail-CentralIT-TillSystem-v1
-  version: '1.0.1'
+  version: '1.0.2'
   description: |
     Provider Service API for the Central IT Till System.
 
@@ -41,15 +41,13 @@ components:
         $ref: "#/components/schemas/storeTillReceipt"
 
   schemas:
-    header:
-      $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.yml"
     storeTillReceipt:
       type: object
       properties:
         payload:
           $ref: "#/components/schemas/storeTillReceiptPayload"
         header:
-          $ref: "#/components/schemas/header"
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.yml"
     storeTillReceiptPayload:
       type: array
       items:
@@ -58,7 +56,7 @@ components:
       type: object
       properties:
         sku:
-          $ref: "#/components/schemas/sku"
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/sku.yml"
         quantity:
           $ref: "#/components/schemas/quantity"
         price:
@@ -71,12 +69,6 @@ components:
         - price
         - currency
 
-    sku:
-      description: SKU.
-      type: string
-      minLength: 4
-      maxLength: 255
-      pattern: ^[A-Za-z0-9_-]*$
     currency:
       type: string
       enum:
