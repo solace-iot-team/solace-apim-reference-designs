@@ -58,31 +58,16 @@ components:
         sku:
           $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/sku.yml"
         quantity:
-          $ref: "#/components/schemas/quantity"
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/quantity.yml"
         price:
-          $ref: "#/components/schemas/price"
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/price.yml"
         currency:
-          $ref: "#/components/schemas/currency"
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/currency.yml"
       required:
         - sku
         - quantity
         - price
         - currency
-
-    currency:
-      type: string
-      enum:
-      - usd
-      - eur
-    quantity:
-      type: integer
-      minimum: 0
-      maximum: 100
-    price:
-      type: number
-      minimum: 0
-
-
 
   # securitySchemes:
   #   saslScram:
