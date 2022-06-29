@@ -27,33 +27,33 @@ channels:
       operationId: receiveStoreTillReceipts
       message:
         # x-parser-message-name: storeTillReceipt
-        $ref: '#/components/messages/storeTillReceipt'
+        $ref: '#/components/messages/storeTillReceipt-v1'
 
 components:
   messages:
-    storeTillReceipt:
-      name: storeTillReceipt
+    storeTillReceipt-v1:
+      name: storeTillReceipt-v1
       title: Store Till Receipt
       summary: Store Till Receipt.
       contentType: application/json
       # traits:
       #   - $ref: '#/components/messageTraits/commonHeaders'
       payload:
-        $ref: "#/components/schemas/storeTillReceipt"
+        $ref: "#/components/schemas/storeTillReceipt-v1"
 
   schemas:
-    storeTillReceipt:
+    storeTillReceipt-v1:
       type: object
       properties:
         payload:
-          $ref: "#/components/schemas/storeTillReceiptPayload"
+          $ref: "#/components/schemas/storeTillReceiptPayload-v1"
         header:
           $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.v1.yml"
-    storeTillReceiptPayload:
+    storeTillReceiptPayload-v1:
       type: array
       items:
-        $ref: '#/components/schemas/tillReceiptLine'
-    tillReceiptLine:
+        $ref: '#/components/schemas/tillReceiptLine-v1'
+    tillReceiptLine-v1:
       type: object
       properties:
         sku:
