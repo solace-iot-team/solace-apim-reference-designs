@@ -1,0 +1,92 @@
+asyncapi: '2.4.0'
+id: urn:com:acme-retail:central-it:provider:till-system:test
+info:
+  title: AcmeRetail-Central-IT-Provider-TillSystem-v1-Test
+  version: '1.0.0'
+  description: |
+    Test for Provider Service API for the Central IT Till System.
+
+    ### Features
+
+    * Simulate Send till receipts from stores
+
+  license:
+    name: MIT
+
+defaultContentType: application/json
+
+channels:
+
+  catalyst-labs/acme-retail/till-system/v1/{storeId}/receipt:
+    description: The topic to simulate sending till receipts from stores on.
+    parameters:
+      storeId:
+        $ref: '#/components/parameters/storeId'
+    subscribe:
+      summary: Simulate sending till receipts from stores.
+      operationId: sendStoreTillReceipts
+      message:
+        # x-parser-message-name: storeTillReceipt
+        $ref: '#/components/messages/storeTillReceipt-v1'
+
+components:
+  messages:
+    storeTillReceipt-v1:
+      name: storeTillReceipt-v1
+      title: Store Till Receipt
+      summary: Store Till Receipt.
+      contentType: application/json
+      # traits:
+      #   - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        $ref: "#/components/schemas/storeTillReceipt-v1"
+
+  schemas:
+    storeTillReceipt-v1:
+      type: object
+      properties:
+        payload:
+          $ref: "#/components/schemas/storeTillReceiptPayload-v1"
+        header:
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.v1.yml"
+    storeTillReceiptPayload-v1:
+      type: array
+      items:
+        $ref: '#/components/schemas/tillReceiptLine-v1'
+    tillReceiptLine-v1:
+      type: object
+      properties:
+        sku:
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/sku.v1.yml"
+        quantity:
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/quantity.v1.yml"
+        price:
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/price.v1.yml"
+        currency:
+          $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/currency.v1.yml"
+      required:
+        - sku
+        - quantity
+        - price
+        - currency
+
+  # securitySchemes:
+  #   saslScram:
+  #     type: scramSha256
+  #     description: Provide your username and password for SASL/SCRAM authentication
+
+  parameters:
+    storeId:
+      description: The ID of the store.
+      schema:
+        type: string
+
+  # messageTraits:
+  #   commonHeaders:
+  #     headers:
+  #       type: object
+  #       properties:
+  #         my-app-header:
+  #           type: integer
+  #           minimum: 0
+  #           maximum: 100
