@@ -4,6 +4,10 @@
     errorId:
       type: string
       description: The Error Id.
+    errorDescription:
+      type: string
+    errorDetails:
+      type: object  
     transactionId:
       type: string
       description: The transaction id.
