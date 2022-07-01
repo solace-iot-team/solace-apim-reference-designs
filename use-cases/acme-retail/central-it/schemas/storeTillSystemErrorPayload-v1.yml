@@ -1,0 +1,9 @@
+  description: Till system error as response to a store transaction.
+  type: object
+  properties:
+    errorId:
+      type: string
+      description: The Error Id.
+    transactionId:
+      type: string
+      description: The transaction id.
