@@ -7,7 +7,7 @@
     errorDescription:
       type: string
     errorDetails:
-      type: object  
-    transactionId:
+      type: object
+    originalTransactionId:
       type: string
-      description: The transaction id.
+      description: The original transaction id the error refers to.
