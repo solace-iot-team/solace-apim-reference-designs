@@ -5,3 +5,6 @@
       type: string
       format: date-time
       description: Date and time when the message was sent.
+    transactionId:
+      type: string
+      description: The transaction id.
