@@ -1,14 +1,15 @@
 asyncapi: '2.4.0'
-id: urn:com:acme-retail:central-it:provider:till-system:test
+id: urn:com:acme-retail:central-it:consumer:till-system:v1
+# ep application domain: from urn?
 info:
-  title: AcmeRetail-Central-IT-Provider-TillSystem-v1-Test
-  version: '1.2.3'
+  title: AcmeRetail-Central-IT-TillSystem-v1
+  version: '1.0.0'
   description: |
-    Test for Provider Service API for the Central IT Till System.
+    API for the Central IT Till System.
 
     ### Features
 
-    * Simulate Send till receipts from stores
+    * send till receipts from stores
 
   license:
     name: MIT
@@ -18,24 +19,24 @@ defaultContentType: application/json
 channels:
 
   catalyst-labs/acme-retail/till-system/v1/{storeId}/receipt:
-    description: The topic to simulate sending till receipts from stores on.
+    description: The topic to send till receipts from stores on.
     parameters:
       storeId:
         $ref: '#/components/parameters/storeId'
     subscribe:
-      summary: Simulate sending till receipts from stores.
+      summary: Send till receipts from stores.
       operationId: sendStoreTillReceipts
       message:
         # x-parser-message-name: storeTillReceipt
         $ref: '#/components/messages/storeTillReceipt-v1'
 
   catalyst-labs/acme-retail/till-system/v1/{storeId}/error:
-    description: The topic to receive errors as response to a transaction on.
+    description: Receive errors as response to a transaction on.
     parameters:
       storeId:
         $ref: '#/components/parameters/storeId'
     publish:
-      summary: Receive errors to store for transaction.
+      summary: Receive errors for transaction.
       operationId: receiveStoreTillSystemError
       message:
         # x-parser-message-name: storeTillReceipt
@@ -43,6 +44,7 @@ channels:
 
 components:
   messages:
+
     storeTillReceipt-v1:
       name: storeTillReceipt-v1
       title: Store Till Receipt
@@ -96,6 +98,7 @@ components:
           $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/storeTillSystemErrorPayload-v1.yml"
         header:
           $ref: "https://raw.githubusercontent.com/solace-iot-team/solace-apim-reference-designs/main/use-cases/acme-retail/central-it/schemas/CommonHeader.v1.yml"
+
 
   # securitySchemes:
   #   saslScram:
