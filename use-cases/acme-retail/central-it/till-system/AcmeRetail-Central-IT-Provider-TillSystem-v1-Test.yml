@@ -2,7 +2,7 @@ asyncapi: '2.4.0'
 id: urn:com:acme-retail:central-it:provider:till-system:test
 info:
   title: AcmeRetail-Central-IT-Provider-TillSystem-v1-Test
-  version: '1.1.0'
+  version: '1.2.0'
   description: |
     Test for Provider Service API for the Central IT Till System.
 
