@@ -11,7 +11,7 @@
     storeId:
       type: string
       description: The store id.
-    required:
-      - sentAt
-      - transactionId
-      - storeId
+  required:
+    - sentAt
+    - transactionId
+    - storeId
