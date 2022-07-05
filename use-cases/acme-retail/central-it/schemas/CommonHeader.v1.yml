@@ -8,3 +8,10 @@
     transactionId:
       type: string
       description: The transaction id.
+    storeId:
+      type: string
+      description: The store id.
+    required:
+      - sentAt
+      - transactionId
+      - storeId
