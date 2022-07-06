@@ -11,3 +11,7 @@
     originalTransactionId:
       type: string
       description: The original transaction id the error refers to.
+  required:
+    - errorId
+    - errorDescription
+    - originalTransactionId
