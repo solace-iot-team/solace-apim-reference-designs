@@ -1,0 +1,139 @@
+[
+    {
+        "id": "72d00ad14346e35c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "70c3f614f4c981d0",
+        "type": "mqtt-broker",
+        "name": "dev",
+        "broker": "mr1n34cqfgy8kj.messaging.solace.cloud",
+        "port": "1883",
+        "clientid": "8ttgoETSgsaOS6xQAshEgpKxb6Arku2r",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "61",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4e0f8ee00aefd536",
+        "type": "debug",
+        "z": "72d00ad14346e35c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a5b5f390743c5ab3",
+        "type": "mqtt in",
+        "z": "72d00ad14346e35c",
+        "name": "receiveStoreTillSystemError",
+        "topic": "catalyst-labs/acme-retail/till-system/v1/+/error",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "70c3f614f4c981d0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "4e0f8ee00aefd536"
+            ]
+        ]
+    },
+    {
+        "id": "6002b9e163a5f49e",
+        "type": "inject",
+        "z": "72d00ad14346e35c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "catalyst-labs/acme-retail/till-system/v1/store-id-1/receipt",
+        "payload": "{\"payload\":[{\"sku\":\"123abc\",\"quantity\":10,\"price\":99,\"currency\":\"eur\"},{\"sku\":\"456def\",\"quantity\":5,\"price\":12,\"currency\":\"eur\"}],\"header\":{\"sentAt\":\"2022-08-24T14:15:22Z\",\"transactionId\":\"transaction-id-1\",\"storeId\":\"store-id-1\"}}",
+        "payloadType": "json",
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "109d553c94399219",
+                "c0cbdccccc8076fe"
+            ]
+        ]
+    },
+    {
+        "id": "109d553c94399219",
+        "type": "debug",
+        "z": "72d00ad14346e35c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "c0cbdccccc8076fe",
+        "type": "mqtt out",
+        "z": "72d00ad14346e35c",
+        "name": "sendStoreTillReceipts",
+        "topic": "catalyst-labs/acme-retail/till-system/v1/store-id-1/receipt",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "70c3f614f4c981d0",
+        "x": 480,
+        "y": 420,
+        "wires": []
+    }
+]
